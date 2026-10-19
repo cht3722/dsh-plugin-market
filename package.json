@@ -1,0 +1,10 @@
+{
+  "name": "fuxi-dsh-plugin-market",
+  "private": true,
+  "type": "module",
+  "scripts": { "validate": "node scripts/validate.mjs" },
+  "devDependencies": {
+    "@deepseek-ai/dsh-plugin-market-index": "0.2.1-rc.2",
+    "@deepseek-ai/cordis": "4.0.5"
+  }
+}

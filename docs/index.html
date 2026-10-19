@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>伏羲 DSH 插件市场</title>
+<style>
+  :root{font-family:system-ui,sans-serif;color:#183047;background:#f5f7f9;line-height:1.7}
+  main{max-width:780px;margin:64px auto;padding:0 24px}h1{line-height:1.2}a{color:#126b70}
+  .url,article{background:white;border:1px solid #dbe3e8;border-radius:12px;padding:22px;margin:20px 0}
+  .url{overflow-wrap:anywhere}article img{width:48px;height:48px;float:right}h2{margin:0}
+  .note{color:#526674;font-size:14px}code{overflow-wrap:anywhere}footer{margin-top:32px}
+</style>
+<main>
+  <p>FUXI AI LABS</p>
+  <h1>伏羲 DSH 插件市场</h1>
+  <p>把下面的索引地址添加到 DSH 的「发现」页，即可浏览团队插件。以后新增插件仍使用同一个地址。</p>
+  <div class="url"><a href="index.json">https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</a></div>
+  <p>在 DSH 中打开「插件」→「实验性插件 / 更多」→ 启用「自定义插件市场」→「发现」→「添加索引源」。</p>
+  <p class="note">此站点公开插件元数据和图标。插件源码保留在原仓库，私有源码需要访问权限。发现插件不代表它与当前 DSH 版本兼容，也不代表已经完成安装。</p>
+  <section id="plugins" aria-label="插件目录"><p>正在读取目录…</p></section>
+  <footer><a href="https://github.com/fuxi-ailabs/dsh-plugin-market">维护目录</a> · <a href="https://github.com/deepseek-ai/deepseek-harness/blob/dsh-v0.2.1-rc.2/docs/user/guide/plugin-market.zh.md">DSH 市场规范</a></footer>
+</main>
+<script type="module">
+  const section = document.querySelector('#plugins');
+  const text = value => typeof value === 'string' ? value : value?.zh ?? value?.en ?? '';
+  try {
+    const response = await fetch('./index.json');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const index = await response.json();
+    section.replaceChildren();
+    for (const plugin of index.plugins) {
+      const card = document.createElement('article');
+      const icon = document.createElement('img');
+      icon.src = plugin.icon; icon.alt = '';
+      const title = document.createElement('h2'); title.textContent = text(plugin.title) || plugin.name;
+      const name = document.createElement('code'); name.textContent = plugin.name;
+      const description = document.createElement('p'); description.textContent = text(plugin.description);
+      const versions = document.createElement('p'); versions.className = 'note';
+      versions.textContent = plugin.versions.map(v => `${v.version} · DSH ${v.engines?.dsh ?? '未声明范围'}`).join(' / ');
+      card.append(icon, title, name, description, versions); section.append(card);
+    }
+  } catch (error) {
+    section.textContent = `目录加载失败：${error.message}。请检查索引地址或稍后重试。`;
+  }
+</script>
+</html>
