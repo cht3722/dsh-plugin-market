@@ -1,44 +1,76 @@
 {
   "format": 1,
-  "title": { "en": "Fuxi DSH 插件市场", "zh": "Fuxi DSH 插件市场" },
-  "description": { "en": "Fuxi AI Labs plugin catalog. Private plugin sources require separate repository access.", "zh": "Fuxi 团队插件目录。目录公开，私有插件的下载和安装仍需仓库访问权限。" },
+  "title": {
+    "en": "Fuxi DSH 插件市场",
+    "zh": "Fuxi DSH 插件市场"
+  },
+  "description": {
+    "en": "Fuxi team plugin catalog",
+    "zh": "Fuxi 团队插件目录"
+  },
   "metadata": {
     "categories": {
-      "evidence": { "title": { "en": "Evidence and lineage", "zh": "证据与溯源" } }
+      "evidence": {
+        "title": {
+          "en": "Evidence and lineage",
+          "zh": "证据与溯源"
+        }
+      }
     },
     "labels": {
-      "private-source": { "title": { "en": "Private source", "zh": "私有源码" } },
-      "preview": { "title": { "en": "Preview", "zh": "预览版" } }
+      "preview": {
+        "title": {
+          "en": "Preview",
+          "zh": "预览版"
+        }
+      }
     }
   },
   "plugins": [
     {
       "name": "@fuxi-ailabs/dsh-agentlineage",
-      "title": { "en": "AgentLineage", "zh": "AgentLineage · 会话证据与溯源" },
+      "title": {
+        "en": "AgentLineage",
+        "zh": "AgentLineage · 会话证据与溯源"
+      },
       "description": {
-        "en": "Query session evidence, open the lineage viewer, and check evidence reports through AgentLineage HTTP services. This catalog version targets DSH 0.1.6-alpha.1 and requires private repository access.",
-        "zh": "通过 AgentLineage HTTP 服务查询会话证据、打开溯源视图并检查证据报告。此目录版本适配 DSH 0.1.6-alpha.1；安装需要私有仓库权限。"
+        "en": "Trace file changes to native agent sessions, inspect evidence, and open the lineage viewer.",
+        "zh": "追溯文件改动来源，查询原生会话证据并打开溯源视图。"
       },
       "icon": "icons/agentlineage.svg",
       "author": "Fuxi AI Labs",
       "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/",
-      "repository": { "url": "https://github.com/fuxi-ailabs/AgentLineage", "directory": "integrations/dsh" },
+      "repository": {
+        "url": "https://github.com/fuxi-ailabs/AgentLineage",
+        "directory": "integrations/dsh"
+      },
       "metadata": {
         "category": "evidence",
-        "labels": ["private-source", "preview"],
-        "keywords": ["AgentLineage", "lineage", "evidence", "溯源", "会话", "证据"]
+        "labels": [
+          "preview"
+        ],
+        "keywords": [
+          "AgentLineage",
+          "lineage",
+          "evidence",
+          "溯源",
+          "会话",
+          "证据"
+        ]
       },
       "versions": [
         {
-          "version": "0.1.0-alpha.1",
-          "publishTimestamp": 1792049198,
+          "version": "0.1.0-alpha.3",
+          "publishTimestamp": 1792412242,
           "source": {
             "type": "git",
             "url": "https://github.com/fuxi-ailabs/AgentLineage",
-            "commit": "31c09b1244116601c73f015822dc5ba034866453",
+            "commit": "bf28b828710f1c146895bdfb63108934edbd1fe5",
             "path": "integrations/dsh"
           },
-          "engines": { "dsh": "0.1.6-alpha.1" }
+          "engines": {
+            "dsh": "0.2.1-rc.2"
+          }
         }
       ]
     }
