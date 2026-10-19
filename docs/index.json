@@ -1,7 +1,7 @@
 {
   "format": 1,
-  "title": { "en": "Fuxi DSH Plugins", "zh": "伏羲 DSH 插件市场" },
-  "description": { "en": "Fuxi AI Labs plugin catalog. Private plugin sources require separate repository access.", "zh": "伏羲团队插件目录。目录公开，私有插件的下载和安装仍需仓库访问权限。" },
+  "title": { "en": "Fuxi DSH 插件市场", "zh": "Fuxi DSH 插件市场" },
+  "description": { "en": "Fuxi AI Labs plugin catalog. Private plugin sources require separate repository access.", "zh": "Fuxi 团队插件目录。目录公开，私有插件的下载和安装仍需仓库访问权限。" },
   "metadata": {
     "categories": {
       "evidence": { "title": { "en": "Evidence and lineage", "zh": "证据与溯源" } }

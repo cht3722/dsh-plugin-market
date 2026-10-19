@@ -1,4 +1,4 @@
-# 伏羲 DSH 插件市场
+# Fuxi DSH 插件市场
 
 公开的 DSH Custom Plugin Market 目录，由 GitHub Pages 托管。
 
