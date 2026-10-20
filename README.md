@@ -17,7 +17,7 @@ Fuxi 团队插件目录
 
 AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开溯源视图。安装准备见 [AgentLineage 使用说明](https://github.com/fuxi-ailabs/AgentLineage/blob/dsh-agentlineage-v0.1.0-alpha.3/integrations/dsh/README.md)。
 
-DT 验证组件按 Spec 整理验收输入、统一审查计划，执行 Harmony UT/UI 与静态依赖验证并汇总证据；当前为开发候选（预览版），会话内业务验收尚未完成。包来自 `harmony-verify` 的 `dsh-release` 分支，安装需要该私有仓库的访问权限；使用说明见 [dt-verify 接入说明](https://github.com/fuxi-ailabs/harmony-verify/blob/a79bc53f842eef3fdf9cf18e00450abec3ce443f/dsh/README.md)。
+DT 验证组件按 Spec 整理验收输入、统一审查计划，执行 Harmony UT/UI 与静态依赖验证并汇总证据；当前为开发候选（预览版）。包来自 `harmony-verify` 的 `dsh-release` 分支，安装需要该私有仓库的访问权限；使用说明见 [dt-verify 接入说明](https://github.com/fuxi-ailabs/harmony-verify/blob/a79bc53f842eef3fdf9cf18e00450abec3ce443f/dsh/README.md)。
 
 ## 添加后续插件或版本
 
