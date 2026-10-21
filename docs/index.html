@@ -37,7 +37,15 @@
       const description = document.createElement('p'); description.textContent = text(plugin.description);
       const versions = document.createElement('p'); versions.className = 'note';
       versions.textContent = plugin.versions.map(v => `${v.version} · DSH ${v.engines?.dsh ?? '未声明范围'}`).join(' / ');
-      card.append(icon, title, name, description, versions); section.append(card);
+      card.append(icon, title, name, description, versions);
+      if (plugin.homepage) {
+        const url = new URL(plugin.homepage, location.href);
+        if (url.protocol === 'https:') {
+          const details = document.createElement('a'); details.href = url.href;
+          details.textContent = '了解插件 →'; card.append(details);
+        }
+      }
+      section.append(card);
     }
   } catch (error) {
     section.textContent = `目录加载失败：${error.message}。请检查索引地址或稍后重试。`;

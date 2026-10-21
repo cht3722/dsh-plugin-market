@@ -39,7 +39,7 @@
       },
       "icon": "icons/agentlineage.svg",
       "author": "Fuxi AI Labs",
-      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/",
+      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/",
       "repository": {
         "url": "https://github.com/fuxi-ailabs/AgentLineage",
         "directory": "integrations/dsh"
