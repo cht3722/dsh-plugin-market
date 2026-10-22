@@ -87,8 +87,8 @@
         "zh": "DT 验证组件 · dt-verify"
       },
       "description": {
-        "en": "Turn a Spec into accepted verification plans, review them, run Harmony UT/UI and static dependency checks, and summarize results with evidence.",
-        "zh": "按 Spec 整理验收输入、统一审查计划，执行 Harmony UT/UI 与静态依赖验证，并汇总结果与证据。"
+        "en": "Turn a Spec into accepted verification plans, review them, verify HarmonyOS projects with Harmony UT/UI tests, and summarize results with evidence.",
+        "zh": "按 Spec 整理验收输入、统一审查计划，用 Harmony UT/UI 测试验证鸿蒙工程，并汇总结果与证据。"
       },
       "icon": "icons/dt-verify.svg",
       "author": "Fuxi AI Labs",
