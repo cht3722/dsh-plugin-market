@@ -45,7 +45,7 @@
       },
       "icon": "icons/agentlineage.svg",
       "author": "Fuxi AI Labs",
-      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/",
+      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/",
       "repository": {
         "url": "https://github.com/fuxi-ailabs/AgentLineage",
         "directory": "integrations/dsh"
@@ -75,7 +75,7 @@
             "path": "integrations/dsh"
           },
           "engines": {
-            "dsh": "0.2.1-rc.2"
+            "dsh": "^0.2.1-rc.2"
           }
         }
       ]
@@ -92,11 +92,7 @@
       },
       "icon": "icons/dt-verify.svg",
       "author": "Fuxi AI Labs",
-      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/",
-      "repository": {
-        "url": "https://github.com/fuxi-ailabs/harmony-verify",
-        "directory": "packaging/deepseek"
-      },
+      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/",
       "metadata": {
         "category": "verification",
         "labels": [
@@ -115,16 +111,14 @@
       },
       "versions": [
         {
-          "version": "0.1.0-dev.18",
-          "publishTimestamp": 1792503043,
+          "version": "0.1.0-dev.19",
+          "publishTimestamp": 1792631994,
           "source": {
-            "type": "git",
-            "url": "https://github.com/fuxi-ailabs/harmony-verify",
-            "commit": "a79bc53f842eef3fdf9cf18e00450abec3ce443f",
-            "path": "dsh"
+            "type": "npm",
+            "registry": "https://registry.npmjs.org/"
           },
           "engines": {
-            "dsh": "0.2.1-rc.2"
+            "dsh": "^0.2.1-rc.2"
           }
         }
       ]
