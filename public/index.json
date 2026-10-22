@@ -81,7 +81,7 @@
       ]
     },
     {
-      "name": "dt-verify-deepseek",
+      "name": "dsh-dt-verify",
       "title": {
         "en": "DT Verification",
         "zh": "DT 验证组件 · dt-verify"
@@ -112,7 +112,7 @@
       "versions": [
         {
           "version": "0.1.0-dev.19",
-          "publishTimestamp": 1792631994,
+          "publishTimestamp": 1792645168,
           "source": {
             "type": "npm",
             "registry": "https://registry.npmjs.org/"
