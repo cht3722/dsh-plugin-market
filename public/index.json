@@ -87,8 +87,8 @@
         "zh": "DT 验证组件 · dt-verify"
       },
       "description": {
-        "en": "Turn a Spec into accepted verification plans, review them, verify HarmonyOS projects with Harmony UT/UI tests, and summarize results with evidence.",
-        "zh": "按 Spec 整理验收输入、统一审查计划，用 Harmony UT/UI 测试验证鸿蒙工程，并汇总结果与证据。"
+        "en": "Turn a Spec into accepted verification plans, review them, verify HarmonyOS Stage projects with Harmony UT/UI tests, and summarize results with evidence. HarmonyOS projects only.",
+        "zh": "按 Spec 整理验收输入、统一审查计划，用 Harmony UT/UI 测试验证鸿蒙工程，并汇总结果与证据。只用于鸿蒙 Stage 工程。"
       },
       "icon": "icons/dt-verify.svg",
       "author": "Fuxi AI Labs",
@@ -111,8 +111,8 @@
       },
       "versions": [
         {
-          "version": "0.1.0-dev.19",
-          "publishTimestamp": 1792645168,
+          "version": "0.1.0-dev.20",
+          "publishTimestamp": 1792672063,
           "source": {
             "type": "npm",
             "registry": "https://registry.npmjs.org/"
