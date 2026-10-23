@@ -81,7 +81,7 @@
       ]
     },
     {
-      "name": "dsh-dt-verify",
+      "name": "@fuxi-ailabs/dsh-dt-verify",
       "title": {
         "en": "DT Verification",
         "zh": "DT 验证组件 · dt-verify"
@@ -112,7 +112,7 @@
       "versions": [
         {
           "version": "0.1.0-dev.20",
-          "publishTimestamp": 1792672063,
+          "publishTimestamp": 1792738620,
           "source": {
             "type": "npm",
             "registry": "https://registry.npmjs.org/"
