@@ -19,7 +19,7 @@ Fuxi 团队插件目录
 
 AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开溯源视图。参见 [插件介绍与效果对比](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/)。安装准备见 [AgentLineage 使用说明](https://github.com/fuxi-ailabs/AgentLineage/blob/dsh-agentlineage-v0.1.0-alpha.3/integrations/dsh/README.md)。
 
-Crowd Memory 是 DSH 记忆插件：工具失败、会话开始或进入工作流阶段时，把以前同类问题的解决记录推送给 Agent，附出处和命中理由。使用前需要安装本机记忆服务 `crowdmemory-runtime`。参见 [Crowd Memory 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/)。
+Crowd Memory 是 DSH 记忆插件：工具失败、会话开始或进入工作流阶段时，把以前同类问题的解决记录推送给 Agent，附出处和命中理由。使用前需要安装本机记忆服务 `@fuxi-ailabs/crowdmemory-runtime`。参见 [Crowd Memory 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/)。
 
 ## 版本与兼容性
 

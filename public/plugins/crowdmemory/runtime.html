@@ -23,7 +23,7 @@
   <main class="main">
     <article class="doc">
       <h1>记忆服务命令</h1>
-<p><code>crowdmemory-runtime</code> 命令随同名 npm 包安装。所有命令都接受 <code>--prefix &lt;目录&gt;</code>（默认 <code>~/.crowdmemory</code>）。</p>
+<p><code>crowdmemory-runtime</code> 命令由 npm 包 <code>@fuxi-ailabs/crowdmemory-runtime</code> 安装。所有命令都接受 <code>--prefix &lt;目录&gt;</code>（默认 <code>~/.crowdmemory</code>）。</p>
 <h2 id="commands">命令<a class="hash" href="#commands" aria-label="本节链接">#</a></h2>
 <div class="table"><table><thead><tr><th>命令</th><th>说明</th></tr></thead><tbody><tr><td><code>install</code></td><td>安装、升级或回滚</td></tr><tr><td><code>start</code></td><td>前台运行记忆服务。已经在运行时拒绝启动第二个</td></tr><tr><td><code>status [--json]</code></td><td>查询运行状态：会话数、模板、最近错误</td></tr><tr><td><code>version [--json]</code></td><td>包版本、组件版本和当前安装的版本</td></tr><tr><td><code>prune [--keep N] [--dry-run]</code></td><td>删除旧版本，默认保留当前和上一个</td></tr><tr><td><code>uninstall [--keep-state]</code></td><td>卸载。加 <code>--keep-state</code> 保留记忆库和配置</td></tr></tbody></table></div>
 <p>退出码：<code>0</code> 成功；<code>1</code> 记忆服务没有运行或没有安装；<code>2</code> 用法或环境错误，例如找不到合适的 Python、包校验失败。</p>
@@ -32,12 +32,12 @@
 <h2 id="layout">目录<a class="hash" href="#layout" aria-label="本节链接">#</a></h2>
 <div class="table"><table><thead><tr><th>路径</th><th>内容</th></tr></thead><tbody><tr><td><code>&lt;prefix&gt;/releases/&lt;id&gt;/</code></td><td>每个版本一个目录，含独立的虚拟环境</td></tr><tr><td><code>&lt;prefix&gt;/current</code></td><td>指向当前版本</td></tr><tr><td><code>&lt;prefix&gt;/host-config.json</code></td><td>记忆服务配置。首次安装时生成，之后不会被覆盖</td></tr><tr><td><code>&lt;prefix&gt;/state/</code></td><td>记忆库、令牌、<code>endpoint.json</code>。升级时保留</td></tr><tr><td><code>&lt;prefix&gt;/service/</code></td><td>生成的服务文件</td></tr></tbody></table></div>
 <h2 id="upgrade">升级与回滚<a class="hash" href="#upgrade" aria-label="本节链接">#</a></h2>
-<div class="code"><div class="code-bar"><span>bash</span><button type="button" class="copy">复制</button></div><pre><code>npm install -g crowdmemory-runtime@&lt;版本&gt;
+<div class="code"><div class="code-bar"><span>bash</span><button type="button" class="copy">复制</button></div><pre><code>npm install -g @fuxi-ailabs/crowdmemory-runtime@&lt;版本&gt;
 crowdmemory-runtime install</code></pre></div>
 <p><code>current</code> 原子切换到新版本，<code>state/</code> 和 <code>host-config.json</code> 保留。正在运行的记忆服务要重启后才使用新版本。回滚用同样的两步，装回旧版本。</p>
 <h2 id="uninstall">卸载<a class="hash" href="#uninstall" aria-label="本节链接">#</a></h2>
 <div class="code"><div class="code-bar"><span>bash</span><button type="button" class="copy">复制</button></div><pre><code>crowdmemory-runtime uninstall
-npm uninstall -g crowdmemory-runtime</code></pre></div>
+npm uninstall -g @fuxi-ailabs/crowdmemory-runtime</code></pre></div>
 <p>加载过服务文件时，先停止服务：macOS 执行 <code>launchctl bootout gui/$(id -u)/com.crowdmemory.runtime</code>，Linux 执行 <code>systemctl --user stop crowdmemory-runtime.service</code>。</p>
       <nav class="pager" aria-label="翻页"><a class="pg prev" href="stats.html"><span>上一页</span>使用统计</a><a class="pg next" href="limits.html"><span>下一页</span>上限与超时</a></nav>
     </article>
