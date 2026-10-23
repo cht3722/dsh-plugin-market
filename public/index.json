@@ -81,7 +81,7 @@
       ]
     },
     {
-      "name": "dsh-ecat",
+      "name": "@fuxi-ailabs/dsh-ecat",
       "title": {
         "en": "ECAT",
         "zh": "ECAT · 熵驱动代码改进循环"
@@ -115,7 +115,7 @@
       "versions": [
         {
           "version": "0.1.0-alpha.1",
-          "publishTimestamp": 1792661466,
+          "publishTimestamp": 1792738462,
           "source": {
             "type": "npm"
           },
