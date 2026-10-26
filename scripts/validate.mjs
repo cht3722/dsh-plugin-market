@@ -23,6 +23,12 @@ const publicPages = new Map([['agentlineage', new Set([
   'index.html', 'styles.css', 'page.js', 'demo-data.js',
   'assets/before-dsh.jpg', 'assets/after-viewer.jpg',
   'assets/dsh-release-note-demo.mp4', 'assets/dsh-release-note-poster.jpg', 'assets/dsh-release-note-zh.vtt',
+])], ['crowdmemory', new Set([
+  'changelog.html', 'configuration.html', 'docs.css', 'docs.js',
+  'errors.html', 'evaluation.html', 'faq.html', 'index.html',
+  'limits.html', 'push.html', 'runtime.html', 'security.html',
+  'stats.html', 'team.html', 'tools.html', 'versions.html',
+  'workflow.html',
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
 const publicLinks = new Map([['agentlineage', new Set([
