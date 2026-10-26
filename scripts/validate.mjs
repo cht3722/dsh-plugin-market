@@ -33,7 +33,7 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'limits.html', 'push.html', 'runtime.html', 'security.html',
   'stats.html', 'team.html', 'tools.html', 'versions.html',
   'workflow.html',
-])], ['workflow-rsi', new Set([
+])], ['plugins/workflow-rsi', new Set([
   'index.html', 'tools.html', 'errors.html', 'versions.html', 'docs.css', 'docs.js',
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
