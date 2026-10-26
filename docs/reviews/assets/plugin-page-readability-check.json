@@ -1,0 +1,343 @@
+{
+  "layouts": [
+    {
+      "route": "plugins/agentlineage/",
+      "width": 360,
+      "scrollWidth": 360,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "16px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "plugins/agentlineage/",
+      "width": 390,
+      "scrollWidth": 390,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "16px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "plugins/agentlineage/",
+      "width": 768,
+      "scrollWidth": 768,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "plugins/agentlineage/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "plugins/agentlineage/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "plugins/agentlineage/",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "templates/plugin-page/",
+      "width": 360,
+      "scrollWidth": 360,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "16px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "templates/plugin-page/",
+      "width": 390,
+      "scrollWidth": 390,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "16px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "templates/plugin-page/",
+      "width": 768,
+      "scrollWidth": 768,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "templates/plugin-page/",
+      "width": 1024,
+      "scrollWidth": 1024,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "templates/plugin-page/",
+      "width": 1440,
+      "scrollWidth": 1440,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    },
+    {
+      "route": "templates/plugin-page/",
+      "width": 1920,
+      "scrollWidth": 1920,
+      "scale": 1,
+      "minFont": 14,
+      "bodyFont": "17px",
+      "codeFont": "15px",
+      "sections": [
+        "overview",
+        "use-cases",
+        "example",
+        "comparison",
+        "details",
+        "quickstart"
+      ],
+      "duplicateIds": [],
+      "brokenAnchors": [],
+      "stepTargets": [
+        "steps",
+        "steps",
+        "steps",
+        "steps",
+        "steps"
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "route": "plugins/agentlineage/",
+      "operation": true,
+      "tabs": true,
+      "keyboard": true,
+      "copy": true,
+      "lightbox": true,
+      "playbackInterrupt": true,
+      "stepNavigation": true,
+      "conditions": true
+    },
+    {
+      "route": "templates/plugin-page/",
+      "operation": true,
+      "tabs": true,
+      "keyboard": true,
+      "copy": true,
+      "lightbox": true,
+      "playbackInterrupt": true,
+      "stepNavigation": true,
+      "conditions": true
+    }
+  ],
+  "manualCopyFallback": true,
+  "noJavaScript": true,
+  "errors": []
+}

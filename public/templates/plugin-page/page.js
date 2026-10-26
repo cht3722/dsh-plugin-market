@@ -94,7 +94,7 @@
       try {
         await navigator.clipboard.writeText(button.dataset.copy);
         clearTimeout(reset); button.classList.add('is-copied'); button.textContent = '已复制 ✓';
-        byId('copy-status').textContent = '已复制，可粘贴到 DSH 或终端。';
+        byId('copy-status').textContent = '内容已复制。';
         reset = setTimeout(() => { button.innerHTML = original; button.classList.remove('is-copied'); }, 1800);
       } catch { manualCopy(button.dataset.copy, button); }
     });
