@@ -12,7 +12,7 @@
 | 字幕与封面 | `assets/dsh-release-note-zh.vtt` / `assets/dsh-release-note-poster.jpg` | 默认中文字幕与真实 Viewer 封面；不自动播放 |
 | 实录依据 | `docs/demos/agentlineage-recording.json` | 真实会话、快照、六条原文引用及文件/视频摘要 |
 | 复现提问 | `example.prompt` | 安装后在自己的 DSH 中创建并两次修改发布说明，再查询来源 |
-| 安装验证例子 | `quickstart.steps[3]`：lineage-check.txt | write hello → edit hello lineage，预期两次确认写入 |
+| 安装验证例子 | `quickstart.steps[3]`：release-note.md | 与页面交互和录像使用同一例子，预期三次确认写入 |
 | Before | `public/plugins/agentlineage/assets/before-dsh.jpg` | 仓库既有 DSH 截图：搜索发布说明并逐条查看操作 |
 | After | `public/plugins/agentlineage/assets/after-viewer.jpg` | 仓库既有 Viewer 截图：按文件查看三次写入及 diff |
 | 使用场景 | 代码审查、历史任务复盘、报告证据核对 | 每个场景含可复制的自然语言提问 |

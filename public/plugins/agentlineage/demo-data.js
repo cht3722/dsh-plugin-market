@@ -1,7 +1,7 @@
 // Illustrative data for this page, not a live plugin connection.
 window.PLUGIN_DEMO = {
-  "title": "一份发布说明，三次操作。",
-  "description": "不用安装，先点下面的记录：看看一句“改好了”，如何拆成可以核对的修改过程。",
+  "title": "查清发布说明的三次改动",
+  "description": "选择一条操作，查看文件变化；切换到“调用与回执”，查看对应的记录。",
   "label": "交互演示 · 固定示意数据",
   "file": "release-note.md",
   "question": "谁把发布说明的状态改成了“待评审”？",
@@ -9,8 +9,7 @@ window.PLUGIN_DEMO = {
   "session": "demo-session-01",
   "ui": {
     "events": "文件操作",
-    "context": "SOURCE SESSION",
-    "contextNote": "每条操作都有对应来源",
+    "context": "来源会话",
     "changeTab": "文件变化",
     "evidenceTab": "调用与回执",
     "action": "工具",
@@ -66,11 +65,10 @@ window.PLUGIN_DEMO = {
     }
   ],
   "prompt": "请用 DSH 的 write 工具创建 release-note.md，内容为“# 搜索功能发布说明\\n功能：新增搜索\\n状态：草稿”；再用 edit 分两次修改：先把“新增搜索”改为“支持标题和标签搜索”，再把“草稿”改为“待评审”。不要使用 shell 写文件。完成后刷新当前会话的 Lineage 快照，查询这个文件的三次写入，给出来源会话、调用、成功回执和原文引用。",
-  "note": "上方交互使用固定示意数据，不连接你的会话。下方视频录自真实 DSH 操作；复制提示词可在自己的 DSH 中复现。",
+  "note": "交互使用固定示意数据，不读取你的会话。下方视频录自真实 DSH 操作。",
   "video": {
-    "label": "REAL DSH RECORDING",
-    "title": "52 秒真实操作：从发布说明到原始证据",
-    "description": "DSH 实际执行一次 write、两次 edit，再查询三次确认写入并在 Viewer 展开 diff 与原文。静音录像，默认中文字幕；登录与等待已剪去，本机路径已隐藏。",
+    "title": "52 秒：查询文件改动并查看原始记录",
+    "description": "视频展示创建文件、两次修改和查询，并在 Viewer 中展开 diff 与原文。附中文字幕，已剪去登录与等待。",
     "src": "assets/dsh-release-note-demo.mp4",
     "poster": "assets/dsh-release-note-poster.jpg",
     "captions": "assets/dsh-release-note-zh.vtt"

@@ -1,11 +1,23 @@
-/* Only the standalone template review page loads this stylesheet. */
-.template-banner{background:linear-gradient(115deg,#15200f,#0e1516);border-bottom:1px solid #3a4b2c;padding:24px 0 15px}
-.review-topline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:25px;align-items:center}
-.template-banner .eyebrow{margin-bottom:8px;font-size:9px}.template-banner h2{font-size:23px;margin-bottom:9px}.template-banner p:not(.eyebrow){font-size:11px;color:var(--muted);margin-bottom:0;line-height:1.8}
-.review-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;max-width:430px}.review-actions a,.review-actions button{display:inline-flex;align-items:center;min-height:34px;border:1px solid #3e4b37;background:#0d1310;color:var(--text);border-radius:4px;padding:6px 11px;font-size:10px}.review-actions a:hover,.review-actions button:hover{border-color:var(--accent);color:var(--accent)}.review-actions button[aria-pressed=true]{border-color:#7c9f50;color:var(--accent)}
-.review-questions{display:flex;flex-wrap:wrap;gap:12px 24px;border-top:1px solid #2c3a25;padding-top:12px;margin-top:18px;font-size:10px}.review-questions>span{color:var(--subtle)}.review-questions a{color:var(--accent)}.template-banner p.review-status{font-size:9px;margin-top:9px;color:var(--subtle)}
-.author-note{padding:11px 13px;margin:0 0 22px;border:1px dashed #465b34;border-radius:4px;background:#c1fa7404;max-width:850px}.author-note>span{font:8px/1.5 var(--mono);letter-spacing:.07em;color:var(--accent)}.author-note p{font-size:10px;color:var(--muted);line-height:1.85;margin:5px 0 0}.author-note strong{color:var(--text);font-weight:500;margin-right:9px}.hero-copy>.author-note{margin-bottom:22px}.template-banner~main .hero{padding-top:40px}
-html[data-template-notes=hidden] [data-review-note]{display:none}
-.video-placeholder{min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:30px 20px;text-align:center;background:repeating-linear-gradient(135deg,#0a0f15,#0a0f15 12px,#0d131a 12px,#0d131a 13px)}.video-placeholder>.mono{color:var(--accent);font-size:10px}.video-placeholder p{font-size:17px;margin:5px 0 0;color:var(--text)}.video-placeholder>span:not(.mono){font-size:11px;color:var(--muted)}.video-placeholder a{font-size:11px;color:var(--accent);border-bottom:1px solid #5c743f;margin-top:7px}
-@media(max-width:900px){.review-topline{grid-template-columns:1fr}.review-actions{justify-content:flex-start;max-width:none;gap:8px}.review-questions{gap:10px 17px}.template-banner{padding-top:20px}}
-@media(max-width:600px){.template-banner h2{font-size:21px}.template-banner p:not(.eyebrow){font-size:10px}.review-topline{gap:15px}.review-actions a,.review-actions button{font-size:9px;padding:6px 9px;min-height:32px}.review-questions{font-size:9px;gap:8px 16px}.review-questions>span{width:100%}.template-banner p.review-status{font-size:8px}.author-note{padding:10px 12px;margin-bottom:20px}.author-note p{font-size:9px}.video-placeholder{min-height:190px;gap:10px}.video-placeholder p{font-size:14px}.video-placeholder>span:not(.mono),.video-placeholder a{font-size:10px}.video-placeholder>.mono{font-size:9px}}
+/* Authoring controls appear only in the template preview. */
+.template-banner { background: #131d13; border-bottom: 1px solid #4b6140; padding: 32px 0 24px; }
+.review-topline { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: center; }
+.template-banner h2 { font-size: 1.75rem; margin-bottom: 12px; }
+.template-banner p { color: var(--muted); margin-bottom: 0; max-width: 65ch; }
+.review-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; max-width: 440px; }
+.review-actions a, .review-actions button { display: inline-flex; align-items: center; min-height: 44px; border: 1px solid #526943; background: #0d1310; color: var(--text); border-radius: 5px; padding: 8px 14px; font-size: .9375rem; }
+.review-actions a:hover, .review-actions button:hover, .review-actions button[aria-pressed=true] { border-color: var(--accent); color: var(--accent); }
+.review-questions { display: flex; flex-wrap: wrap; gap: 12px 28px; border-top: 1px solid #3d4f34; padding-top: 20px; margin-top: 24px; font-size: 1rem; }
+.review-questions a { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent); }
+.template-banner p.review-status { font-size: .9375rem; margin-top: 12px; color: var(--subtle); }
+.author-note { padding: 16px 20px; margin: 0 0 24px; border: 1px dashed #637e48; border-radius: 6px; background: #c1fa7405; max-width: 75ch; }
+.author-note > span { font-size: .9375rem; color: var(--accent); font-weight: 600; }
+.author-note p { color: var(--muted); margin: 8px 0 0; font-size: 1rem; }
+html[data-template-notes=hidden] [data-review-note] { display: none; }
+.video-placeholder { min-height: 210px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 32px 24px; text-align: center; background: #0d131a; }
+.video-placeholder p { font-size: 1.125rem; margin: 0; }
+.video-placeholder > span { font-size: 1rem; color: var(--muted); }
+.video-placeholder a { font-size: 1rem; color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 1000px) {
+  .review-topline { grid-template-columns: 1fr; gap: 24px; }
+  .review-actions { justify-content: flex-start; max-width: none; }
+}

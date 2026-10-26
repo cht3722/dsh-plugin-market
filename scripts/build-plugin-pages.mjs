@@ -12,14 +12,14 @@ const requireList = (value, name, min) => {
 };
 export function validateContent(p) {
   if (!/^[a-z0-9-]+$/.test(p.slug)) throw new Error('Invalid plugin slug');
-  for (const key of ['name','category','version','compatibility','description','promise','heroQuestion','heroAnswer','heroFile']) requireText(p[key], key);
-  for (const key of ['headline','heroNodes','facts']) {
+  for (const key of ['name','version','compatibility','description','promise','heroQuestion','heroAnswer','heroFile']) requireText(p[key], key);
+  for (const key of ['headline','heroNodes']) {
     requireList(p[key], key, 2); p[key].forEach(v => requireText(v, key));
   }
-  for (const key of ['terminal','objectLabel','contextLabel','contextMeta']) requireText(p.preview?.[key], `preview.${key}`);
+  for (const key of ['contextLabel']) requireText(p.preview?.[key], `preview.${key}`);
   const x = p.example;
   for (const key of ['title','description','label','file','question','answer','session','prompt','note']) requireText(x?.[key], `example.${key}`);
-  for (const key of ['events','context','contextNote','changeTab','evidenceTab','action','contextField','request','result','resultText','status']) requireText(x.ui?.[key], `example.ui.${key}`);
+  for (const key of ['events','context','changeTab','evidenceTab','action','contextField','request','result','resultText','status']) requireText(x.ui?.[key], `example.ui.${key}`);
   if (x.video) {
     requireText(x.video.title, 'video.title');
     if (!/^assets\/[a-z0-9-]+\.(mp4|webm)$/.test(x.video.src) || !/^assets\/[a-z0-9-]+\.jpg$/.test(x.video.poster) || !/^assets\/[a-z0-9-]+\.vtt$/.test(x.video.captions)) throw new Error('Video, poster and captions must be reviewed local assets');
@@ -37,13 +37,16 @@ export function validateContent(p) {
   requireList(p.comparison.takeaways, 'comparison.takeaways', 1);
   p.comparison.takeaways.forEach(v=>requireText(v,'takeaway'));
   requireList(p.useCases, 'useCases', 2);
-  for (const c of p.useCases) for (const key of ['tag','title','question','description','prompt']) requireText(c[key], `useCase.${key}`);
-  for (const key of ['title','description','summaryTitle']) requireText(p.quickstart?.[key], `quickstart.${key}`);
-  if (p.quickstart.steps?.length !== 5) throw new Error('Quickstart must have exactly five steps');
-  for (const s of p.quickstart.steps) for (const key of ['title','description','code','codeLabel']) requireText(s[key], `step.${key}`);
+  for (const c of p.useCases) for (const key of ['title','question','description','prompt']) requireText(c[key], `useCase.${key}`);
+  for (const key of ['title','description']) requireText(p.quickstart?.[key], `quickstart.${key}`);
+  requireList(p.quickstart.steps, 'quickstart.steps', 1);
+  if (p.quickstart.steps.length > 5) throw new Error('Quickstart must have at most five steps');
+  for (const s of p.quickstart.steps) for (const key of ['title','description','code','codeLabel','expected']) requireText(s[key], `step.${key}`);
   requireList(p.boundaries, 'boundaries', 1);
   for (const b of p.boundaries) for (const key of ['title','description']) requireText(b[key], `boundary.${key}`);
-  for (const key of ['eyebrow','title']) requireText(p.closing?.[key], `closing.${key}`);
+  for (const key of ['summary','description']) requireText(p.requirements?.[key], `requirements.${key}`);
+  requireList(p.requirements.items, 'requirements.items', 1);
+  for (const item of p.requirements.items) for (const key of ['label','value']) requireText(item[key], `requirement.${key}`);
   requireList(p.links, 'links', 1);
   for (const l of p.links) {
     requireText(l.label, 'link.label');
