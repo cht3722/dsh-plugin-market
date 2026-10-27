@@ -12,63 +12,101 @@ const raw = JSON.parse(await readFile('public/index.json', 'utf8'));
 const index = parseMarketIndex(raw, indexUrl);
 
 // Pages deploys only this allowlisted catalog directory. No plugin archives or source trees belong here.
-const allowedTopLevel = new Set(['.nojekyll', 'index.html', 'index.json', 'icons', 'plugins']);
+const pageRoots = new Set(['plugins', 'templates']);
+const allowedTopLevel = new Set(['.nojekyll', 'index.html', 'index.json', 'icons', ...pageRoots]);
 for (const entry of await readdir('public', { withFileTypes: true })) {
-  if (!allowedTopLevel.has(entry.name) || (entry.isDirectory() && !['icons', 'plugins'].includes(entry.name))) {
+  if (!allowedTopLevel.has(entry.name) || (entry.isDirectory() && entry.name !== 'icons' && !pageRoots.has(entry.name))) {
     throw new Error(`Unapproved publication path: public/${entry.name}`);
   }
 }
 // Each page is reviewed independently. Add its exact resource list here before publishing.
-const publicPages = new Map([
-  ['agentlineage', new Set([
-    'index.html', 'styles.css', 'page.js', 'evidence.js',
-    'assets/before-dsh.jpg', 'assets/after-viewer.jpg',
-  ])],
-  ['dt-verify', new Set(['index.html', 'styles.css'])],
-]);
-for (const directory of await readdir('public/plugins', { withFileTypes: true })) {
-  if (!directory.isDirectory() || !publicPages.has(directory.name)) {
-    throw new Error(`Unapproved plugin page: ${directory.name}`);
+const publicPages = new Map([['plugins/agentlineage', new Set([
+  'index.html', 'styles.css', 'page.js', 'demo-data.js',
+  'assets/before-dsh.jpg', 'assets/after-viewer.jpg',
+  'assets/dsh-release-note-demo.mp4', 'assets/dsh-release-note-poster.jpg', 'assets/dsh-release-note-zh.vtt',
+])], ['templates/plugin-page', new Set([
+  'index.html', 'styles.css', 'page.js', 'demo-data.js', 'content.example.json',
+  'review.css', 'review.js', 'assets/before.svg', 'assets/after.svg',
+])], ['plugins/crowdmemory', new Set([
+  'changelog.html', 'configuration.html', 'docs.css', 'docs.js',
+  'errors.html', 'evaluation.html', 'faq.html', 'index.html',
+  'limits.html', 'push.html', 'runtime.html', 'security.html',
+  'stats.html', 'team.html', 'tools.html', 'versions.html',
+  'workflow.html',
+])], ['plugins/workflow-rsi', new Set([
+  'index.html', 'tools.html', 'errors.html', 'versions.html', 'docs.css', 'docs.js',
+])], ['plugins/ecat', new Set(['index.html'])], ['plugins/dt-verify', new Set(['index.html', 'styles.css'])]]);
+// Exact documentation URLs are reviewed alongside each page, never inferred from its content.
+const publicLinks = new Map([['plugins/agentlineage', new Set([
+  'https://github.com/fuxi-ailabs/AgentLineage/blob/bf28b828710f1c146895bdfb63108934edbd1fe5/integrations/dsh/README.md',
+  'https://github.com/fuxi-ailabs/AgentLineage/tree/bf28b828710f1c146895bdfb63108934edbd1fe5/integrations/dsh',
+])], ['templates/plugin-page', new Set([
+  'https://github.com/fuxi-ailabs/dsh-plugin-market/blob/main/docs/plugin-page-template.md',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/#recording',
+])]]);
+for (const root of pageRoots) {
+  for (const entry of await readdir(`public/${root}`, { withFileTypes:true })) {
+    if (!entry.isDirectory() || !publicPages.has(`${root}/${entry.name}`)) {
+      throw new Error(`Unapproved page: ${root}/${entry.name}`);
+    }
   }
-  const allowed = publicPages.get(directory.name);
+}
+for (const [page, allowed] of publicPages) {
   const found = new Set();
   const walk = async (prefix = '') => {
-    for (const entry of await readdir(`public/plugins/${directory.name}/${prefix}`, { withFileTypes: true })) {
+    for (const entry of await readdir(`public/${page}/${prefix}`, { withFileTypes: true })) {
       const path = prefix + entry.name;
       if (entry.isDirectory() && [...allowed].some(file => file.startsWith(path + '/'))) {
         await walk(path + '/');
       } else if (entry.isFile() && allowed.has(path)) {
-        const data = await readFile(`public/plugins/${directory.name}/${path}`);
+        const data = await readFile(`public/${page}/${path}`);
+        if (path.endsWith('.svg') && (!data.toString('utf8').startsWith('<svg ') || /<script\b|<foreignObject\b|\bon\w+\s*=|\b(?:href|src)\s*=/i.test(data.toString('utf8')))) {
+          throw new Error(`Review unsafe SVG content: ${page}/${path}`);
+        }
         if (path.endsWith('.jpg')) {
           if (data[0] !== 0xff || data[1] !== 0xd8 || data.at(-2) !== 0xff || data.at(-1) !== 0xd9) {
             throw new Error(`Invalid JPEG: ${path}`);
           }
-        } else if (/Bearer |core-token|api_key|[A-Za-z]:[\\/]|Administrator/.test(data.toString('utf8'))) {
+        } else if (path.endsWith('.mp4')) {
+          if (data.toString('ascii',4,8) !== 'ftyp') throw new Error(`Invalid MP4: ${path}`);
+        } else if (path.endsWith('.webm')) {
+          if (data.subarray(0,4).toString('hex') !== '1a45dfa3') throw new Error(`Invalid WebM: ${path}`);
+        } else if (path.endsWith('.vtt') && !data.toString('utf8').startsWith('WEBVTT')) {
+          throw new Error(`Invalid captions: ${path}`);
+        } else if (/Bearer |core-token|api_key|(?:^|[\s"'<>=(])[A-Za-z]:[\\/]|Administrator/m.test(data.toString('utf8'))) {
           throw new Error(`Review private data in page asset: ${path}`);
         }
         found.add(path);
       } else {
-        throw new Error(`Unapproved page asset: ${directory.name}/${path}`);
+        throw new Error(`Unapproved page asset: ${page}/${path}`);
       }
     }
   };
   await walk();
-  if (found.size !== allowed.size) throw new Error(`Missing page resources: ${directory.name}`);
-  const html = await readFile(`public/plugins/${directory.name}/index.html`, 'utf8');
+  if (found.size !== allowed.size) throw new Error(`Missing page resources: ${page}`);
+  const html = await readFile(`public/${page}/index.html`, 'utf8');
   const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
-  for (const [, url] of html.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
-    if (url.startsWith('#') ? !ids.has(url.slice(1)) : !allowed.has(url)) {
+  for (const [, url] of html.matchAll(/\b(?:src|href|poster)="([^"]+)"/g)) {
+    if (url.startsWith('#') ? !ids.has(url.slice(1)) : !allowed.has(url) && !publicLinks.get(page)?.has(url)) {
       throw new Error(`Unreviewed page link: ${url}`);
     }
   }
 }
-for (const slug of publicPages.keys()) await readFile(`public/plugins/${slug}/index.html`);
 for (const entry of await readdir('public/icons', { withFileTypes: true })) {
   if (!entry.isFile() || !/^[a-z0-9-]+\.(svg|png|jpg|jpeg|webp)$/.test(entry.name)) {
     throw new Error(`Unapproved icon: ${entry.name}`);
   }
 }
 for (const plugin of index.plugins) {
+  if (!plugin.homepage) throw new Error(`Plugin needs an introduction page: ${plugin.name}`);
+  const homepage = new URL(plugin.homepage);
+  const pagePrefix = new URL('plugins/', indexUrl);
+  if (homepage.origin !== pagePrefix.origin || !homepage.pathname.startsWith(pagePrefix.pathname) || homepage.search || homepage.hash) {
+    throw new Error(`Plugin homepage must be a reviewed market page: ${plugin.name}`);
+  }
+  const slug = homepage.pathname.slice(pagePrefix.pathname.length).replace(/\/$/, '');
+  if (!publicPages.has(`plugins/${slug}`)) throw new Error(`Missing reviewed plugin page: ${slug}`);
   if (plugin.icon?.startsWith(new URL('icons/', indexUrl).href)) {
     await readFile(new URL(plugin.icon).pathname.replace('/dsh-plugin-market/', 'public/'));
   }
