@@ -356,6 +356,50 @@
           }
         }
       ]
+    },
+    {
+      "name": "@fuxi-ailabs/dsh-static-check-bundle",
+      "title": {
+        "en": "Static Check",
+        "zh": "Static Check · Skill 静态检查"
+      },
+      "description": {
+        "en": "Run declarative Skill analysis, security vetting, and optional AI content review from one DSH workbench.",
+        "zh": "在一个 DSH 工作台中执行 Skill 声明规范检查、安全扫描和可选的 AI 内容评审。"
+      },
+      "icon": "icons/static-check.svg",
+      "author": "Fuxi AI Labs",
+      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/static-check/",
+      "repository": {
+        "url": "https://github.com/guixu-labs/dsh-plugin",
+        "directory": "bundles/dsh-static-check-bundle"
+      },
+      "metadata": {
+        "category": "verification",
+        "labels": [
+          "preview"
+        ],
+        "keywords": [
+          "Static Check",
+          "Skill",
+          "SIFT",
+          "security vetting",
+          "静态检查",
+          "安全扫描"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1793091135,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": "^0.2.1-rc.2"
+          }
+        }
+      ]
     }
   ]
 }
