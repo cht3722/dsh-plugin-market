@@ -36,12 +36,19 @@ a:hover { text-decoration: underline; }
 .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 28px; min-height: 60px; padding: 0 max(24px, calc((100vw - 1160px) / 2)); border-bottom: 1px solid var(--line); background: var(--header); backdrop-filter: blur(12px); }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); font-weight: 650; }
 .brand:hover { text-decoration: none; }
-.brand-mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg, #0d89d8, #38bdf8); color: white; font: 700 11px var(--mono); letter-spacing: .04em; }
+.brand-icon { width: 30px; height: 30px; border-radius: 8px; }
 .topbar nav { display: flex; gap: 22px; margin-left: auto; }
 .topbar nav a { color: var(--text-2); font-size: 14px; }
 .npm-link { padding: 5px 12px; border: 1px solid var(--line); border-radius: 7px; font-size: 13px; color: var(--text-2); }
 .layout { display: grid; grid-template-columns: minmax(0, 820px) 190px; gap: 56px; max-width: 1160px; margin: 0 auto; padding: 44px 24px 76px; }
 .hero { padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.hero-title { display: flex; align-items: center; gap: 16px; }
+.hero-title img { flex: none; border-radius: 12px; }
+.hero-title .eyebrow { margin-bottom: 2px; }
+.npm-callout { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 24px; padding: 13px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); }
+.npm-callout div { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.npm-callout strong { color: var(--text); font-size: 13px; }
+.npm-callout a { flex: none; font-size: 13px; }
 .eyebrow { margin: 0 0 10px; color: var(--accent); font: 600 12px var(--mono); letter-spacing: .1em; }
 h1 { margin: 0 0 16px; font-size: 48px; line-height: 1.1; letter-spacing: -.03em; }
 .lede { max-width: 720px; margin: 0; color: var(--text-2); font-size: 18px; line-height: 1.7; }
@@ -79,6 +86,10 @@ th { background: var(--code); color: var(--text-2); font-weight: 600; }
   .lede { font-size: 16px; }
 }
 @media (max-width: 540px) {
+  .hero-title { align-items: flex-start; }
+  .hero-title img { width: 44px; height: 44px; }
+  .npm-callout { display: block; }
+  .npm-callout a { display: inline-block; margin-top: 8px; }
   .brand span:last-child { display: none; }
   h1 { font-size: 34px; }
   h2 { font-size: 23px; margin-top: 38px; }
