@@ -40,6 +40,10 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'assets/plugin-config.jpg', 'assets/session-button.jpg', 'assets/score-card.jpg', 'assets/insight-score.jpg',
 ])], ['plugins/audit', new Set([
   'index.html', 'styles.css', 'assets/icon.svg', 'assets/audit-workbench.jpg', 'assets/audit-flyout.jpg',
+])], ['plugins/static-check', new Set([
+  'index.html', 'styles.css', 'assets/icon.svg', 'assets/static-check-workbench.jpg',
+])], ['plugins/skill-eval', new Set([
+  'index.html', 'styles.css', 'assets/icon.svg', 'assets/skill-eval-workbench.jpg',
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
 const publicLinks = new Map([['plugins/agentlineage', new Set([
@@ -50,6 +54,12 @@ const publicLinks = new Map([['plugins/agentlineage', new Set([
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/audit', new Set([
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-audit-bundle',
+  'https://github.com/guixu-labs/dsh-plugin',
+])], ['plugins/static-check', new Set([
+  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle',
+  'https://github.com/guixu-labs/dsh-plugin',
+])], ['plugins/skill-eval', new Set([
+  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-eval-bundle',
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['templates/plugin-page', new Set([
   'https://github.com/fuxi-ailabs/dsh-plugin-market/blob/main/docs/plugin-page-template.md',

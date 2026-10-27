@@ -22,6 +22,8 @@ Fuxi 团队插件目录
 | DT 验证组件（@fuxi-ailabs/dsh-dt-verify） | `0.1.0-dev.21` | `^0.2.1-rc.2` |
 | Insight · 会话导入与评分 | `1.0.1` | `^0.2.1-rc.2` |
 | Session Audit · 会话审计 | `1.0.1` | `^0.2.1-rc.2` |
+| Static Check · Skill 静态检查 | `1.0.0` | `^0.2.1-rc.2` |
+| Skill Eval · Skill 评测 | `1.0.0` | `^0.2.1-rc.2` |
 
 AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开溯源视图。参见 [插件介绍与效果对比](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/)。Windows x64 随插件提供完整运行环境，安装后自动启动。参见 [AgentLineage 安装与使用说明](https://github.com/fuxi-ailabs/AgentLineage/blob/dsh-agentlineage-v0.1.0-alpha.4/integrations/dsh/README.md)。
 
@@ -31,6 +33,10 @@ workflow-rsi 操作台在 DSH 里查看 workflow-rsi 的会话、请求、评测
 Insight 把当前 DSH 会话导入 Insight，读回评分卡，并在插件配置页检查 Provider Auth、Insight CLI 与服务状态。参见 [Insight 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/insight/)。
 
 Session Audit 用 SIFT 审计真实 DSH 会话执行轨迹，在工作台和历史记录中查看 finding、证据与 turn 引用，并在右侧只读报告面板中打开完整审计报告。参见 [Session Audit 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/audit/)。
+
+Static Check 在 DSH 工作台中检查 Skill 和 Agent 声明，组合 SIFT 的 11 项规范检查、安全扫描与可选 AI 内容评审，并在插件配置页检查 SIFT、扫描器、Provider Auth 和服务状态。参见 [Static Check 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/static-check/)。
+
+Skill Eval 在 DSH 工作台中构建 Skill 评测题集、检查覆盖率与基线，运行 Eval/Trigger 和真实任务，并生成 Gate 与 HTML 报告。参见 [Skill Eval 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/skill-eval/)。
 
 DT 验证组件按 Spec 整理验收输入、统一审查计划，用 Harmony UT/UI 测试验证鸿蒙工程并汇总证据，只用于鸿蒙 Stage 工程；当前为开发候选（预览版）。参见 [插件介绍与使用步骤](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/)。包发布在 npm：[@fuxi-ailabs/dsh-dt-verify](https://www.npmjs.com/package/@fuxi-ailabs/dsh-dt-verify)。0.1.0-dev.20 在 DSH 运行中从市场安装后，“子智能体委派工具 · dt-verify.subagent”会显示异常（重启 DSH 后恢复），0.1.0-dev.21 已修复。自定义插件市场只把可用更新显示为状态、不提供升级按钮：已装 dev.20 的用户在插件页移除 `@fuxi-ailabs/dsh-dt-verify` 后，从「发现」重新安装即得到 dev.21；或先退出 DSH，执行 `dsh plugin --profile web add --save-exact @fuxi-ailabs/dsh-dt-verify@0.1.0-dev.21` 再启动。
 
