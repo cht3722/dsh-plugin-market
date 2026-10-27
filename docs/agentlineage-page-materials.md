@@ -1,0 +1,50 @@
+# AgentLineage 介绍页材料
+
+材料对应市场索引里的插件 `0.1.0-alpha.3`，来源固定为 AgentLineage 提交 `bf28b828710f1c146895bdfb63108934edbd1fe5`。2026-10-26 已在真实 DSH 0.2.1-rc.2、Core 0.1.0a10 和 DeepSeek-V4.1-Flash 中完成最小例子，并录制了约 52 秒短片。
+
+## 已准备
+
+| 材料 | 路径 / 内容 | 使用方式 |
+|---|---|---|
+| 页面内容 | `content/plugins/agentlineage.json` | 一句话定位、场景、五步使用、条件及版本文档 |
+| 最小例子 | `example`：release-note.md，write → edit → edit | 网页固定交互示意；3 条操作、diff、调用/回执示意引用 |
+| 真实短片 | `public/plugins/agentlineage/assets/dsh-release-note-demo.mp4` | 1280×720、H.264、约 52 秒；可在介绍页直接播放 |
+| 字幕与封面 | `assets/dsh-release-note-zh.vtt` / `assets/dsh-release-note-poster.jpg` | 默认中文字幕与真实 Viewer 封面；不自动播放 |
+| 实录依据 | `docs/demos/agentlineage-recording.json` | 真实会话、快照、六条原文引用及文件/视频摘要 |
+| 复现提问 | `example.prompt` | 安装后在自己的 DSH 中创建并两次修改发布说明，再查询来源 |
+| 安装验证例子 | `quickstart.steps[3]`：release-note.md | 与页面交互和录像使用同一例子，预期三次确认写入 |
+| Before | `public/plugins/agentlineage/assets/before-dsh.jpg` | 仓库既有 DSH 截图：搜索发布说明并逐条查看操作 |
+| After | `public/plugins/agentlineage/assets/after-viewer.jpg` | 仓库既有 Viewer 截图：按文件查看三次写入及 diff |
+| 使用场景 | 代码审查、历史任务复盘、报告证据核对 | 每个场景含可复制的自然语言提问 |
+| 模板与内容骨架 | `templates/plugin-page/` | 后续插件使用同一生成器、样式和交互 |
+
+Before / After 截图保持仓库原文件；未用这些截图推断真实证据 ID。页面交互里的 `demo-session-01` 与 `demo:call-*` / `demo:result-*` 均为示意值；新视频和实录依据使用此次真实运行的会话与引用。
+
+## 真实录制与核对
+
+真实 DSH 会话执行一次 `write`、两次 `edit`，再调用 `lineage_import`、`lineage_query` 和 `lineage_open`。独立读取同一 Core 快照核对：三条写入均为 `confirmed` / `returned`；六条调用与结果引用均能解析到完整原文；磁盘文件与预期三行内容一致。
+
+视频采用真实浏览器画面采样并分段剪辑，没有重绘界面或替换工具结果。登录、会话轨迹总览与片段间的等待未收入短片；Viewer 中的本机路径做了遮盖。原始画面、完整日志、凭据和 Core 数据库保留在本机非发布目录，不上传。
+
+## 功能与安装依据
+
+已通过 GitHub 读取该固定提交的两份一手材料：
+
+- [DSH 集成说明](https://github.com/fuxi-ailabs/AgentLineage/blob/bf28b828710f1c146895bdfb63108934edbd1fe5/integrations/dsh/README.md)：Node 24+、Python 3.12+、Core 0.1.0a10；托管本地 Core；自然语言到七个工具的映射；冻结快照与手动刷新；Viewer 首次本机登录。
+- [插件 package.json](https://github.com/fuxi-ailabs/AgentLineage/blob/bf28b828710f1c146895bdfb63108934edbd1fe5/integrations/dsh/package.json)：包名、0.1.0-alpha.3、DSH 0.2.1-rc.2 与 Node >=24。
+
+这里介绍 DSH 插件，没有套用 HarnessCore 中另一个 Node SDK 集成的运行方式。网页本身不启动 Core，不读取用户会话，不执行复制的命令。
+
+## 录屏分镜
+
+已按同一个发布说明例子完成录制，实际成片约 52 秒：
+
+| 时间 | 镜头 | 画面 / 旁白 |
+|---|---|---|
+| 00–05s | 展示问题 | “谁把 release-note.md 从草稿改成待评审？” |
+| 05–15s | DSH 执行最小输入 | write 创建说明，再用 edit 改功能、改状态 |
+| 15–25s | 查询来源 | 刷新当前会话快照，查询该文件；出现三次确认写入 |
+| 25–40s | 展开证据 | 打开 Viewer，选中文件，再展开状态修改的 diff 与原文引用 |
+| 40–50s | 回到具体答案 | 指出哪个会话、哪次 edit、对应成功回执；提醒继续工作后刷新快照 |
+
+录制要求：使用独立演示项目和会话；凭据登录不入镜；检查本机路径、用户名、会话内容和第三方数据；导出 1280×720 或更高、附中文字幕。页面示意数据录屏只能称“网页交互演示”。

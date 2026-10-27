@@ -4,6 +4,8 @@ Fuxi 团队插件目录
 
 索引地址：**https://fuxi-ailabs.github.io/dsh-plugin-market/index.json**
 
+介绍页模板：[独立网页预览与评审](https://fuxi-ailabs.github.io/dsh-plugin-market/templates/plugin-page/) · [填写与复用说明](docs/plugin-page-template.md)。预览展示六段通用结构，支持开关填写提示和下载内容骨架。
+
 `public/` 是 Pages 站点根目录，目录名不出现在公开 URL 中。例如 `public/index.json` 对应上面的索引地址，`public/plugins/agentlineage/` 对应 `/dsh-plugin-market/plugins/agentlineage/`。
 
 ## 在 DSH 中添加
@@ -15,8 +17,13 @@ Fuxi 团队插件目录
 | 插件 | 版本 | DSH 兼容范围 |
 |---|---|---|
 | AgentLineage | `0.1.0-alpha.3` | `^0.2.1-rc.2` |
+| workflow-rsi 操作台 | `0.1.0-alpha.1` | `0.1.6-alpha.2 \|\| ^0.2.1-rc.2` |
+| Crowd Memory · 群体记忆 | `0.1.0` | `0.1.6-alpha.2 \|\| ^0.2.0-rc.2` |
 
 AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开溯源视图。参见 [插件介绍与效果对比](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/)。安装准备见 [AgentLineage 使用说明](https://github.com/fuxi-ailabs/AgentLineage/blob/dsh-agentlineage-v0.1.0-alpha.3/integrations/dsh/README.md)。
+
+Crowd Memory 是 DSH 记忆插件：工具失败、会话开始或进入工作流阶段时，把以前同类问题的解决记录推送给 Agent，附出处和命中理由。使用前需要安装本机记忆服务 `@fuxi-ailabs/crowdmemory-runtime`。参见 [Crowd Memory 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/)。
+workflow-rsi 操作台在 DSH 里查看 workflow-rsi 的会话、请求、评测资产、Run、闭环与工作计划，写操作只由人在 `/wrsi … --confirm` 执行。使用前需要安装并启动 workflow-rsi 本体 `@fuxi-ailabs/workflow-rsi` 提供的 `wrsi-server`。参见 [workflow-rsi 操作台文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/workflow-rsi/)。
 
 ## 版本与兼容性
 
@@ -37,8 +44,8 @@ AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开�
 
 1. 在插件自己的仓库准备可安装 Bundle，核实 `package.json` 中的包名、版本、`dsh.bundle` 和 DSH 兼容范围；`engines.dsh` 写范围并与索引一致，验证 npm/Git 安装及构建产物。
 2. 在 `public/index.json` 的 `plugins` 数组追加条目；已有插件则向 `versions` 追加版本。Git 来源必须固定完整 40 位 commit SHA，并填写真实的子目录。`publishTimestamp` 使用来源提交的 Unix 秒时间。
-3. 图标放进 `public/icons/`。介绍页与经审核的图片放进 `public/plugins/<插件目录>/`，在校验脚本 `publicPages` 中登记逐文件清单，并通过 `homepage` 关联。具体内容与呈现方式由接口负责人维护，before/after 不强制。标题和描述可提供 `en`、`zh`，其中英文必须存在。
-4. 运行 `npm ci --ignore-scripts` 和 `npm run ci`（格式与发布目录校验 + 兼容性/来源策略检查）。
+3. 图标放进 `public/icons/`。每个插件都需要按[统一深色介绍页模板](docs/plugin-page-template.md)准备六段内容：作用、使用场景、最小例子、前后对比、使用条件、安装与验证。内容写入 `content/plugins/<slug>.json`，运行 `npm run build:pages` 输出介绍页；经审核的图片放进 `public/plugins/<slug>/assets/`，在校验脚本 `publicPages` / `publicLinks` 登记逐文件清单与文档链接，并通过 `homepage` 关联。标题和描述可提供 `en`、`zh`，其中英文必须存在。
+4. 运行 `npm ci --ignore-scripts` 和 `npm run ci`（生成结果一致性、格式与发布目录校验、兼容性/来源策略检查）。`npm run preview` 启动本地页面预览。AgentLineage 材料与录屏分镜见[页面材料](docs/agentlineage-page-materials.md)。
 5. 提交 PR。合入 `main` 后，GitHub Actions 校验并部署 `public/`。核对工作流成功、索引匿名访问返回 HTTP 200，再在 DSH 的「发现」页重新读取目录。
 
 ## PR 与合并规则
