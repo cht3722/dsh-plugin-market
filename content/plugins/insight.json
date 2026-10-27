@@ -1,0 +1,227 @@
+{
+  "slug": "insight",
+  "name": "Insight",
+  "category": "SESSION INTELLIGENCE",
+  "version": "1.0.0",
+  "compatibility": "DSH 0.2.1-rc.2 · Node.js 24+ · Insight CLI 0.2.40 已验证",
+  "description": "把 DSH 会话导入 Insight，在 DSH 内读回评分卡，并从插件配置页核对依赖状态。",
+  "headline": [
+    "把会话送进 Insight，",
+    "再把评分带回 DSH。"
+  ],
+  "promise": "当前会话 → Insight 导入 → 评分卡与覆盖度核对",
+  "heroQuestion": "这次会话在 Insight 里得了多少分？",
+  "heroAnswer": "读回总分、覆盖度和各维度分数，并指出需要重新导入或人工确认的部分。",
+  "heroFile": "session.v4.jsonl",
+  "heroNodes": [
+    "当前会话",
+    "Insight 导入",
+    "评分卡"
+  ],
+  "preview": {
+    "terminal": "insight / score",
+    "objectLabel": "SESSION",
+    "contextLabel": "INSIGHT CONTEXT",
+    "contextMeta": "import + score"
+  },
+  "facts": [
+    "/insight 导出当前会话、导入 Insight 并打开会话页",
+    "/score 读取、重算或语义评审评分卡",
+    "插件配置页直接检查 Insight CLI、服务与 Provider Auth"
+  ],
+  "example": {
+    "title": "一次会话，五个维度。",
+    "description": "固定一组会话输入和评分卡结果，展示从导入到读分的完整链路。",
+    "label": "交互演示 · 固定示意数据",
+    "file": "session.v4.jsonl",
+    "question": "这次会话在 Insight 里得了多少分？",
+    "answer": "总分 8.2/10，导入覆盖度 95%，五个维度均已返回分数；其中一项被标记为需要人工确认。",
+    "session": "demo-insight-01",
+    "ui": {
+      "events": "演示步骤",
+      "context": "DSH SESSION",
+      "contextNote": "固定示意会话，不连接真实用户数据",
+      "changeTab": "导入与评分",
+      "evidenceTab": "运行细节",
+      "action": "操作",
+      "contextField": "会话",
+      "request": "输入位置",
+      "result": "输出位置",
+      "resultText": "执行结果",
+      "status": "已完成"
+    },
+    "operations": [
+      {
+        "tool": "/insight",
+        "title": "导入当前会话",
+        "description": "从当前 DSH 会话导出带子会话的 canonical 记录，并提交给 Insight。",
+        "removed": [
+          "手动导出会话文件",
+          "复制文件路径并登录 Insight 上传"
+        ],
+        "added": [
+          "当前会话已导入",
+          "会话页可直接打开"
+        ],
+        "result": "导入成功，Session 页面返回",
+        "requestRef": "demo:session-01",
+        "resultRef": "demo:import-01"
+      },
+      {
+        "tool": "/score",
+        "title": "读回评分卡",
+        "description": "从 Insight 读取评分卡，并核对导入覆盖度与维度分数。",
+        "removed": [
+          "在 Insight 页面逐项抄录结果"
+        ],
+        "added": [
+          "总分 8.2/10",
+          "覆盖度 95%",
+          "五个维度分数"
+        ],
+        "result": "评分卡与待确认项回到 DSH 回执",
+        "requestRef": "demo:score-request-01",
+        "resultRef": "demo:score-result-01"
+      }
+    ],
+    "prompt": "把当前会话导入 Insight，然后读取评分卡；列出总分、覆盖度、各维度分数和需要人工确认的项目。",
+    "note": "这是固定示意数据，不连接用户会话。真实结果取决于 Insight 服务版本、会话导入覆盖度和评分配置。"
+  },
+  "comparison": {
+    "title": "同一项就绪检查，从分散核对到就地完成。",
+    "description": "Before 只看到 Bundle 已安装；After 打开配置页即可同时确认 Provider Auth、Insight CLI 和运行服务。",
+    "before": {
+      "title": "安装后还要另找地方核对依赖",
+      "description": "插件列表只说明 Bundle 已安装，无法在这里判断 Insight 是否真的可用。",
+      "image": "assets/before.jpg",
+      "alt": "DSH 插件管理页的已安装插件区域，显示 @fuxi-ailabs/dsh-insight-bundle 和启用开关。"
+    },
+    "after": {
+      "title": "配置页直接给出运行状态",
+      "description": "Provider Auth 已配置，Insight CLI 可用且服务运行中，检查结果为 2 项正常、0 项异常。",
+      "image": "assets/after.jpg",
+      "alt": "Insight Bundle 配置页显示 Provider Auth 已配置、Insight CLI 可用且服务运行中，以及两个正常检查项。"
+    },
+    "takeaways": [
+      "Bundle、Provider Auth 与环境检查三个插件行在同一个 Bundle 中启用",
+      "Insight 配置页直接给出命令、服务和凭据状态",
+      "异常时可在同一页面查看安装指引或启动实例"
+    ]
+  },
+  "useCases": [
+    {
+      "tag": "01 / SESSION REVIEW",
+      "title": "刚完成一次复杂任务",
+      "question": "“这次会话执行得怎么样？”",
+      "description": "把当前会话送入 Insight，再读回评分卡和覆盖度，定位需要复核的维度。",
+      "prompt": "把当前会话导入 Insight，读取评分卡，并总结总分、覆盖度、各维度分数和需要人工确认的问题。"
+    },
+    {
+      "tag": "02 / REGRESSION CHECK",
+      "title": "确认一轮改动没有退化",
+      "question": "“修改前后，评分和覆盖度有没有变化？”",
+      "description": "分别导入修改前后的会话，比较评分卡与覆盖度，避免只看单次总分。",
+      "prompt": "读取修改前后两个会话的评分卡，对比总分、覆盖度和各维度变化，并标出变化最大的维度。"
+    },
+    {
+      "tag": "03 / READINESS",
+      "title": "安装后先确认环境",
+      "question": "“Insight 现在能用吗？”",
+      "description": "在插件配置页检查 Provider Auth、Insight CLI 和服务状态，缺依赖时直接查看安装或启动入口。",
+      "prompt": "检查 Insight Bundle 的环境状态；如果服务未启动，给出启动实例或安装依赖的下一步。"
+    }
+  ],
+  "quickstart": {
+    "summaryTitle": "准备好，就开始。",
+    "title": "五步，完成第一次导入与读分。",
+    "description": "先准备 Insight 运行环境，再从市场安装 Bundle，最后用当前会话做一次最小验证。",
+    "steps": [
+      {
+        "title": "准备运行环境",
+        "description": "确认 Node.js 24+、DSH 0.2.1-rc.2，并确保 Insight CLI 与服务可用。",
+        "code": "node --version\n# DSH 0.2.1-rc.2\n# Insight CLI 与服务均可用",
+        "codeLabel": "运行条件",
+        "note": "没有 CLI 时先在插件配置页查看安装指引；CLI 已安装但服务未启动时，可直接点击启动实例。",
+        "expected": "返回 Node.js 24+；插件配置页显示 Insight CLI 可用、服务运行中。"
+      },
+      {
+        "title": "从市场安装 Bundle",
+        "description": "在 DSH 的插件市场添加索引，安装 Insight 1.0.0。",
+        "code": "https://fuxi-ailabs.github.io/dsh-plugin-market/index.json",
+        "codeLabel": "插件市场索引",
+        "note": "安装后重启 DSH，确保 Host 和 Client 模块重新加载。",
+        "expected": "Bundle 出现在已安装插件列表，重启后 Provider Auth、Insight 和环境检查组件均运行中。"
+      },
+      {
+        "title": "确认依赖就绪",
+        "description": "打开插件管理页中的 Insight Bundle，在配置区检查 Provider Auth 与 Insight 状态。",
+        "code": "插件 → Insight → 配置 → 环境检查",
+        "codeLabel": "检查位置",
+        "note": "预期看到 Provider Auth 正常，以及 Insight CLI 可用、服务运行中。",
+        "expected": "Provider Auth 正常，Insight CLI 与服务正常，异常数为 0。"
+      },
+      {
+        "title": "导入当前会话",
+        "description": "在 DSH 中执行 /insight，导出并导入当前会话，然后打开 Insight 会话页。",
+        "code": "/insight",
+        "codeLabel": "发送给 DSH",
+        "note": "如果只想检查服务状态，可先执行 /insight --status。",
+        "expected": "会话成功导入，Insight 会话页可打开。"
+      },
+      {
+        "title": "读回评分卡",
+        "description": "执行 /score，核对总分、覆盖度和各维度分数；需要语义评审时再显式使用 --semantic。",
+        "code": "/score",
+        "codeLabel": "发送给 DSH",
+        "note": "确定性读卡不调用 LLM；只有 --semantic 会消耗模型 token。",
+        "expected": "回执显示总分、覆盖度和各维度评分。"
+      }
+    ]
+  },
+  "boundaries": [
+    {
+      "title": "Insight 是外部运行环境",
+      "description": "Bundle 安装 DSH 侧组件，但不会自动安装 Insight CLI 或启动外部服务。"
+    },
+    {
+      "title": "语义评审会产生模型调用",
+      "description": "普通读卡和重算不调用 LLM；只有显式使用 /score --semantic 才会请求 Provider 并消耗 token。"
+    },
+    {
+      "title": "评分依赖导入覆盖度与服务版本",
+      "description": "会话未完整导入、服务版本不匹配或评分配置变化时，结果可能不同；请结合覆盖度与置信信息判断。"
+    }
+  ],
+  "closing": {
+    "eyebrow": "IMPORT. SCORE. VERIFY.",
+    "title": "从会话到评分，闭环留在 DSH 里。"
+  },
+  "links": [
+    {
+      "label": "安装与使用文档 ↗",
+      "url": "https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle"
+    },
+    {
+      "label": "查看插件源码 ↗",
+      "url": "https://github.com/guixu-labs/dsh-plugin"
+    }
+  ],
+  "requirements": {
+    "summary": "需要 DSH 0.2.1-rc.2、Node.js 24+，以及可用的 Insight CLI 与服务。",
+    "description": "Insight 是外部运行环境；Bundle 只负责 DSH 侧插件和检查入口。语义评审还会使用 Provider Auth 和模型 token。",
+    "items": [
+      {
+        "label": "DSH 与 Node",
+        "value": "DSH 0.2.1-rc.2；Node.js >=24"
+      },
+      {
+        "label": "Insight 服务",
+        "value": "Insight CLI 在 PATH 中，服务可访问"
+      },
+      {
+        "label": "模型评审",
+        "value": "仅 /score --semantic 需要 Provider Auth 和 token 预算"
+      }
+    ]
+  }
+}
