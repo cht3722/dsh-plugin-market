@@ -35,7 +35,7 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'workflow.html',
 ])], ['plugins/workflow-rsi', new Set([
   'index.html', 'tools.html', 'errors.html', 'versions.html', 'docs.css', 'docs.js',
-])], ['plugins/ecat', new Set(['index.html'])]]);
+])], ['plugins/ecat', new Set(['index.html'])], ['plugins/dt-verify', new Set(['index.html', 'styles.css'])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
 const publicLinks = new Map([['plugins/agentlineage', new Set([
   'https://github.com/fuxi-ailabs/AgentLineage/blob/bf28b828710f1c146895bdfb63108934edbd1fe5/integrations/dsh/README.md',
