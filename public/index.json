@@ -411,6 +411,50 @@
           }
         }
       ]
+    },
+    {
+      "name": "@fuxi-ailabs/dsh-eval-bundle",
+      "title": {
+        "en": "Skill Eval",
+        "zh": "Skill Eval · Skill 评测"
+      },
+      "description": {
+        "en": "Build Skill evaluation suites, inspect coverage and baselines, run Eval/Trigger tasks, and generate Gate results and HTML reports.",
+        "zh": "构建 Skill 评测题集，检查覆盖率与基线，运行 Eval/Trigger，并生成 Gate 与 HTML 报告。"
+      },
+      "icon": "icons/skill-eval.svg",
+      "author": "Fuxi AI Labs",
+      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/skill-eval/",
+      "repository": {
+        "url": "https://github.com/guixu-labs/dsh-plugin",
+        "directory": "bundles/dsh-eval-bundle"
+      },
+      "metadata": {
+        "category": "verification",
+        "labels": [
+          "preview"
+        ],
+        "keywords": [
+          "Skill Eval",
+          "SIFT",
+          "eval suite",
+          "trigger",
+          "Gate",
+          "Skill 评测"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.0.0",
+          "publishTimestamp": 1793098705,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": "^0.2.1-rc.2"
+          }
+        }
+      ]
     }
   ]
 }
