@@ -3,28 +3,29 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Insight DSH 插件：导入当前会话、读取评分卡，并在插件配置页检查运行环境。">
+  <meta name="description" content="dsh-insight 是 Context-Insight 的 DSH 集成插件：自动准备运行时，把当前 DSH 会话导入分析工具并获取任务质量评分。">
   <meta name="color-scheme" content="light dark">
-  <title>Insight · DSH 插件文档</title>
+  <title>dsh-insight · DSH 插件文档</title>
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
   <header class="topbar">
     <a class="brand" href="#top"><img class="brand-icon" src="assets/icon.svg" alt=""><span>Insight</span></a>
     <nav aria-label="文档导航">
-      <a href="#install">安装</a>
-      <a href="#health">环境检查</a>
-      <a href="#usage">使用</a>
-      <a href="#limits">限制</a>
+      <a href="#relationship">概览</a>
+      <a href="#requirements">快速开始</a>
+      <a href="#import-session">使用 CLI</a>
+      <a href="#troubleshooting">帮助</a>
     </nav>
     <a class="npm-link" href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle">npm ↗</a>
   </header>
 
-  <main id="top" class="layout">
+  <main class="layout">
     <article class="doc">
-      <header class="hero">
-        <div class="hero-title"><img src="assets/icon.svg" alt="" width="58" height="58"><div><p class="eyebrow">DSH PLUGIN · v1.0.1</p><h1>Insight</h1></div></div>
-        <p class="lede">把当前 DSH 会话导入 Insight，在 DSH 内读回评分卡，并从插件配置页检查 Provider Auth、Insight CLI 和服务状态。</p>
+      <header class="hero" id="top">
+        <div class="hero-title"><img src="assets/icon.svg" alt="" width="58" height="58"><div><p class="eyebrow">DSH PLUGIN · dsh-insight · v1.0.3</p><h1>Insight</h1></div></div>
+        <p class="lede"><strong>Context-Insight</strong> 是回看 Agent 会话轨迹、分析任务质量的开源工具；<strong>dsh-insight</strong> 是把它接入 DSH 的插件。安装后，插件会自动准备运行时；首次点击 Insight 时启动 Context-Insight 服务，用户可以把当前 DSH 会话导入其中，并在 DSH 查看会话评分。当任务步骤复杂、结果不确定，或想验证 Prompt / Skill 调整时，你可以在 Context-Insight 中查看执行过程、定位问题并获取评分。</p>
         <dl class="meta">
           <div><dt>DSH</dt><dd><code>0.2.1-rc.2</code></dd></div>
           <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
@@ -32,123 +33,304 @@
         </dl>
       </header>
 
-      <section id="features">
-        <h2>功能</h2>
-        <ul>
-          <li><code>/insight</code>：导出当前会话（含子会话）、导入 Insight，并打开会话页。</li>
-          <li><code>/score</code>：读取、重算或语义评审评分卡，并核对导入覆盖度。</li>
-          <li><strong>会话页 Insight 按钮</strong>：一键刷新当前会话并打开 Insight 页面。</li>
-          <li><strong>打分 tag</strong>：导入后直接读取评分卡，查看总分和维度分数。</li>
-          <li><strong>环境检查</strong>：在 Insight Bundle 配置页检查 Provider Auth 和 Insight 服务状态。</li>
-        </ul>
-      </section>
+      <div class="tabbar" role="tablist" aria-label="Insight 文档章节">
+        <button type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-tab="overview">概览</button>
+        <button type="button" role="tab" id="tab-quick-start" aria-controls="panel-quick-start" aria-selected="false" tabindex="-1" data-tab="quick-start">快速开始</button>
+        <button type="button" role="tab" id="tab-usage" aria-controls="panel-usage" aria-selected="false" tabindex="-1" data-tab="usage">使用 CLI</button>
+        <button type="button" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" tabindex="-1" data-tab="help">帮助</button>
+      </div>
 
-      <section id="install">
-        <h2>安装</h2>
-        <div class="npm-callout">
-          <div><strong>npm 包</strong><code>@fuxi-ailabs/dsh-insight-bundle</code></div>
-          <a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle">查看 npm 页面 ↗</a>
+      <div class="tab-panels">
+        <div class="tab-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-panel="overview">
+          <section id="relationship">
+            <h2>Context-Insight 和 dsh-insight 是什么关系？</h2>
+            <table class="relationship-table">
+              <thead><tr><th>名称</th><th>作用</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Context-Insight</strong><small>开源分析工具</small></td><td>开源、本地部署的 Agent 会话分析工具。提供本地数据库保存会话与分析结果、API 供客户端接入，以及 Web 前端展示页，用于查看执行过程、维度分与评分卡。</td></tr>
+                <tr><td><strong>dsh-insight</strong><small>DSH 接入插件</small></td><td>负责准备运行时，并在首次使用时启动 Context-Insight 服务、导出并导入当前 DSH 会话，同时在 DSH 内提供 Insight 按钮、<code>/insight</code>、<code>/score</code> 和评分摘要等功能。</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="scenarios">
+            <h2>适合观察哪些运行情况？</h2>
+            <p>dsh-insight 把当前 DSH 会话导入 Context-Insight，重点用于观察以下运行信息：</p>
+            <ul class="scenario-list">
+              <li><strong>Workflow 与 Subagent：</strong>查看主 Agent 如何拆解任务、派发子 Agent，以及各执行环节和结果的对应关系。</li>
+              <li><strong>多轮执行与工具调用：</strong>按轮次查看用户请求、Agent 决策、工具调用、文件读写、错误和重试过程。</li>
+              <li><strong>Skill 使用与任务覆盖：</strong>检查 Skill 是否被触发、哪些内容参与了执行，以及任务要求是否被完整覆盖。</li>
+              <li><strong>任务质量与评分：</strong>查看评分卡、维度分、否决项、覆盖度和语义评审结果。</li>
+            </ul>
+          </section>
+
+          <section id="boundaries">
+            <h2>实时更新与使用边界</h2>
+            <p>Context-Insight 可以自动刷新已导入会话的数据。任务继续执行时，新产生的轮次、工具调用和 Subagent 状态会出现在分析页面中；评分不会自动重算，需要重新执行 Score 或使用 <code>/score --recalc</code>。</p>
+            <p>它用于观察和复盘，不会实时干预 Agent 的决策或执行。如果只需要查看会话内容、继续对话或编辑文件，可以直接使用 DSH。</p>
+          </section>
         </div>
-        <h3>1. 准备运行环境</h3>
-        <ul>
-          <li>DSH <code>0.2.1-rc.2</code> 或同一兼容范围。</li>
-          <li>Node.js 24 或更高版本。</li>
-          <li>Insight CLI 已安装，并且 Insight 服务可访问。</li>
-          <li>需要使用 <code>/score --semantic</code> 时，准备好可用的 provider 凭据。</li>
-        </ul>
 
-        <h3>2. 从市场安装</h3>
-        <p>在 DSH 的插件市场中添加索引，找到 <strong>Insight · 会话导入与评分</strong> 并安装。</p>
-        <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
-        <p>也可以在命令行安装当前版本：</p>
-        <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-insight-bundle@1.0.1</code></pre>
-        <p>安装完成后重启 DSH，让新的 Host 和 Client 模块重新加载。</p>
-      </section>
+        <div class="tab-panel" id="panel-quick-start" role="tabpanel" aria-labelledby="tab-quick-start" data-panel="quick-start" hidden>
+          <section id="requirements">
+            <h2>1. 准备运行环境</h2>
+            <table class="quick-facts">
+              <tbody>
+                <tr><th>DSH</th><td><code>0.2.1-rc.2</code> 或同一兼容范围。</td></tr>
+                <tr><th>Node.js</th><td><code>&gt;=24</code>。</td></tr>
+                <tr><th>npm</th><td>用于首次下载 Context-Insight 运行时，DSH 启动环境必须能找到 <code>npm</code>。</td></tr>
+                <tr><th>Provider</th><td>可选。普通读卡与重算不调用模型；只有语义评审需要可用的 Provider 凭据。</td></tr>
+                <tr><th>Context-Insight</th><td>无需预先安装 CLI。dsh-insight 会在后台把 <code>context-insight@0.2.41</code> 准备到 <code>~/.dsh-insight/runtime/</code>。</td></tr>
+              </tbody>
+            </table>
+          </section>
 
-      <section id="health">
-        <h2>环境检查</h2>
-        <p>打开「插件」→ Insight Bundle，在配置区检查当前依赖。检查结果会区分正常、提醒和异常，并提供安装指引或 Insight 启动/关闭操作。</p>
-        <figure class="shot">
-          <img src="assets/plugin-config.jpg" alt="Insight Bundle 配置页显示 Provider Auth 正常，Insight CLI 可用且服务运行中。" loading="lazy">
-          <figcaption>Insight 配置页会检查 Provider Auth、Insight CLI 和 Insight 服务。</figcaption>
-        </figure>
-        <table>
-          <thead><tr><th>检查项</th><th>说明</th></tr></thead>
-          <tbody>
-            <tr><td>Provider Auth</td><td>检查凭据来源是否已配置；用于语义评审和共享认证。</td></tr>
-            <tr><td>Insight</td><td>检查 CLI 是否可执行、服务是否在运行，并提供启动/关闭操作。</td></tr>
-          </tbody>
-        </table>
-      </section>
+          <section id="install">
+            <h2>2. 安装 Bundle</h2>
+            <div class="npm-callout">
+              <div><strong>npm 包</strong><code>@fuxi-ailabs/dsh-insight-bundle</code></div>
+              <a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle">查看 npm 页面 ↗</a>
+            </div>
+            <p>在 DSH 插件市场中添加索引，找到 <strong>Insight · 会话导入与评分</strong> 并安装。</p>
+            <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
+            <p>也可以直接安装当前版本：</p>
+            <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-insight-bundle@1.0.3</code></pre>
+            <p>安装完成后重启 DSH。</p>
+          </section>
 
-      <section id="usage">
-        <h2>使用</h2>
-        <h3>导入当前会话</h3>
-        <p>在 DSH 会话页点击右上角的 <strong>Insight</strong> 按钮，或执行命令：</p>
-        <pre><code>/insight</code></pre>
-        <figure class="shot">
-          <img src="assets/session-button.jpg" alt="DSH 会话页右上角的 Insight 按钮和导入后出现的打分 tag，对话正文已模糊。" loading="lazy">
-          <figcaption>点击 <strong>Insight</strong> 导入当前会话；导入完成后出现 <strong>打分</strong> tag。用户会话正文已模糊处理。</figcaption>
-        </figure>
-        <p>命令会导出当前会话、调用 Insight 导入接口，并打开对应会话页。常用选项：</p>
-        <pre><code>/insight --status
-/insight --force
+          <section id="first-session">
+            <h2>3. 导入第一个会话</h2>
+            <p>安装完成后，从启动 DSH 到在 DSH 中看到评分，按以下顺序操作。</p>
+
+            <h3 id="start-dsh">3.1 启动 DSH</h3>
+            <p>使用你平时使用的 profile 启动 DSH：</p>
+            <pre><code>dsh web
+# 或
+dsh --profile &lt;profile&gt;</code></pre>
+            <p>DSH 启动后，dsh-insight 会在后台检查 Context-Insight 运行时。首次使用时可能需要下载，下载期间可以继续使用 DSH。</p>
+
+            <h3 id="choose-session">3.2 选择会话</h3>
+            <p>打开一个已有会话，或新建一个会话并完成一轮任务。会话页右上角会显示 <strong>Insight</strong> 按钮。</p>
+
+            <h3 id="click-insight">3.3 点击 Insight</h3>
+            <div class="state-list">
+              <article>
+                <strong>A. Context-Insight 服务尚未启动</strong>
+                <p>首次点击会启动 Context-Insight 服务并等待就绪；如果运行时还没有下载完成，会先显示下载和启动进度。可以等待或切换到其他 Session，下载任务不会中断。</p>
+                <figure class="shot">
+                  <img src="assets/insight-runtime-preparing.jpg" alt="DSH 会话页显示正在准备 Insight，按钮显示启动中。" loading="lazy">
+                  <figcaption>首次点击时，DSH 浮窗会显示运行时准备或 Context-Insight 启动进度。</figcaption>
+                </figure>
+              </article>
+              <article>
+                <strong>B. Context-Insight 服务已经启动</strong>
+                <p>服务可用时，dsh-insight 会导出并导入当前会话，随后自动打开对应的 Context-Insight 会话页。</p>
+                <figure class="shot">
+                  <img src="assets/insight-imported-session.jpg" alt="Context-Insight 中已导入的 Python 测试会话总览。" loading="lazy">
+                  <figcaption>会话导入后自动打开 Context-Insight，可查看轮次、工具调用、Skills 和执行概览。</figcaption>
+                </figure>
+              </article>
+              <article>
+                <strong>C. 导入完成后查看评分</strong>
+                <p>回到 DSH 会话页，右上角会出现打分 tag。点击后可以查看总分、覆盖度和各维度评分；完整的 Score 页面位于 Context-Insight。</p>
+                <figure class="shot">
+                  <img src="assets/insight-score-page.jpg" alt="Context-Insight Score 页面，展示测试会话的总分、覆盖度和六维能力图。" loading="lazy">
+                  <figcaption>Context-Insight 的 <strong>Score</strong> 页面展示总分、覆盖度、否决项和六维评分。示例中部分维度显示“—”，表示证据不足或尚未执行语义评审；覆盖度表示本次导入内容的完整程度。</figcaption>
+                </figure>
+                <figure class="shot">
+                  <img src="assets/insight-dsh-score.jpg" alt="DSH 会话页中的 Insight 评分卡，显示总分、覆盖度和各维度分数。" loading="lazy">
+                  <figcaption>回到 DSH 点击打分 tag，可以查看同一份评分卡摘要；带“—”的维度同样需要补充证据或执行语义评审。</figcaption>
+                </figure>
+              </article>
+            </div>
+
+            <h3 id="health">3.4 检查运行环境</h3>
+            <p>如果导入或启动失败，打开「插件」→ Insight Bundle，在配置区检查 Provider Auth、Context-Insight Runtime 和 Service 状态。这里也可以启动或关闭 Context-Insight 服务。</p>
+            <table>
+              <thead><tr><th>检查项</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>Provider Auth</td><td>检查凭据来源是否已配置；仅语义评审和共享认证需要。</td></tr>
+                <tr><td>Context-Insight Runtime</td><td>识别自动下载的托管 CLI，也可使用 <code>PATH</code> 中已有的安装。</td></tr>
+                <tr><td>Context-Insight Service</td><td>检查服务是否可访问，并提供启动 / 关闭操作。</td></tr>
+              </tbody>
+            </table>
+            <figure class="shot">
+              <img src="assets/insight-environment-check.jpg" alt="Insight Bundle 环境检查页，Provider Auth、Context-Insight CLI 和服务均正常。" loading="lazy">
+              <figcaption>环境检查确认 Provider Auth、Context-Insight Runtime 和 Service 状态。</figcaption>
+            </figure>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="panel-usage" role="tabpanel" aria-labelledby="tab-usage" data-panel="usage" hidden>
+          <section id="cli-intro">
+            <h2>使用 CLI</h2>
+            <p>以下命令不是 shell 命令，而是直接在 DSH 会话输入框中执行的 <code>/insight</code> 和 <code>/score</code> 命令，效果与页面上的 <strong>Insight</strong> 按钮和 <strong>打分</strong> tag 等价。</p>
+            <pre><code>/insight
+/score
+/score --semantic</code></pre>
+            <p><code>/insight</code> 负责导入会话，<code>/score</code> 负责读取或计算评分；只有显式使用 <code>--semantic</code> 时才会调用大模型。</p>
+          </section>
+
+          <section id="import-session">
+            <h2><code>/insight</code>：导入会话</h2>
+            <p>导出当前 DSH 会话（默认包含子代理），导入 Context-Insight，并打开对应的会话分析页面。</p>
+            <pre><code>/insight
+/insight &lt;sid&gt;
 /insight --no-subagents
-/insight &lt;sid&gt;</code></pre>
-        <p>点击 Insight 按钮并完成导入后，可以在 Insight 的 Score 页面查看完整评分卡。</p>
-        <figure class="shot">
-          <img src="assets/insight-score.jpg" alt="Insight 的 Score 页面，展示总分、否决项、六维能力图和维度明细。" loading="lazy">
-          <figcaption>Insight <strong>Score</strong> 页面：总分、否决项、覆盖度、六维能力图和维度明细。</figcaption>
-        </figure>
+/insight --no-open</code></pre>
+            <table class="command-table">
+              <thead><tr><th>参数</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td><code>&lt;sid&gt;</code></td><td>导入指定会话；不填时使用当前会话。</td></tr>
+                <tr><td><code>--no-subagents</code></td><td>本次只导入根会话，不包含子代理。</td></tr>
+                <tr><td><code>--no-open</code></td><td>完成导入但不打开浏览器标签页。</td></tr>
+                <tr><td><code>--base &lt;url&gt;</code></td><td>本次指定 Context-Insight 地址。</td></tr>
+                <tr><td><code>--force</code></td><td>服务不可用时仍导出会话文件；只导出，不导入。</td></tr>
+                <tr><td><code>--status</code></td><td>只检查 Context-Insight 是否可访问。</td></tr>
+              </tbody>
+            </table>
+          </section>
 
-        <h3>查看 DSH 内的评分</h3>
-        <p>导入后点击会话页右上角的 <strong>打分</strong> tag，可以在 DSH 内直接读取评分卡。</p>
-        <pre><code>/score</code></pre>
-        <figure class="shot">
-          <img src="assets/score-card.jpg" alt="DSH 会话页右侧的 Insight 评分卡，显示总分、覆盖度与六个维度分数，对话正文已模糊。" loading="lazy">
-          <figcaption>点击 <strong>打分</strong> 后显示评分卡；用户会话正文已模糊处理。</figcaption>
-        </figure>
-        <p>常用选项：</p>
-        <pre><code>/score --recalc
-/score --semantic
-/score --status
+          <section id="score-in-dsh">
+            <h2><code>/score</code>：读取与重算评分</h2>
+            <p>读取当前会话的评分卡；没有缓存时计算确定性层。默认路径不会调用大模型。</p>
+            <pre><code>/score
+/score --sid &lt;sid&gt;
+/score --recalc
 /score --no-cover</code></pre>
-        <p><code>--semantic</code> 会调用大模型并消耗 token，其他读卡和重算路径不会自动调用 LLM。</p>
-      </section>
+            <h3>常用参数</h3>
+            <table class="command-table">
+              <thead><tr><th>参数</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td><code>--sid &lt;sid&gt;</code></td><td>读取指定会话的评分卡。</td></tr>
+                <tr><td><code>--recalc</code></td><td>强制重算确定性评分。</td></tr>
+                <tr><td><code>--no-cover</code></td><td>跳过本地会话与 Context-Insight 的覆盖度对账。</td></tr>
+                <tr><td><code>--open</code></td><td>打开 Context-Insight 中对应的评分页面。</td></tr>
+              </tbody>
+            </table>
+            <h3>高级参数</h3>
+            <table class="command-table">
+              <thead><tr><th>参数</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td><code>--json</code></td><td>把完整评分卡保存为 JSON，便于归档或后续自动化处理。</td></tr>
+                <tr><td><code>--bench &lt;0-100&gt;</code></td><td>把外部 CANN-Bench 总分写入评分卡，用于基准或人工对照。</td></tr>
+                <tr><td><code>--confirm &lt;item&gt;=fine|problem</code></td><td>人工确认某个疑似项：<code>fine</code> 表示确认正常，<code>problem</code> 表示确认有问题。</td></tr>
+                <tr><td><code>--base &lt;url&gt;</code></td><td>本次指定 Context-Insight 服务地址。</td></tr>
+              </tbody>
+            </table>
+          </section>
 
-      <section id="limits">
-        <h2>使用条件与限制</h2>
-        <ul>
-          <li>Insight 是外部运行环境，Bundle 不会自动安装 CLI 或启动服务。</li>
-          <li>评分结果受会话导入覆盖度、Insight 服务版本和评分配置影响。</li>
-          <li>语义评审需要 provider 凭据，并会产生模型调用费用。</li>
-          <li>导入和评分接口以已经验证的 Insight 版本为准；升级服务后应重新检查兼容性。</li>
-        </ul>
-      </section>
+          <section id="semantic">
+            <h2>语义评审</h2>
+            <p>使用 Provider 对任务完成质量和行为进行语义评审。该命令会调用模型并消耗 token。</p>
+            <pre><code>/score --semantic
+/score --semantic --sid &lt;sid&gt;
+/score --probe-provider</code></pre>
+            <p>执行前会先探测 Provider。凭据或模型配置不正确时，命令会返回失败原因，不会继续消耗评审 token。<code>/score --probe-provider</code> 只测试 Provider 连通性，不执行语义评审。</p>
+          </section>
 
-      <section id="links">
-        <h2>相关链接</h2>
-        <ul class="links">
-          <li><a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle">npm 包与 README ↗</a></li>
-          <li><a href="https://github.com/guixu-labs/dsh-plugin">插件源码仓库 ↗</a></li>
-        </ul>
-      </section>
+          <section id="status">
+            <h2>状态检查</h2>
+            <p>只检查 Context-Insight 是否可访问，不导出、不导入，也不计算评分。</p>
+            <pre><code>/insight --status
+/score --status</code></pre>
+          </section>
+
+        </div>
+
+        <div class="tab-panel" id="panel-help" role="tabpanel" aria-labelledby="tab-help" data-panel="help" hidden>
+          <section id="troubleshooting">
+            <h2>故障排查</h2>
+            <div class="trouble-list">
+              <article>
+                <h3>提示找不到 npm</h3>
+                <p>确认 Node.js / npm 已安装，并且 DSH 启动环境能够访问 <code>npm</code>。也可以在插件配置中设置 <code>runtime.npmBin</code>。</p>
+              </article>
+              <article>
+                <h3>首次下载失败</h3>
+                <p>检查网络和 npm registry，查看安装日志后再次点击 Insight 重试。已经下载的 npm 缓存会复用。</p>
+                <pre><code>~/.dsh-insight/runtime/install.log</code></pre>
+              </article>
+              <article>
+                <h3>Context-Insight 启动失败</h3>
+                <p>启动失败可能来自端口占用、数据库初始化或 Prisma migration。错误会回传给浮窗，完整输出位于：</p>
+                <pre><code>~/.dsh-insight/runtime/start.log</code></pre>
+              </article>
+              <article>
+                <h3>页面没有自动打开</h3>
+                <p>浏览器可能拦截了新窗口。浮窗仍会显示同步和错误状态；修复后再次点击即可。</p>
+              </article>
+              <article>
+                <h3>评分提示会话未导入</h3>
+                <p>先点击 Insight 或执行 <code>/insight</code> 重新导入当前会话，再运行 <code>/score</code>。</p>
+              </article>
+              <article>
+                <h3>覆盖度不足</h3>
+                <p>检查是否有子代理或较新的本地消息没有进入 Context-Insight。重新导入后再读取评分卡。</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="limits">
+            <h2>使用条件与限制</h2>
+            <ul>
+              <li>首次准备运行时需要 npm 和网络；后续启动优先复用本地运行时。</li>
+              <li>Context-Insight 是任务完成后的分析工具，不实时介入 Agent 执行。</li>
+              <li>评分结果受导入覆盖度、服务版本和评分配置影响。</li>
+              <li><code>--semantic</code> 会调用大模型并消耗 token。</li>
+              <li>升级 Context-Insight 服务后应重新检查导入与评分接口兼容性。</li>
+            </ul>
+          </section>
+
+          <section id="links">
+            <h2>相关链接</h2>
+            <ul class="links">
+              <li><a href="https://www.npmjs.com/package/context-insight">Context-Insight npm 页面与 README ↗</a></li>
+              <li><a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle">dsh-insight Bundle npm 包与 README ↗</a></li>
+              <li><a href="https://github.com/guixu-labs/dsh-plugin">插件源码仓库 ↗</a></li>
+            </ul>
+          </section>
+        </div>
+      </div>
     </article>
 
     <aside class="toc" aria-label="本页目录">
-      <strong>本页目录</strong>
-      <a href="#features">功能</a>
-      <a href="#install">安装</a>
-      <a href="#health">环境检查</a>
-      <a href="#usage">使用</a>
-      <a href="#limits">使用条件与限制</a>
-      <a href="#links">相关链接</a>
+      <div data-toc="overview">
+        <strong>概览</strong>
+        <a href="#relationship">名称与关系</a>
+        <a href="#scenarios">观察运行情况</a>
+        <a href="#boundaries">实时更新与边界</a>
+      </div>
+      <div data-toc="quick-start" hidden>
+        <strong>快速开始</strong>
+        <a href="#requirements">准备环境</a>
+        <a href="#install">安装 Bundle</a>
+        <a href="#start-dsh">启动 DSH</a>
+        <a href="#choose-session">选择会话</a>
+        <a href="#click-insight">点击 Insight</a>
+        <a href="#health">检查环境</a>
+      </div>
+      <div data-toc="usage" hidden>
+        <strong>使用 CLI</strong>
+        <a href="#cli-intro">CLI 概览</a>
+        <a href="#import-session">/insight</a>
+        <a href="#score-in-dsh">/score</a>
+        <a href="#semantic">语义评审</a>
+        <a href="#status">状态检查</a>
+      </div>
+      <div data-toc="help" hidden>
+        <strong>帮助</strong>
+        <a href="#troubleshooting">故障排查</a>
+        <a href="#limits">使用限制</a>
+        <a href="#links">相关链接</a>
+      </div>
     </aside>
   </main>
 
   <footer class="footer">
-    <span>Fuxi AI Labs · Insight DSH Plugin</span>
+    <span>Fuxi AI Labs · dsh-insight · Context-Insight</span>
     <a href="#top">回到顶部 ↑</a>
   </footer>
+  <script src="page.js" defer></script>
 </body>
 </html>
