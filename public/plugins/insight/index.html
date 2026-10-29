@@ -4,36 +4,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="dsh-insight 是 Context-Insight 的 DSH 集成插件：自动准备运行时，把当前 DSH 会话导入分析工具并获取任务质量评分。">
-  <meta name="color-scheme" content="light dark">
+  <meta name="color-scheme" content="light">
   <title>dsh-insight · DSH 插件文档</title>
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#top"><img class="brand-icon" src="assets/icon.svg" alt=""><span>Insight</span></a>
-    <nav aria-label="文档导航">
-      <a href="#relationship">概览</a>
-      <a href="#requirements">快速开始</a>
-      <a href="#import-session">使用 CLI</a>
-      <a href="#troubleshooting">帮助</a>
-    </nav>
-    <a class="npm-link" href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle">npm ↗</a>
+  <a class="skip-link" href="#relationship">跳到主要内容</a>
+  <header class="site-header">
+    <div class="market-banner">
+      <div class="wrap header-inner">
+        <nav class="market-breadcrumb" aria-label="当前位置">
+          <a class="market-brand" href="https://fuxi-ailabs.github.io/dsh-plugin-market/">Fuxi通用DSH组件市场</a>
+          <span class="market-location"><span class="market-separator" aria-hidden="true">/</span><a class="market-current" href="#top" aria-current="page">Insight</a></span>
+        </nav>
+        <nav class="section-nav" aria-label="文档导航">
+          <a href="#relationship">概览</a>
+          <a href="#requirements">快速开始</a>
+          <a href="#import-session">使用 CLI</a>
+          <a href="#troubleshooting">帮助</a>
+          <a class="nav-npm" href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle">npm ↗</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <main class="layout">
-    <article class="doc">
-      <header class="hero" id="top">
-        <div class="hero-title"><img src="assets/icon.svg" alt="" width="58" height="58"><div><p class="eyebrow">DSH PLUGIN · dsh-insight · v1.0.3</p><h1>Insight</h1></div></div>
+  <main>
+    <header class="wrap hero" id="top">
+      <div class="hero-copy">
+        <div class="hero-title">
+          <img src="assets/icon.svg" alt="" width="64" height="64">
+          <div>
+            <p class="eyebrow">DSH PLUGIN · dsh-insight · v1.0.3</p>
+            <h1>Insight</h1>
+          </div>
+        </div>
         <p class="lede"><strong>Context-Insight</strong> 是回看 Agent 会话轨迹、分析任务质量的开源工具；<strong>dsh-insight</strong> 是把它接入 DSH 的插件。安装后，插件会自动准备运行时；首次点击 Insight 时启动 Context-Insight 服务，用户可以把当前 DSH 会话导入其中，并在 DSH 查看会话评分。当任务步骤复杂、结果不确定，或想验证 Prompt / Skill 调整时，你可以在 Context-Insight 中查看执行过程、定位问题并获取评分。</p>
         <dl class="meta">
           <div><dt>DSH</dt><dd><code>0.2.1-rc.2</code></dd></div>
           <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
           <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-insight-bundle</code></dd></div>
         </dl>
-      </header>
+      </div>
+      <figure class="hero-visual" aria-label="Context-Insight Score 页面示意">
+        <img src="assets/insight-score-page.jpg" width="1280" height="800" alt="Context-Insight Score 页面，展示测试会话的总分、覆盖度和六维能力图。">
+      </figure>
+    </header>
 
-      <div class="tabbar" role="tablist" aria-label="Insight 文档章节">
+    <div class="layout wrap">
+      <article class="doc">
+        <div class="tabbar" role="tablist" aria-label="Insight 文档章节">
         <button type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-tab="overview">概览</button>
         <button type="button" role="tab" id="tab-quick-start" aria-controls="panel-quick-start" aria-selected="false" tabindex="-1" data-tab="quick-start">快速开始</button>
         <button type="button" role="tab" id="tab-usage" aria-controls="panel-usage" aria-selected="false" tabindex="-1" data-tab="usage">使用 CLI</button>
@@ -325,9 +345,10 @@ dsh --profile &lt;profile&gt;</code></pre>
         <a href="#links">相关链接</a>
       </div>
     </aside>
+    </div>
   </main>
 
-  <footer class="footer">
+  <footer class="footer wrap">
     <span>Fuxi AI Labs · dsh-insight · Context-Insight</span>
     <a href="#top">回到顶部 ↑</a>
   </footer>
