@@ -26,7 +26,7 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'assets/dsh-release-note-demo.mp4', 'assets/dsh-release-note-poster.jpg', 'assets/dsh-release-note-zh.vtt',
 ])], ['templates/plugin-page', new Set([
   'index.html', 'styles.css', 'page.js', 'demo-data.js', 'content.example.json',
-  'review.css', 'review.js', 'assets/before.svg', 'assets/after.svg',
+  'review.css', 'assets/overview.svg', 'assets/demo.svg', 'assets/before.svg', 'assets/after.svg',
 ])], ['plugins/crowdmemory', new Set([
   'changelog.html', 'configuration.html', 'docs.css', 'docs.js',
   'errors.html', 'evaluation.html', 'faq.html', 'index.html',
@@ -48,6 +48,8 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
 const publicLinks = new Map([['plugins/agentlineage', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/',
   'https://github.com/fuxi-ailabs/AgentLineage/blob/211057da3b42eabbf92a7f723ce8c3fa46ce05ef/integrations/dsh/README.md',
   'https://github.com/fuxi-ailabs/AgentLineage/tree/211057da3b42eabbf92a7f723ce8c3fa46ce05ef/integrations/dsh',
 ])], ['plugins/insight', new Set([
@@ -64,6 +66,8 @@ const publicLinks = new Map([['plugins/agentlineage', new Set([
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-eval-bundle',
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['templates/plugin-page', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/templates/plugin-page/',
   'https://github.com/fuxi-ailabs/dsh-plugin-market/blob/main/docs/plugin-page-template.md',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/#recording',
