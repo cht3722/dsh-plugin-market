@@ -118,6 +118,21 @@ test('HarmonyOS Code Verifier guide keeps the market link in its banner at every
   assert(!/\.crumb-market[^{]*\{[^}]*display:\s*none/.test(css), 'the market link must stay visible on narrow screens');
 });
 
+test('Session Audit keeps existing evidence, video space and install contract', async () => {
+  const html = await readFile(new URL('../public/plugins/audit/index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../public/plugins/audit/styles.css', import.meta.url), 'utf8');
+  const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-audit-bundle');
+  const version = plugin.versions.at(-1).version;
+  assert(html.includes('class="market-brand"'));
+  assert(html.includes('class="market-current"'));
+  assert(html.includes('assets/audit-workbench.jpg'));
+  assert(html.includes('assets/audit-flyout.jpg'));
+  assert(html.includes('id="recording"'));
+  assert(html.includes('操作录像待补充'));
+  assert(html.includes(`@fuxi-ailabs/dsh-audit-bundle@${version}`));
+  assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css));
+});
+
 test('requirements share the compact installation section and results start collapsed', () => {
   const html = renderPage(agent);
   assert(!html.includes('<section id="details"'));
