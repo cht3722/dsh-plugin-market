@@ -35,15 +35,15 @@
         <div class="hero-title">
           <img src="assets/icon.svg" alt="" width="64" height="64">
           <div>
-            <p class="eyebrow">DSH PLUGIN · dsh-audit · v1.0.1</p>
+            <p class="eyebrow">DSH PLUGIN · dsh-audit · v1.1.1</p>
             <h1>Session Audit</h1>
           </div>
         </div>
-        <p class="lede">选择一条 DSH 会话，把真实执行轨迹转换为 SIFT 审计输入，查看 finding、证据和 turn 引用，并在右侧面板浏览完整报告。</p>
+        <p class="lede">从 DSH 选择一条会话并拖入审计工作台，将真实执行轨迹转换为 SIFT 审计材料。工作台会列出发现的问题、判断依据及对应的 turn 引用；点击 turn 引用可反向定位到 Trajectory 中的对应记录；需要完整上下文时，可在右侧报告面板继续浏览。</p>
         <dl class="meta">
           <div><dt>DSH</dt><dd><code>0.2.1-rc.2</code></dd></div>
           <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
-          <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-audit-bundle</code></dd></div>
+          <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-audit-bundle@1.1.1</code></dd></div>
         </dl>
       </div>
       <figure class="hero-visual" aria-label="Session Audit 工作台示意">
@@ -68,7 +68,7 @@
                 <article><span class="feature-index">01 / WORKBENCH</span><h3>会话审计工作台</h3><p>从 Session 轨迹识别 Skill、Workflow 和子 Agent。</p></article>
                 <article><span class="feature-index">02 / SCOPE</span><h3>三类审计</h3><p>按 Skill、Root Workflow 和 Agent 声明选择审计范围。</p></article>
                 <article><span class="feature-index">03 / REPORT</span><h3>真实报告</h3><p>复用 SIFT 生成的 HTML 报告和结构化 JSON。</p></article>
-                <article><span class="feature-index">04 / EVIDENCE</span><h3>右侧报告面板</h3><p>展示 summary、finding、证据和 turn 引用。</p></article>
+                <article><span class="feature-index">04 / EVIDENCE</span><h3>右侧报告面板</h3><p>展示 summary、finding、证据和 turn 引用；点击引用可反向定位到 Trajectory 中的对应记录。</p></article>
                 <article><span class="feature-index">05 / HEALTH</span><h3>环境检查</h3><p>检查 SIFT、Provider Auth 和审计服务。</p></article>
               </div>
             </section>
@@ -92,12 +92,6 @@
                 </button>
                 <figcaption><strong>报告面板</strong>支持“有引用 / 全部”切换，展示 finding 和 turn 引用。左侧会话正文及本机路径已做隐私处理。</figcaption>
               </figure>
-              <ul class="audit-limitations">
-                <li><strong>只读展示</strong>不切换原生 Trajectory View。</li>
-                <li><strong>不执行聚焦</strong>不执行 finding 记录聚焦。</li>
-                <li><strong>不改会话</strong>不修改 Conversation View。</li>
-                <li><strong>T tag 仅引用</strong>显示引用，不支持点击跳转。</li>
-              </ul>
             </section>
           </div>
 
@@ -106,9 +100,10 @@
               <h2>1. 准备运行环境</h2>
               <table class="quick-facts">
                 <tbody>
-                  <tr><th>DSH</th><td><code>0.2.1-rc.2</code> 或同一兼容范围。</td></tr>
+                  <tr><th>DSH</th><td><code>^0.2.1-rc.2</code>。</td></tr>
                   <tr><th>Node.js</th><td><code>&gt;=24</code>。</td></tr>
-                  <tr><th>SIFT</th><td>必需。命令已安装并在 <code>PATH</code> 中；Bundle 不会自动安装。</td></tr>
+                  <tr><th>Python</th><td><code>&gt;=3.10</code>，用于准备 SIFT 运行时。</td></tr>
+                  <tr><th>SIFT</th><td>由共享 Runtime Bundle 首次加载时自动准备；也可以复用 <code>PATH</code> 中已有的 <code>sift</code>。</td></tr>
                   <tr><th>Provider</th><td>可选。需要指令精炼、headline 或 AI critique 时准备凭据。</td></tr>
                 </tbody>
               </table>
@@ -123,8 +118,8 @@
               <p>在 DSH 的插件市场中添加索引，找到 <strong>Session Audit</strong> 并安装。</p>
               <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
               <p>也可以直接安装当前版本：</p>
-              <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-audit-bundle@1.0.1</code></pre>
-              <p>安装完成后重启 DSH。</p>
+              <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.1 @fuxi-ailabs/dsh-audit-bundle@1.1.1</code></pre>
+              <p>安装完成后重启 DSH。首次审计时会自动准备 SIFT。</p>
             </section>
 
             <section id="usage-steps">
@@ -184,10 +179,10 @@
             <section id="faq">
               <h2>使用条件与限制</h2>
               <div class="faq-list">
-                <details><summary>SIFT 需要自动安装吗？<span aria-hidden="true">＋</span></summary><p>SIFT 是外部运行环境，Bundle 不会自动安装 <code>sift</code>。请先在 DSH 所在环境准备并验证 <code>sift --version</code>。</p></details>
+                <details><summary>SIFT 需要手动安装吗？<span aria-hidden="true">＋</span></summary><p>通常不需要。共享 Runtime Bundle 会在首次加载或首次审计时自动准备 SIFT，并复用已有安装；也可以预先在 <code>PATH</code> 中提供 <code>sift</code>。</p></details>
                 <details><summary>审计结果的质量受什么影响？<span aria-hidden="true">＋</span></summary><p>审计质量依赖 Session 证据完整性、子会话可读性和 Skill 声明位置。</p></details>
-                <details><summary>右侧报告面板支持定位 Trajectory 吗？<span aria-hidden="true">＋</span></summary><p>当前不执行 finding 聚焦，也不切换原生 Trajectory View；后续需要 DSH 上游提供公开桥接 API。</p></details>
-                <details><summary>历史记录保存在哪里？<span aria-hidden="true">＋</span></summary><p>历史记录保存在 <code>~/.dsh-insight/dsh-audit/&lt;sid&gt;/</code>。</p></details>
+                <details><summary>turn 引用能反向定位吗？<span aria-hidden="true">＋</span></summary><p>可以。点击 finding 的 turn 引用，会打开对应会话的 Trajectory 并定位到相关记录。</p></details>
+                <details><summary>历史记录保存在哪里？<span aria-hidden="true">＋</span></summary><p>审计报告默认保存在 <code>~/.dsh-audit/&lt;session-id&gt;/&lt;run-id&gt;/</code>。</p></details>
               </div>
             </section>
 

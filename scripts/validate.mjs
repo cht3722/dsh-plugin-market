@@ -53,7 +53,7 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'assets/static-check-hero.jpg', 'assets/static-check-workbench.jpg', 'assets/static-check-environment.jpg',
   'assets/static-check-vet.jpg', 'assets/static-check-critique.jpg',
 ])], ['plugins/skill-eval', new Set([
-  'index.html', 'styles.css', 'assets/icon.svg', 'assets/skill-eval-workbench.jpg',
+  'index.html', 'styles.css', 'page.js', 'assets/icon.svg', 'assets/skill-eval-workbench.jpg',
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
 const publicLinks = new Map([['plugins/agentlineage', new Set([
@@ -80,6 +80,8 @@ const publicLinks = new Map([['plugins/agentlineage', new Set([
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle',
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/skill-eval', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/skill-eval/',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-eval-bundle',
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/dt-verify', new Set([

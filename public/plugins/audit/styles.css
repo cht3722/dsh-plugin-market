@@ -258,9 +258,6 @@ tr:last-child td { border-bottom: 0; }
 .audit-table th + th, .audit-table td + td { border-left: 1px solid var(--line); }
 .audit-table th { background: var(--accent-soft); color: var(--text); font-weight: 600; }
 .audit-table tr:last-child td { border-bottom: 0; }
-.audit-limitations { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 22px 0 0; padding: 0; list-style: none; }
-.audit-limitations li { padding: 18px 20px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--muted); font-size: .9375rem; }
-.audit-limitations strong { display: block; margin-bottom: 4px; color: var(--text); }
 .faq-list details { border-bottom: 1px solid var(--line); }
 .faq-list summary { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; min-height: 44px; padding: 16px 0; font-size: 1.0625rem; }
 .faq-list summary > span { flex: none; color: var(--accent); }
@@ -281,7 +278,7 @@ tr:last-child td { border-bottom: 0; }
 @media (max-width: 920px) {
   .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .feature-grid article:last-child { grid-column: 1 / -1; }
-  .comparison-grid, .audit-limitations { grid-template-columns: 1fr; }
+  .comparison-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 620px) {
   .feature-grid { grid-template-columns: 1fr; }
