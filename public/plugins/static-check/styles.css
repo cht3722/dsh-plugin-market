@@ -202,6 +202,12 @@ tr:last-child td { border-bottom: 0; }
   .command-table td:first-child { width: auto; }
   .command-table code { white-space: normal; }
   .quick-facts th { width: 112px; white-space: normal; }
+  .relationship-table { table-layout: fixed; font-size: .875rem; }
+  .relationship-table th, .relationship-table td { padding: 10px 8px; }
+  .relationship-table th:first-child, .relationship-table td:first-child { width: 28%; }
+  .relationship-table th:nth-child(2), .relationship-table td:nth-child(2) { width: 24%; }
+  .relationship-table td code { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+  .relationship-table .version-short { white-space: nowrap; }
   .footer { display: block; }
   .footer a { margin-top: 4px; }
 }
