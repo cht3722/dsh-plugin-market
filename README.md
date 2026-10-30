@@ -20,9 +20,9 @@ Fuxi 团队插件目录
 | workflow-rsi 操作台 | `0.1.0-alpha.1` | `0.1.6-alpha.2 \|\| ^0.2.1-rc.2` |
 | Crowd Memory · 群体记忆 | `0.1.0` | `0.1.6-alpha.2 \|\| ^0.2.0-rc.2` |
 | 鸿蒙代码验证器（@fuxi-ailabs/dsh-dt-verify） | `0.1.0-dev.28` | `^0.2.1-rc.2` |
-| Insight · 会话导入与评分 | `1.0.3` | `^0.2.1-rc.2` |
+| Insight · 会话导入与评分 | `1.1.1` | `^0.2.1-rc.2` |
 | Session Audit · 会话审计 | `1.0.1` | `^0.2.1-rc.2` |
-| Static Check · Skill 静态检查 | `1.0.0` | `^0.2.1-rc.2` |
+| Static Check · Skill 静态检查 | `1.1.1` | `^0.2.1-rc.2` |
 | Skill Eval · Skill 评测 | `1.0.0` | `^0.2.1-rc.2` |
 
 AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开溯源视图。参见 [插件介绍与效果对比](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/)。Windows x64 随插件提供完整运行环境，安装后自动启动。参见 [AgentLineage 安装与使用说明](https://github.com/fuxi-ailabs/AgentLineage/blob/dsh-agentlineage-v0.1.0-alpha.4/integrations/dsh/README.md)。

@@ -15,6 +15,7 @@
   --accent-line: #b6d4c7;
   --code-bg: #f8fafc;
   --shadow: 0 12px 40px rgb(38 61 82 / 5%);
+  --site-header-height: 69px;
   --mono: "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --sans: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-family: var(--sans);
@@ -90,7 +91,7 @@ pre { margin: 0 0 20px; padding: 18px 20px; overflow-x: auto; border: 1px solid 
 /* Tabs stay visually consistent with the compact demo tabs on other market pages. */
 .js .tab-panel { display: none; }
 .js .tab-panel:not([hidden]) { display: block; }
-.tabbar { position: sticky; top: 84px; z-index: 8; display: flex; width: fit-content; max-width: 100%; gap: 4px; margin: 0 0 8px; padding: 5px; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: color-mix(in srgb, var(--bg) 92%, transparent); box-shadow: 0 8px 24px rgb(38 61 82 / 5%); backdrop-filter: blur(12px); scrollbar-width: none; }
+.tabbar { position: sticky; top: calc(var(--site-header-height) + 15px); z-index: 8; display: flex; width: fit-content; max-width: 100%; gap: 4px; margin: 0 0 8px; padding: 5px; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: color-mix(in srgb, var(--bg) 92%, transparent); box-shadow: 0 8px 24px rgb(38 61 82 / 5%); backdrop-filter: blur(12px); scrollbar-width: none; }
 .tabbar::-webkit-scrollbar { display: none; }
 .tabbar button { flex: none; min-height: 42px; padding: 9px 18px; border: 0; border-radius: 5px; background: transparent; color: var(--muted); font: 600 .9375rem/1.4 var(--sans); cursor: pointer; }
 .tabbar button:hover { color: var(--text); background: var(--raised); }
@@ -164,7 +165,6 @@ tr:last-child td { border-bottom: 0; }
   .layout { grid-template-columns: 1fr; padding-top: 22px; }
   .toc { display: none; }
   .section-nav a:not(.nav-npm) { display: none; }
-  .tabbar { top: 72px; }
   .scenario-list, .trouble-list { grid-template-columns: 1fr; }
 }
 
@@ -174,10 +174,10 @@ tr:last-child td { border-bottom: 0; }
   .market-banner { padding-block: 8px; }
   .market-brand, .market-current { font-size: .9375rem; }
   .section-nav { gap: 0; }
-  .site-header { position: relative; }
+  .site-header { position: sticky; }
   .header-inner { gap: 8px 12px; }
   .market-location { flex-wrap: wrap; }
-  .tabbar { top: 0; }
+  .tabbar { top: calc(var(--site-header-height) + 8px); }
   .hero { gap: 30px; padding-block: 42px 36px; }
   .hero-title { align-items: flex-start; gap: 14px; }
   .hero-title img { width: 52px; height: 52px; }
@@ -192,7 +192,7 @@ tr:last-child td { border-bottom: 0; }
   .layout { padding-bottom: 64px; }
   .tabbar { width: calc(100% + 36px); margin: 0 -18px 8px; padding: 6px 14px; border-right: 0; border-left: 0; border-radius: 0; }
   .tabbar button { padding-inline: 14px; }
-  .tab-panel > section { scroll-margin-top: 72px; }
+  .tab-panel > section { scroll-margin-top: calc(var(--site-header-height) + 68px); }
   .tab-panel > section:first-child h2 { margin-top: 26px; }
   .scenario-list li { padding: 18px 18px 18px 30px; }
   .scenario-list li::before { left: 14px; }

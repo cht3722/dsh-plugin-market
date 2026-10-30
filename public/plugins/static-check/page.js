@@ -4,6 +4,11 @@
   const panels = new Map(names.map((name) => [name, document.getElementById(`panel-${name}`)]));
   const tocs = new Map(names.map((name) => [name, document.querySelector(`[data-toc="${name}"]`)]));
   const tabbar = document.querySelector('.tabbar');
+  const siteHeader = document.querySelector('.site-header');
+  const syncHeaderHeight = () => {
+    const height = siteHeader?.getBoundingClientRect().height;
+    if (height) document.documentElement.style.setProperty('--site-header-height', `${Math.ceil(height)}px`);
+  };
 
   function activate(name, focus = false) {
     if (!panels.has(name)) return;
@@ -29,7 +34,8 @@
   }
 
   function scrollToTop() {
-    const top = tabbar.getBoundingClientRect().top + window.scrollY - 62;
+    const headerHeight = siteHeader?.getBoundingClientRect().height ?? 0;
+    const top = tabbar.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
     window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }
 
@@ -65,6 +71,9 @@
     });
   }
 
+  syncHeaderHeight();
+  if (siteHeader && typeof ResizeObserver !== 'undefined') new ResizeObserver(syncHeaderHeight).observe(siteHeader);
+  window.addEventListener('resize', syncHeaderHeight);
   window.addEventListener('hashchange', () => applyHash());
   window.addEventListener('popstate', () => applyHash());
 

@@ -35,7 +35,7 @@
         <div class="hero-title">
           <img src="assets/icon.svg" alt="" width="64" height="64">
           <div>
-            <p class="eyebrow">DSH PLUGIN · dsh-insight · v1.1.0</p>
+            <p class="eyebrow">DSH PLUGIN · dsh-insight · v1.1.1</p>
             <h1>Insight</h1>
           </div>
         </div>
@@ -43,7 +43,7 @@
         <dl class="meta">
           <div><dt>DSH</dt><dd><code>^0.2.1-rc.2</code></dd></div>
           <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
-          <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-insight-bundle@1.1.0</code></dd></div>
+          <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-insight-bundle@1.1.1</code></dd></div>
         </dl>
       </div>
       <figure class="hero-visual" aria-label="Context-Insight Score 页面示意">
@@ -67,13 +67,13 @@
             <table class="relationship-table">
               <thead><tr><th>组成</th><th>版本</th><th>作用</th></tr></thead>
               <tbody>
-                <tr><td><strong>Insight Bundle</strong><small>安装入口</small></td><td><code class="version-short">1.1.0</code></td><td>安装 dsh-insight，并依赖共享的 Runtime Bundle。</td></tr>
+                <tr><td><strong>Insight Bundle</strong><small>安装入口</small></td><td><code class="version-short">1.1.1</code></td><td>安装 dsh-insight，并依赖共享的 Runtime Bundle。</td></tr>
                 <tr><td><strong>dsh-insight</strong><small>DSH 集成插件</small></td><td><code class="version-short">1.1.0</code></td><td>准备运行时，在首次使用时启动 Context-Insight 服务、导入当前会话，并在 DSH 内提供 Insight 按钮、<code>/insight</code>、<code>/score</code> 和评分摘要等功能。</td></tr>
-                <tr><td><strong>Shared Runtime Bundle</strong><small>共享运行时</small></td><td><code class="version-short">1.1.0</code></td><td>包含 <code>dsh-runtime-bundle</code>、<code>dsh-provider-auth</code> 和 <code>dsh-env-health</code>，供 Insight 与 Static Check 共用。</td></tr>
+                <tr><td><strong>Shared Runtime Bundle</strong><small>共享运行时</small></td><td><code class="version-short">1.1.1</code></td><td>包含 <code>dsh-runtime-bundle@1.1.1</code>、<code>dsh-provider-auth@1.1.0</code> 和 <code>dsh-env-health@1.1.0</code>，供 Insight 与 Static Check 共用。</td></tr>
                 <tr><td><strong>Context-Insight</strong><small>外部分析运行时</small></td><td><code class="version-short">0.2.41</code></td><td>开源、本地部署的 Agent 会话分析工具，提供本地数据库、API 和 Web 分析页面。</td></tr>
               </tbody>
             </table>
-            <p class="component-note"><strong>Insight 1.1.0 默认开启运行时准备与服务启动。</strong> 安装后会在后台准备 <code>context-insight@0.2.41</code>，默认安装目录为 <code>~/.dsh-insight/runtime/0.2.41/</code>。</p>
+            <p class="component-note"><strong>Insight 1.1.1 默认开启运行时准备与服务启动。</strong> 安装后会在后台准备 <code>context-insight@0.2.41</code>，默认安装目录为 <code>~/.dsh-insight/runtime/0.2.41/</code>。</p>
           </section>
 
           <section id="scenarios">
@@ -118,7 +118,7 @@
             <p>在 DSH 插件市场中添加索引，找到 <strong>Insight · 会话导入与评分</strong> 并安装。</p>
             <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
             <p>也可以直接安装当前版本：</p>
-            <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-insight-bundle@1.1.0</code></pre>
+            <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.1 @fuxi-ailabs/dsh-insight-bundle@1.1.1</code></pre>
             <p>安装完成后重启 DSH。</p>
           </section>
 
