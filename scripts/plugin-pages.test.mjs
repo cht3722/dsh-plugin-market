@@ -118,6 +118,21 @@ test('HarmonyOS Code Verifier guide keeps the market link in its banner at every
   assert(!/\.crumb-market[^{]*\{[^}]*display:\s*none/.test(css), 'the market link must stay visible on narrow screens');
 });
 
+test('Insight and Static Check keep both banner links visible at narrow widths', async () => {
+  const pages = [
+    ['insight', 'Insight'],
+    ['static-check', 'Static Check'],
+  ];
+  for (const [slug, name] of pages) {
+    const html = await readFile(new URL(`../public/plugins/${slug}/index.html`, import.meta.url), 'utf8');
+    const css = await readFile(new URL(`../public/plugins/${slug}/styles.css`, import.meta.url), 'utf8');
+    assert(html.includes('class="market-brand"'));
+    assert(html.includes(`class="market-current" href="#top" aria-current="page">${name}</a>`));
+    assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css), `${name} must keep the component link visible on narrow screens`);
+    assert(!/\.market-separator[^{]*\{[^}]*display:\s*none/.test(css), `${name} must keep the breadcrumb separator visible on narrow screens`);
+  }
+});
+
 test('requirements share the compact installation section and results start collapsed', () => {
   const html = renderPage(agent);
   assert(!html.includes('<section id="details"'));

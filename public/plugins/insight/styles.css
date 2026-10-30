@@ -174,6 +174,10 @@ tr:last-child td { border-bottom: 0; }
   .market-banner { padding-block: 8px; }
   .market-brand, .market-current { font-size: .9375rem; }
   .section-nav { gap: 0; }
+  .site-header { position: relative; }
+  .header-inner { gap: 8px 12px; }
+  .market-location { flex-wrap: wrap; }
+  .tabbar { top: 0; }
   .hero { gap: 30px; padding-block: 42px 36px; }
   .hero-title { align-items: flex-start; gap: 14px; }
   .hero-title img { width: 52px; height: 52px; }
@@ -188,7 +192,7 @@ tr:last-child td { border-bottom: 0; }
   .layout { padding-bottom: 64px; }
   .tabbar { width: calc(100% + 36px); margin: 0 -18px 8px; padding: 6px 14px; border-right: 0; border-left: 0; border-radius: 0; }
   .tabbar button { padding-inline: 14px; }
-  .tab-panel > section { scroll-margin-top: 132px; }
+  .tab-panel > section { scroll-margin-top: 72px; }
   .tab-panel > section:first-child h2 { margin-top: 26px; }
   .scenario-list li { padding: 18px 18px 18px 30px; }
   .scenario-list li::before { left: 14px; }
@@ -203,7 +207,6 @@ tr:last-child td { border-bottom: 0; }
 }
 
 @media (max-width: 380px) {
-  .market-current, .market-separator { display: none; }
   .hero-title img { width: 46px; height: 46px; }
   h1 { font-size: 2.9rem; }
   .tabbar button { padding-inline: 12px; font-size: .875rem; }
