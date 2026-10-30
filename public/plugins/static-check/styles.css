@@ -263,11 +263,8 @@ h1 { font-size: clamp(3.25rem, 5.5vw, 4.75rem); }
 .check-example h3 { margin: 0; font-size: 1.0625rem; }
 .check-example > p { margin-bottom: 16px; font-size: .9375rem; line-height: 1.75; }
 .check-example .shot { margin-top: 0; }
-.check-example .shot img { aspect-ratio: 718 / 574; object-fit: cover; object-position: top; }
-.shot-placeholder { display: grid; min-height: 360px; place-content: center; gap: 8px; padding: 24px; background: color-mix(in srgb, var(--accent-soft) 58%, var(--surface)); color: var(--muted); text-align: center; }
-.shot-placeholder strong { color: var(--text); }
+.check-example .shot img { aspect-ratio: auto; object-fit: contain; background: var(--bg); }
 
 @media (max-width: 920px) {
   .check-examples { grid-template-columns: 1fr; }
-  .shot-placeholder { min-height: 300px; }
 }

@@ -48,7 +48,7 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
 ])], ['plugins/static-check', new Set([
   'index.html', 'styles.css', 'page.js', 'assets/icon.svg',
   'assets/static-check-hero.jpg', 'assets/static-check-workbench.jpg', 'assets/static-check-environment.jpg',
-  'assets/static-check-vet.jpg',
+  'assets/static-check-vet.jpg', 'assets/static-check-critique.jpg',
 ])], ['plugins/skill-eval', new Set([
   'index.html', 'styles.css', 'assets/icon.svg', 'assets/skill-eval-workbench.jpg',
 ])]]);
