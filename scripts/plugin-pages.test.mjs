@@ -133,6 +133,45 @@ test('Session Audit keeps existing evidence, video space and install contract', 
   assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css));
 });
 
+test('Insight and Static Check keep both banner links visible at narrow widths', async () => {
+  const pages = [
+    ['insight', 'Insight'],
+    ['static-check', 'Static Check'],
+  ];
+  for (const [slug, name] of pages) {
+    const html = await readFile(new URL(`../public/plugins/${slug}/index.html`, import.meta.url), 'utf8');
+    const css = await readFile(new URL(`../public/plugins/${slug}/styles.css`, import.meta.url), 'utf8');
+    assert(html.includes('class="market-brand"'));
+    assert(html.includes(`class="market-current" href="#top" aria-current="page">${name}</a>`));
+    const pageJs = await readFile(new URL(`../public/plugins/${slug}/page.js`, import.meta.url), 'utf8');
+    assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css), `${name} must keep the component link visible on narrow screens`);
+    assert(!/\.market-separator[^{]*\{[^}]*display:\s*none/.test(css), `${name} must keep the breadcrumb separator visible on narrow screens`);
+    assert(!/\.site-header\s*\{[^}]*position:\s*relative/.test(css), `${name} must keep the banner sticky on narrow screens`);
+    assert(css.includes('--site-header-height'), `${name} must offset sticky tabs by banner height`);
+    assert(pageJs.includes('ResizeObserver'), `${name} must track the actual banner height`);
+  }
+});
+
+test('market docs match the currently installable Insight and Static Check versions', async () => {
+  const insight = await readFile(new URL('../public/plugins/insight/index.html', import.meta.url), 'utf8');
+  const staticCheck = await readFile(new URL('../public/plugins/static-check/index.html', import.meta.url), 'utf8');
+  const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  assert(insight.includes('dsh-runtime-bundle@1.1.1'));
+  assert(insight.includes('dsh-insight-bundle@1.1.1'));
+  assert(insight.includes('context-insight@0.2.41'));
+  assert(insight.includes('~/.dsh-insight/runtime/0.2.41/'));
+  assert(insight.includes('autoInstall: true') && insight.includes('autoStart: true'));
+  assert(staticCheck.includes('dsh-runtime-bundle@1.1.1'));
+  assert(staticCheck.includes('dsh-static-check-bundle@1.1.1'));
+  assert(staticCheck.includes('1193fa77e27ed01d657de7df1db881b61114d569'));
+  assert(staticCheck.includes('2.6.0-dev.1193fa7'));
+  assert(staticCheck.includes('~/.dsh-sift/runtime/2.6.0-dev.1193fa7/'));
+  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-insight-bundle').versions[0].version, '1.1.1');
+  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-static-check-bundle').versions[0].version, '1.1.1');
+  assert(readme.includes('| Insight · 会话导入与评分 | `1.1.1` |'));
+  assert(readme.includes('| Static Check · Skill 静态检查 | `1.1.1` |'));
+});
+
 test('requirements share the compact installation section and results start collapsed', () => {
   const html = renderPage(agent);
   assert(!html.includes('<section id="details"'));

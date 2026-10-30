@@ -20,9 +20,9 @@ Fuxi 团队插件目录
 | workflow-rsi 操作台 | `0.1.0-alpha.1` | `0.1.6-alpha.2 \|\| ^0.2.1-rc.2` |
 | Crowd Memory · 群体记忆 | `0.1.0` | `0.1.6-alpha.2 \|\| ^0.2.0-rc.2` |
 | 鸿蒙代码验证器（@fuxi-ailabs/dsh-dt-verify） | `0.1.0-dev.28` | `^0.2.1-rc.2` |
-| Insight · 会话导入与评分 | `1.0.1` | `^0.2.1-rc.2` |
+| Insight · 会话导入与评分 | `1.1.1` | `^0.2.1-rc.2` |
 | Session Audit · 会话审计 | `1.0.1` | `^0.2.1-rc.2` |
-| Static Check · Skill 静态检查 | `1.0.0` | `^0.2.1-rc.2` |
+| Static Check · Skill 静态检查 | `1.1.1` | `^0.2.1-rc.2` |
 | Skill Eval · Skill 评测 | `1.0.0` | `^0.2.1-rc.2` |
 
 AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开溯源视图。参见 [插件介绍与效果对比](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/)。Windows x64 随插件提供完整运行环境，安装后自动启动。参见 [AgentLineage 安装与使用说明](https://github.com/fuxi-ailabs/AgentLineage/blob/dsh-agentlineage-v0.1.0-alpha.4/integrations/dsh/README.md)。
@@ -30,7 +30,7 @@ AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开�
 Crowd Memory 是 DSH 的群体记忆：每个 Agent 在工作中得到的经验，按任务结果判断可信后，提供给其他会话、同一 workflow 里的其他 Agent 和团队复用，模型不需要重新训练。适合长期在同一批项目上工作、workflow 反复运行或多人同时用 Agent 做同类任务的场景；开关记忆配对评测中，同样的模型和预算下完成率从 39% 提高到 78%。使用前需要安装本机记忆服务 `@fuxi-ailabs/crowdmemory-runtime`。参见 [Crowd Memory 介绍、例子与安装说明](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/)。
 workflow-rsi 让 Workflow 递归自我改进：不改模型权重，用真实运行结果持续搜索、评测并发布更好的 Workflow 结构，并评估和改进自己的改进方法。改进来自闭环、Memory 共性、请求、工作计划与假设驱动，结构用已审批的算子和受约束搜索生成，节点内容经 skill / agent RSI 接口改进，全部在整个 Workflow 上分级评测，以 PR 交付；评分规则与发布标准只由人准入。市场收录的是 DSH 操作台，使用前需要安装并启动 `@fuxi-ailabs/workflow-rsi` 提供的 `wrsi-server`。参见 [workflow-rsi 介绍、例子与安装说明](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/workflow-rsi/)。
 
-Insight 把当前 DSH 会话导入 Insight，读回评分卡，并在插件配置页检查 Provider Auth、Insight CLI 与服务状态。参见 [Insight 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/insight/)。
+Insight 把当前 DSH 会话导入 Context-Insight，查看 Workflow、Subagent 与工具调用，并在 DSH 中读取评分卡。插件会自动准备运行时，并在配置页检查 Provider Auth、CLI 与服务状态。参见 [Insight 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/insight/)。
 
 Session Audit 用 SIFT 审计真实 DSH 会话执行轨迹，在工作台和历史记录中查看 finding、证据与 turn 引用，并在右侧只读报告面板中打开完整审计报告。参见 [Session Audit 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/audit/)。
 

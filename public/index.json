@@ -299,8 +299,8 @@
         "zh": "Insight · 会话导入与评分"
       },
       "description": {
-        "en": "Import DSH sessions into Insight, read back scorecards, and verify Provider Auth and runtime readiness from the plugin configuration page.",
-        "zh": "把 DSH 会话导入 Insight，在 DSH 内读回评分卡，并从插件配置页核对 Provider Auth 与运行环境状态。"
+        "en": "Import DSH sessions into Context-Insight, inspect workflow and subagent execution, read scorecards in DSH, and check runtime readiness from the plugin configuration page.",
+        "zh": "把 DSH 会话导入 Context-Insight，查看 Workflow、Subagent 与工具调用，在 DSH 内读取评分卡，并从插件配置页检查运行时状态。"
       },
       "icon": "icons/insight.svg",
       "author": "Fuxi AI Labs",
@@ -326,8 +326,8 @@
       },
       "versions": [
         {
-          "version": "1.0.1",
-          "publishTimestamp": 1793087735,
+          "version": "1.1.1",
+          "publishTimestamp": 1793342175,
           "source": {
             "type": "npm"
           },
@@ -415,8 +415,8 @@
       },
       "versions": [
         {
-          "version": "1.0.0",
-          "publishTimestamp": 1793091135,
+          "version": "1.1.1",
+          "publishTimestamp": 1793342256,
           "source": {
             "type": "npm"
           },
