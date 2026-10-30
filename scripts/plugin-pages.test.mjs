@@ -7,6 +7,7 @@ import { validateContent } from '../templates/plugin-page/validate.mjs';
 
 const starter = JSON.parse(await readFile(new URL('../templates/plugin-page/content.example.json', import.meta.url), 'utf8'));
 const agent = JSON.parse(await readFile(new URL('../content/plugins/agentlineage.json', import.meta.url), 'utf8'));
+const verifier = JSON.parse(await readFile(new URL('../content/plugins/dt-verify.json', import.meta.url), 'utf8'));
 const catalog = JSON.parse(await readFile(new URL('../public/index.json', import.meta.url), 'utf8'));
 
 test('a generic plugin needs no file-history fields or controls', () => {
@@ -39,6 +40,17 @@ test('a video can be the only demo content', () => {
   const html = renderPage(page);
   assert(html.includes('<video controls'));
   assert(!html.includes('id="play-demo"'));
+});
+
+test('a video loops muted only when the page opts in', () => {
+  const page = structuredClone(starter);
+  page.example = { title: '视频演示', video: agent.example.video };
+  assert(renderPage(page).includes('<video controls playsinline preload="none"'));
+  page.example.video = { ...agent.example.video, loop: true };
+  validateContent(page);
+  assert(renderPage(page).includes('<video controls autoplay muted loop playsinline preload="auto"'));
+  page.example.video.loop = 'yes';
+  assert.throws(() => validateContent(page), /video.loop/);
 });
 
 test('empty demos and unsupported content are rejected', () => {
@@ -83,6 +95,27 @@ test('AgentLineage keeps its interactive demo and current installation contract'
   assert(agent.requirements.summary.includes('无需另装 Python 或 Core'));
   assert(!html.includes('AGENTLINEAGE_PYTHON'));
   assert(agent.quickstart.steps.at(-1).note.includes('复用 DSH 登录'));
+});
+
+test('HarmonyOS Code Verifier installs the catalog version under the market banner', () => {
+  validateContent(verifier);
+  const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-dt-verify');
+  const version = plugin.versions.find(item => item.version === verifier.version);
+  assert(version, 'the introduction must describe a catalog version');
+  assert(verifier.install.code.includes(marketInstallTarget(plugin.name, version).spec));
+  assert(verifier.quickstart.steps.some(step => step.code === verifier.install.code));
+  const html = renderPage(verifier);
+  assert(html.includes('class="market-brand"'));
+  assert(html.includes('aria-current="page">鸿蒙代码验证器</a>'));
+  assert(html.includes('<video controls'));
+  assert(html.includes('id="faq"'));
+});
+
+test('HarmonyOS Code Verifier guide keeps the market link in its banner at every width', async () => {
+  const html = await readFile(new URL('../public/plugins/dt-verify/guide.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../public/plugins/dt-verify/docs.css', import.meta.url), 'utf8');
+  assert(html.includes('<a class="crumb-market" href="https://fuxi-ailabs.github.io/dsh-plugin-market/">Fuxi通用DSH组件市场</a>'));
+  assert(!/\.crumb-market[^{]*\{[^}]*display:\s*none/.test(css), 'the market link must stay visible on narrow screens');
 });
 
 test('requirements share the compact installation section and results start collapsed', () => {
