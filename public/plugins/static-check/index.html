@@ -3,148 +3,311 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Static Check DSH 插件：为 Skill 和 Agent 声明执行规范检查、安全扫描与可选 AI 内容评审。">
-  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Static Check DSH 插件：在一个工作台中检查 Skill 和 Agent 声明，执行 11 项规范检查、安全扫描和可选 AI 内容评审。">
+  <meta name="color-scheme" content="light">
   <title>Static Check · DSH 插件文档</title>
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#top"><img class="brand-icon" src="assets/icon.svg" alt=""><span>Static Check</span></a>
-    <nav aria-label="文档导航">
-      <a href="#install">安装</a>
-      <a href="#health">环境检查</a>
-      <a href="#usage">使用</a>
-      <a href="#checks">检查项</a>
-      <a href="#limits">限制</a>
-    </nav>
-    <a class="npm-link" href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle">npm ↗</a>
+  <a class="skip-link" href="#relationship">跳到主要内容</a>
+  <header class="site-header">
+    <div class="market-banner">
+      <div class="wrap header-inner">
+        <nav class="market-breadcrumb" aria-label="当前位置">
+          <a class="market-brand" href="https://fuxi-ailabs.github.io/dsh-plugin-market/">Fuxi通用DSH组件市场</a>
+          <span class="market-location"><span class="market-separator" aria-hidden="true">/</span><a class="market-current" href="#top" aria-current="page">Static Check</a></span>
+        </nav>
+        <nav class="section-nav" aria-label="文档导航">
+          <a href="#relationship">概览</a>
+          <a href="#requirements">快速开始</a>
+          <a href="#cli-intro">使用 CLI</a>
+          <a href="#troubleshooting">帮助</a>
+          <a class="nav-npm" href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle">npm ↗</a>
+        </nav>
+      </div>
+    </div>
   </header>
 
-  <main id="top" class="layout">
-    <article class="doc">
-      <header class="hero">
-        <div class="hero-title"><img src="assets/icon.svg" alt="" width="58" height="58"><div><p class="eyebrow">DSH PLUGIN · v1.0.0</p><h1>Skill 静态检查</h1></div></div>
-        <p class="lede">在一个工作台中检查 Skill 和 Agent 声明：运行 11 项规范检查与安全扫描，并按需启用 AI 内容评审。</p>
-        <dl class="meta">
-          <div><dt>DSH</dt><dd><code>0.2.1-rc.2</code></dd></div>
-          <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
-          <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-static-check-bundle</code></dd></div>
-        </dl>
-      </header>
-
-      <section id="features">
-        <h2>功能</h2>
-        <ul>
-          <li><strong>统一工作台</strong>：按 System、Global、工作区和手动路径浏览检查对象。</li>
-          <li><strong>规范检查</strong>：执行 SIFT 的 11 项确定性 Skill 声明检查。</li>
-          <li><strong>安全扫描</strong>：汇总内置扫描与可选的 <code>aguara</code>、<code>skill-scanner</code> 结果。</li>
-          <li><strong>AI 内容评审</strong>：按需调用模型评审声明内容，不会默认开启。</li>
-          <li><strong>环境检查</strong>：在插件配置页检查 SIFT、扫描器、Provider Auth 和静态检查服务。</li>
-        </ul>
-      </section>
-
-      <section id="install">
-        <h2>安装</h2>
-        <div class="npm-callout">
-          <div><strong>npm 包</strong><code>@fuxi-ailabs/dsh-static-check-bundle</code></div>
-          <a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle">查看 npm 页面 ↗</a>
+  <main>
+    <header class="wrap hero" id="top">
+      <div class="hero-copy">
+        <div class="hero-title">
+          <img src="assets/icon.svg" alt="" width="64" height="64">
+          <div>
+            <p class="eyebrow">DSH PLUGIN · dsh-static-check · v1.1.1</p>
+            <h1>Skill 静态检查</h1>
+          </div>
         </div>
-        <h3>1. 准备运行环境</h3>
-        <ul>
-          <li>DSH <code>0.2.1-rc.2</code> 或同一兼容范围。</li>
-          <li>Node.js 24 或更高版本。</li>
-          <li><code>sift</code> 命令已安装并在 <code>PATH</code> 中。</li>
-          <li><code>aguara</code>、<code>skill-scanner</code> 为可选外部扫描器。</li>
-          <li>AI 内容评审需要可用的 Provider 凭据。</li>
-        </ul>
-        <h3>2. 从市场安装</h3>
-        <p>在 DSH 的插件市场中添加索引，找到 <strong>Static Check · Skill 静态检查</strong> 并安装。</p>
-        <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
-        <p>也可以直接安装当前版本：</p>
-        <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-static-check-bundle@1.0.0</code></pre>
-        <p>安装后重启 DSH。</p>
-      </section>
+        <p class="lede"><strong>dsh-static-check</strong> 提供 Skill 和 Agent 声明的静态分析，包含统一工作台、<code>/skill-check</code> 命令和 Agent 工具。它不会执行目标 Skill，可以运行 11 项规范检查、安全扫描，并按需触发 AI 内容评审。</p>
+        <dl class="meta">
+          <div><dt>DSH</dt><dd><code>^0.2.1-rc.2</code></dd></div>
+          <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
+          <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-static-check-bundle@1.1.1</code></dd></div>
+        </dl>
+      </div>
+      <figure class="hero-visual" aria-label="Static Check 工作台示意">
+        <img src="assets/static-check-hero.jpg" width="1440" height="900" alt="Static Check 工作台，左侧选择 release-note-check Skill，右侧显示规范检查入口。">
+      </figure>
+    </header>
 
-      <section id="health">
-        <h2>环境检查</h2>
-        <p>在「插件」→ Static Check 的配置页检查运行依赖。检查只读取环境，不修改插件配置。</p>
-        <table>
-          <thead><tr><th>检查项</th><th>说明</th></tr></thead>
-          <tbody>
-            <tr><td>SIFT</td><td>必需。检查 <code>sift</code> 是否可执行，并提供缺失时的安装指引。</td></tr>
-            <tr><td>aguara / skill-scanner</td><td>可选。外部安全扫描器缺失时显示警告，不阻止规范检查。</td></tr>
-            <tr><td>Provider Auth</td><td>可选。仅 AI 内容评审需要可用的模型凭据。</td></tr>
-            <tr><td>Static Check Service</td><td>检查 Host 是否已挂载 <code>staticCheck</code> 服务。</td></tr>
-          </tbody>
-        </table>
-      </section>
+    <div class="layout wrap">
+      <article class="doc">
+        <div class="tabbar" role="tablist" aria-label="Static Check 文档章节">
+          <button type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-tab="overview">概览</button>
+          <button type="button" role="tab" id="tab-quick-start" aria-controls="panel-quick-start" aria-selected="false" tabindex="-1" data-tab="quick-start">快速开始</button>
+          <button type="button" role="tab" id="tab-usage" aria-controls="panel-usage" aria-selected="false" tabindex="-1" data-tab="usage">使用 CLI</button>
+          <button type="button" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" tabindex="-1" data-tab="help">帮助</button>
+        </div>
 
-      <section id="usage">
-        <h2>使用</h2>
-        <ol>
-          <li>打开左侧「静态检查」。</li>
-          <li>选择已有 Skill，或通过「添加路径」加入本地 <code>SKILL.md</code>、Skill 目录或 Agent 声明。</li>
-          <li>选择「规范检查」「安全扫描」或「内容评审」。</li>
-          <li>运行当前检查，并在右侧查看评分、问题、扫描器和内容对照。</li>
-        </ol>
-        <figure class="shot">
-          <img src="assets/static-check-workbench.jpg" alt="Static Check 工作台，左侧展示检查对象列表，右侧展示检查类型和运行入口。" loading="lazy">
-          <figcaption><strong>Static Check 工作台</strong>：左侧选择 Skill 或 Agent 声明，右侧切换检查类型并运行。截图使用演示 Skill。</figcaption>
-        </figure>
-      </section>
+        <div class="tab-panels">
+        <div class="tab-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-panel="overview">
+          <section id="relationship">
+            <h2>主要组成</h2>
+            <table class="relationship-table">
+              <thead><tr><th>组成</th><th>版本</th><th>作用</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Static Check Bundle</strong><small>安装入口</small></td><td><code class="version-short">1.1.1</code></td><td>安装 dsh-static-check，并依赖共享的 Runtime Bundle。</td></tr>
+                <tr><td><strong>dsh-static-check</strong><small>DSH 集成与工作台</small></td><td><code class="version-short">1.1.0</code></td><td>启动时检查运行环境并默认安装 SIFT；提供 Skill / Agent 工作台、手动路径管理、<code>/skill-check</code> 命令和 <code>skill_static_check</code> Agent 工具。</td></tr>
+                <tr><td><strong>Shared Runtime Bundle</strong><small>共享运行时</small></td><td><code class="version-short">1.1.1</code></td><td>包含 <code>dsh-runtime-bundle@1.1.1</code>、<code>dsh-provider-auth@1.1.0</code> 和 <code>dsh-env-health@1.1.0</code>；与 Insight 同时安装时只挂载一次。</td></tr>
+                <tr><td><strong>SIFT</strong><small>底层静态检查引擎</small></td><td><code class="version-long">2.6.0-dev.1193fa7</code></td><td>提供 <code>analyze</code>、<code>vet</code> 和 <code>critique</code> 三类检查能力。CLI 显示版本为 <code>2.6.0</code>，默认安装到 <code>~/.dsh-sift/runtime/2.6.0-dev.1193fa7/</code>。</td></tr>
+              </tbody>
+            </table>
+            <p class="component-note"><strong>SIFT 是底层静态检查引擎。</strong> 插件启动时会检查运行环境；如果尚未安装，会从固定 commit <code>1193fa77e27ed01d657de7df1db881b61114d569</code> 自动准备。Provider Auth、环境检查和 SIFT 安装任务由共享 Runtime Bundle 统一管理。</p>
+          </section>
 
-      <section id="checks">
-        <h2>三类检查</h2>
-        <table>
-          <thead><tr><th>检查</th><th>行为</th></tr></thead>
-          <tbody>
-            <tr><td><code>analyze</code></td><td>执行 11 项确定性规范检查，不调用 LLM。</td></tr>
-            <tr><td><code>vet</code></td><td>执行安全扫描；可勾选「跳过外部扫描器」，只运行内置 secrets-scan 与 structure-check。</td></tr>
-            <tr><td><code>critique</code></td><td>调用模型进行内容评审，会产生模型调用、耗时和费用。</td></tr>
-          </tbody>
-        </table>
-        <h3>命令行</h3>
-        <pre><code>/skill-check &lt;path&gt; --checks analyze,vet
-/skill-check &lt;path&gt; --checks analyze,vet,critique
+          <section id="scenarios">
+            <h2>适合检查哪些声明？</h2>
+            <p>Static Check 直接读取声明文件，不会执行目标 Skill，因此适合在发布前检查内容和风险。</p>
+            <ul class="scenario-list">
+              <li><strong>发布 Skill 前：</strong>检查名称、description、触发条件、示例和引用结构是否符合规范。</li>
+              <li><strong>审查外部 Skill：</strong>在安装或复用第三方 Skill 前检查敏感信息、结构问题和潜在风险。</li>
+              <li><strong>修改声明后：</strong>对比修改前后的规范分数、失败项和安全扫描结果。</li>
+              <li><strong>检查 Agent 声明：</strong>使用 AI 内容评审检查 Agent 指令是否清楚、完整和可执行。</li>
+            </ul>
+          </section>
+
+          <section id="checks">
+            <h2>三类检查</h2>
+            <div class="check-grid">
+              <article><span class="check-kind">ANALYZE</span><h3>规范检查</h3><p>执行 SIFT 的 11 项确定性声明检查，不调用 LLM，适合每次修改后运行。</p></article>
+              <article><span class="check-kind">VET</span><h3>安全扫描</h3><p>汇总内置 secrets-scan、structure-check 和可选的 aguara、skill-scanner 结果。</p></article>
+              <article><span class="check-kind">CRITIQUE</span><h3>AI 内容评审</h3><p>按需调用模型分析声明质量，会消耗模型时间和 token；默认不启用。</p></article>
+            </div>
+            <div class="note">
+              <strong>“静态”表示目标 Skill 不会被执行，不等于所有检查都不调用模型。</strong>
+              <p>规范检查和安全扫描不调用 LLM；只有 <code>critique</code> 内容评审会使用 Provider。</p>
+            </div>
+          </section>
+
+          <section id="check-results">
+            <h2>检查结果示例</h2>
+            <div class="check-examples">
+              <article class="check-example">
+                <div class="check-example-heading"><span class="check-kind">VET</span><h3>安全扫描</h3></div>
+                <p>检查硬编码凭据、危险结构和外部扫描器 findings，并以 SAFE、REVIEW_NEEDED 或 BLOCKED 汇总风险结论。</p>
+                <figure class="shot">
+                  <img src="assets/static-check-vet.jpg" alt="Static Check 安全扫描结果：archify Skill 显示 SAFE，内置 secrets-scan 与 structure-check 均通过。" loading="lazy">
+                  <figcaption><strong>安全扫描结果</strong>：扫描器状态、findings 和最终 verdict 集中展示；可选外部扫描器可以在大型目录中跳过。</figcaption>
+                </figure>
+              </article>
+
+              <article class="check-example">
+                <div class="check-example-heading"><span class="check-kind">CRITIQUE</span><h3>AI 内容评审</h3></div>
+                <p>按维度检查声明是否清楚、完整、可执行，并展示证据、缺口和投票结果；该检查会调用模型并消耗 token。</p>
+                <figure class="shot">
+                  <img src="assets/static-check-critique.jpg" alt="Static Check AI 内容评审结果：aico-ppt Skill 显示满足 4、部分满足 0、缺失 2，并列出各维度的证据与缺口。" loading="lazy">
+                  <figcaption><strong>内容评审结果</strong>：查看各维度状态、证据与缺口，定位需要补充或修改的声明内容。</figcaption>
+                </figure>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="panel-quick-start" role="tabpanel" aria-labelledby="tab-quick-start" data-panel="quick-start" hidden>
+          <section id="requirements">
+            <h2>1. 准备运行环境</h2>
+            <table class="quick-facts">
+              <tbody>
+                <tr><th>DSH</th><td><code>^0.2.1-rc.2</code>。</td></tr>
+                <tr><th>Node.js</th><td><code>&gt;=24</code>。</td></tr>
+                <tr><th>Python</th><td><code>&gt;=3.10</code>，用于准备 SIFT 运行时。</td></tr>
+                <tr><th>SIFT</th><td>固定 commit <code>1193fa77e27ed01d657de7df1db881b61114d569</code>，运行时标识 <code>2.6.0-dev.1193fa7</code>，CLI 显示版本 <code>2.6.0</code>。插件启动时会默认检查并安装。</td></tr>
+                <tr><th>aguara</th><td>可选，当前版本 <code>0.28.0</code>；不自动安装，缺失时只影响对应扫描项。</td></tr>
+                <tr><th>skill-scanner</th><td>可选，当前版本 <code>1.1.0</code>；不自动安装，未安装时显示提醒，不阻止规范检查。</td></tr>
+                <tr><th>Provider Auth</th><td>可选。只有 AI 内容评审需要可用的 Provider 凭据。</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="install">
+            <h2>2. 安装 Bundle</h2>
+            <div class="npm-callout">
+              <div><strong>npm 包</strong><code>@fuxi-ailabs/dsh-static-check-bundle</code></div>
+              <a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle">查看 npm 页面 ↗</a>
+            </div>
+            <p>在 DSH 插件市场中添加索引，找到 <strong>Static Check · Skill 静态检查</strong> 并安装。</p>
+            <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
+            <p>也可以直接安装当前 Bundle 与共享 Runtime Bundle：</p>
+            <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.1 @fuxi-ailabs/dsh-static-check-bundle@1.1.1</code></pre>
+            <p>安装完成后重启 DSH。首次检查时会自动准备 SIFT，也可以使用环境中已有的 <code>sift</code> 命令。</p>
+          </section>
+
+          <section id="open-workbench">
+            <h2>3. 选择检查对象</h2>
+            <ol class="steps">
+              <li><div><strong>打开工作台</strong><p>从 DSH 左侧打开「静态检查」，进入 Skill / Agent 声明检查页面。</p></div></li>
+              <li><div><strong>选择 Skill 或 Agent 声明</strong><p>使用 System、Global、工作区或手动路径中的声明；也可以通过「添加路径」加入本地 <code>SKILL.md</code> 或 Agent 声明文件。</p></div></li>
+              <li><div><strong>选择检查类型</strong><p>右侧可切换「规范检查」「安全扫描」「内容评审」。点击「执行当前检查」只会运行当前选中的类型。</p></div></li>
+            </ol>
+          </section>
+
+          <section id="run-check">
+            <h2>4. 运行并查看结果</h2>
+            <p>推荐先运行规范检查，再按需运行安全扫描和 AI 内容评审。下面的测试案例使用 <code>aico-ppt</code> Skill，11 项规范检查全部通过。</p>
+            <figure class="shot">
+              <img src="assets/static-check-workbench.jpg" alt="Static Check 工作台，左侧选择 aico-ppt Skill，右侧显示规范检查 11/11 全部通过。" loading="lazy">
+              <figcaption><strong>规范检查结果</strong>：工作台展示当前检查对象和 11/11 结果摘要；绿色 PASS 项列出每一条检查。</figcaption>
+            </figure>
+            <table>
+              <thead><tr><th>检查</th><th>结果怎么看</th></tr></thead>
+              <tbody>
+                <tr><td>规范检查</td><td>查看 PASS / FAIL、总分和失败项；不调用 LLM。</td></tr>
+                <tr><td>安全扫描</td><td>查看扫描器状态、findings、severity 和最终 verdict；外部扫描器可选择跳过。</td></tr>
+                <tr><td>内容评审</td><td>查看各维度状态、证据、缺口和投票结果；会调用模型。</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="health">
+            <h2>5. 检查运行环境</h2>
+            <p>打开「插件」→ Static Check 的配置页，检查 SIFT、可选扫描器、Provider Auth 和静态检查服务。检查只读取环境，不修改配置。</p>
+            <figure class="shot">
+              <img src="assets/static-check-environment.jpg" alt="Static Check 环境检查页，SIFT、Provider Auth、aguara 正常，skill-scanner 提示可选安装。" loading="lazy">
+              <figcaption>当前测试环境：SIFT、Provider Auth、aguara 正常；可选的 skill-scanner 未安装，因此显示提醒但不阻止规范检查。</figcaption>
+            </figure>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="panel-usage" role="tabpanel" aria-labelledby="tab-usage" data-panel="usage" hidden>
+          <section id="cli-intro">
+            <h2>使用 CLI</h2>
+            <p>以下命令直接在 DSH 会话输入框中执行，与 Static Check 工作台执行的是同一套检查服务。</p>
+            <pre><code>/skill-check &lt;path&gt;
+/skill-check &lt;path&gt; --checks analyze,vet
+/skill-check &lt;path&gt; --all
 /skill-check &lt;agent.md&gt; --kind agent</code></pre>
-        <p>Agent 声明目前只支持 <code>critique</code> 内容评审。</p>
-      </section>
+            <p>只指定路径时，Skill 默认运行 <code>analyze</code> 和 <code>vet</code>；Agent 声明默认只运行 <code>critique</code>。</p>
+          </section>
 
-      <section id="limits">
-        <h2>使用条件与限制</h2>
-        <ul>
-          <li>静态表示目标 Skill 不会被执行，但 AI 内容评审仍会调用模型。</li>
-          <li>安全扫描的完整程度取决于外部扫描器是否安装及本机环境。</li>
-          <li>大型目录建议勾选「跳过外部扫描器」，避免外部扫描器超时。</li>
-          <li>手动路径保存在 DSH Home 下的 <code>dsh-static-check</code> 目录。</li>
-        </ul>
-      </section>
+          <section id="cli-common">
+            <h2>常用参数</h2>
+            <table class="command-table">
+              <thead><tr><th>参数</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td><code>--checks analyze,vet</code></td><td>指定一个或多个检查类型，可用 <code>analyze</code>、<code>vet</code>、<code>critique</code>。</td></tr>
+                <tr><td><code>--all</code></td><td>执行 analyze、vet、critique 三类检查；包含 AI 评审和 token 消耗。</td></tr>
+                <tr><td><code>--with-critique</code></td><td>在默认检查之外增加 AI 内容评审。</td></tr>
+                <tr><td><code>--kind agent</code></td><td>检查 Agent 声明；当前只支持 <code>critique</code>。</td></tr>
+                <tr><td><code>--skip-external</code></td><td>安全扫描跳过外部扫描器，只运行内置检查，适合大型目录或排障。</td></tr>
+              </tbody>
+            </table>
+          </section>
 
-      <section id="links">
-        <h2>相关链接</h2>
-        <ul class="links">
-          <li><a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle">npm 包与 README ↗</a></li>
-          <li><a href="https://github.com/guixu-labs/dsh-plugin">插件源码仓库 ↗</a></li>
-        </ul>
-      </section>
+          <section id="cli-advanced">
+            <h2>高级参数</h2>
+            <table class="command-table">
+              <thead><tr><th>参数</th><th>用途</th></tr></thead>
+              <tbody>
+                <tr><td><code>--runs &lt;n&gt;</code></td><td>内容评审执行轮数，用于降低单次模型判断的偶然性。</td></tr>
+                <tr><td><code>--model &lt;name&gt;</code></td><td>指定内容评审使用的模型。</td></tr>
+                <tr><td><code>--output &lt;path&gt;</code></td><td>单类检查时指定报告输出文件。</td></tr>
+                <tr><td><code>--output-dir &lt;dir&gt;</code></td><td>指定内容评审报告目录。</td></tr>
+                <tr><td><code>--cwd &lt;path&gt;</code></td><td>指定检查命令的工作目录。</td></tr>
+                <tr><td><code>--timeout-ms &lt;n&gt;</code></td><td>设置检查超时时间，单位毫秒。</td></tr>
+                <tr><td><code>--timeout &lt;n&gt;</code></td><td>设置内容评审超时时间，单位秒。</td></tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="cli-tool">
+            <h2>Agent 工具</h2>
+            <p>插件同时注册 <code>skill_static_check</code> 工具，Agent 可以使用与 <code>/skill-check</code> 相同的检查能力。工作台、命令和工具共享同一个 <code>staticCheck</code> 服务，不会产生不同的检查口径。</p>
+          </section>
+        </div>
+
+        <div class="tab-panel" id="panel-help" role="tabpanel" aria-labelledby="tab-help" data-panel="help" hidden>
+          <section id="troubleshooting">
+            <h2>故障排查</h2>
+            <div class="trouble-list">
+              <article><h3>提示找不到 SIFT</h3><p>确认 DSH 启动环境可以执行 <code>sift --version</code>。也可以在插件配置中将 <code>siftBin</code> 设置为绝对路径。</p></article>
+              <article><h3>skill-scanner 未安装</h3><p>这是可选项，只会让环境检查显示提醒。安装后可获得额外的 Skill 安全检查结果；规范检查和内置安全扫描仍可正常使用。</p></article>
+              <article><h3>外部扫描很慢或超时</h3><p>对大型目录先使用 <code>--skip-external</code>，或在工作台勾选跳过外部扫描器。确认是哪个扫描器超时后再单独处理。</p></article>
+              <article><h3>AI 内容评审失败</h3><p>检查 Provider Auth、模型名和网络。内容评审会真实调用模型；凭据或模型配置错误时不会继续消耗评审 token。</p></article>
+              <article><h3>手动路径读取失败</h3><p>确认 DSH 进程有读取目标文件的权限。错误中的 <code>EPERM</code> 通常表示启动 DSH 的进程无权访问该目录。</p></article>
+              <article><h3>Agent 不能运行 analyze / vet</h3><p>当前 Agent 声明只支持 <code>critique</code>。需要确定性的 Skill 检查时，请传入 Skill 目录而不是 Agent 声明。</p></article>
+            </div>
+          </section>
+
+          <section id="limits">
+            <h2>使用条件与限制</h2>
+            <ul>
+              <li>“静态”表示目标 Skill 不会被执行，但内容评审仍会调用模型。</li>
+              <li>安全扫描的完整程度取决于外部扫描器是否安装以及本机环境。</li>
+              <li>外部扫描器可能对大型目录较慢，必要时使用跳过选项。</li>
+              <li>Agent 声明目前只支持 AI 内容评审。</li>
+              <li>手动路径保存在 DSH Home 下的 <code>dsh-static-check</code> 目录。</li>
+            </ul>
+          </section>
+
+          <section id="links">
+            <h2>相关链接</h2>
+            <ul class="links">
+              <li><a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle">Static Check Bundle npm 包与 README ↗</a></li>
+              <li><a href="https://github.com/guixu-labs/dsh-plugin">插件源码仓库 ↗</a></li>
+            </ul>
+          </section>
+        </div>
+      </div>
     </article>
 
     <aside class="toc" aria-label="本页目录">
-      <strong>本页目录</strong>
-      <a href="#features">功能</a>
-      <a href="#install">安装</a>
-      <a href="#health">环境检查</a>
-      <a href="#usage">使用</a>
-      <a href="#checks">检查项</a>
-      <a href="#limits">限制</a>
-      <a href="#links">相关链接</a>
+      <div data-toc="overview">
+        <strong>概览</strong>
+        <a href="#relationship">主要组成</a>
+        <a href="#scenarios">适用场景</a>
+        <a href="#checks">三类检查</a>
+        <a href="#check-results">检查结果示例</a>
+      </div>
+      <div data-toc="quick-start" hidden>
+        <strong>快速开始</strong>
+        <a href="#requirements">准备环境</a>
+        <a href="#install">安装 Bundle</a>
+        <a href="#open-workbench">选择对象</a>
+        <a href="#run-check">运行检查</a>
+        <a href="#health">检查环境</a>
+      </div>
+      <div data-toc="usage" hidden>
+        <strong>使用 CLI</strong>
+        <a href="#cli-intro">CLI 概览</a>
+        <a href="#cli-common">常用参数</a>
+        <a href="#cli-advanced">高级参数</a>
+        <a href="#cli-tool">Agent 工具</a>
+      </div>
+      <div data-toc="help" hidden>
+        <strong>帮助</strong>
+        <a href="#troubleshooting">故障排查</a>
+        <a href="#limits">使用限制</a>
+        <a href="#links">相关链接</a>
+      </div>
     </aside>
+    </div>
   </main>
 
-  <footer class="footer">
-    <span>Fuxi AI Labs · Static Check DSH Plugin</span>
+  <footer class="footer wrap">
+    <span>Fuxi AI Labs · dsh-static-check</span>
     <a href="#top">回到顶部 ↑</a>
   </footer>
+  <script src="page.js" defer></script>
 </body>
 </html>

@@ -43,12 +43,15 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'assets/verify-flow.jpg', 'assets/fix-before.jpg', 'assets/fix-after.jpg',
   'assets/dsh-install-demo.mp4', 'assets/dsh-install-demo-poster.jpg', 'assets/dsh-install-demo-zh.vtt',
 ])], ['plugins/insight', new Set([
-  'index.html', 'styles.css', 'assets/icon.svg',
-  'assets/plugin-config.jpg', 'assets/session-button.jpg', 'assets/score-card.jpg', 'assets/insight-score.jpg',
+  'index.html', 'styles.css', 'page.js', 'assets/icon.svg',
+  'assets/insight-runtime-preparing.jpg', 'assets/insight-imported-session.jpg', 'assets/insight-score-page.jpg',
+  'assets/insight-dsh-score.jpg', 'assets/insight-environment-check.jpg',
 ])], ['plugins/audit', new Set([
   'index.html', 'styles.css', 'assets/icon.svg', 'assets/audit-workbench.jpg', 'assets/audit-flyout.jpg',
 ])], ['plugins/static-check', new Set([
-  'index.html', 'styles.css', 'assets/icon.svg', 'assets/static-check-workbench.jpg',
+  'index.html', 'styles.css', 'page.js', 'assets/icon.svg',
+  'assets/static-check-hero.jpg', 'assets/static-check-workbench.jpg', 'assets/static-check-environment.jpg',
+  'assets/static-check-vet.jpg', 'assets/static-check-critique.jpg',
 ])], ['plugins/skill-eval', new Set([
   'index.html', 'styles.css', 'assets/icon.svg', 'assets/skill-eval-workbench.jpg',
 ])]]);
@@ -63,12 +66,15 @@ const publicLinks = new Map([['plugins/agentlineage', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/ecat/',
 ])], ['plugins/insight', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://www.npmjs.com/package/context-insight',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle',
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/audit', new Set([
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-audit-bundle',
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/static-check', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle',
   'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/skill-eval', new Set([
