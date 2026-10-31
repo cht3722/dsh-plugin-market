@@ -75,8 +75,6 @@
   if (carousel) {
     const track = carousel.querySelector('[data-carousel-track]');
     const slides = [...carousel.querySelectorAll('[data-carousel-slide]')];
-    const dots = [...carousel.querySelectorAll('[data-carousel-dot]')];
-    const current = carousel.querySelector('[data-carousel-current]');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let index = 0;
     let timer;
@@ -87,12 +85,6 @@
       slides.forEach((slide, slideIndex) => {
         slide.setAttribute('aria-hidden', String(slideIndex !== index));
       });
-      dots.forEach((dot, dotIndex) => {
-        const active = dotIndex === index;
-        dot.classList.toggle('is-active', active);
-        dot.setAttribute('aria-selected', String(active));
-      });
-      if (current) current.textContent = String(index + 1);
     };
 
     const stop = () => {
@@ -103,27 +95,11 @@
     const start = () => {
       stop();
       if (reducedMotion.matches || document.hidden) return;
-      timer = window.setInterval(() => showSlide(index + 1), 4500);
+      timer = window.setInterval(() => showSlide(index + 1), 5200);
     };
 
-    carousel.querySelector('[data-carousel-prev]')?.addEventListener('click', () => {
-      showSlide(index - 1);
-      start();
-    });
-    carousel.querySelector('[data-carousel-next]')?.addEventListener('click', () => {
-      showSlide(index + 1);
-      start();
-    });
-    dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => {
-      showSlide(dotIndex);
-      start();
-    }));
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
-    carousel.addEventListener('focusin', stop);
-    carousel.addEventListener('focusout', event => {
-      if (!carousel.contains(event.relatedTarget)) start();
-    });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stop();
       else start();
