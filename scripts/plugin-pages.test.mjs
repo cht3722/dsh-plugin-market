@@ -161,6 +161,7 @@ test('Insight and Static Check keep both banner links visible at narrow widths',
 
 test('market docs match the currently installable Insight and Static Check versions', async () => {
   const insight = await readFile(new URL('../public/plugins/insight/index.html', import.meta.url), 'utf8');
+  const insightCss = await readFile(new URL('../public/plugins/insight/styles.css', import.meta.url), 'utf8');
   const staticCheck = await readFile(new URL('../public/plugins/static-check/index.html', import.meta.url), 'utf8');
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   assert(insight.includes('<dt>Runtime Bundle</dt>'));
@@ -180,6 +181,9 @@ test('market docs match the currently installable Insight and Static Check versi
   assert(!insight.includes('carousel-ui'));
   const insightPageJs = await readFile(new URL('../public/plugins/insight/page.js', import.meta.url), 'utf8');
   assert(insightPageJs.includes('setInterval') && insightPageJs.includes('data-carousel-track'));
+  assert(insightPageJs.includes("track.style.transform = 'none'"));
+  assert(insightPageJs.includes("removeAttribute('aria-hidden')"));
+  assert(insightCss.includes('.hero-carousel .carousel-track { display: block;'));
   assert(insight.includes('context-insight@0.2.41'));
   assert(insight.includes('~/.dsh-insight/runtime/0.2.41/'));
   assert(insight.includes('autoInstall: true') && insight.includes('autoStart: true'));

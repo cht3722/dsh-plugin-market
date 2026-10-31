@@ -81,6 +81,11 @@
 
     const showSlide = (next) => {
       index = (next + slides.length) % slides.length;
+      if (reducedMotion.matches) {
+        track.style.transform = 'none';
+        slides.forEach(slide => slide.removeAttribute('aria-hidden'));
+        return;
+      }
       track.style.transform = `translateX(-${index * 100}%)`;
       slides.forEach((slide, slideIndex) => {
         slide.setAttribute('aria-hidden', String(slideIndex !== index));
@@ -104,7 +109,10 @@
       if (document.hidden) stop();
       else start();
     });
-    reducedMotion.addEventListener?.('change', start);
+    reducedMotion.addEventListener?.('change', () => {
+      showSlide(index);
+      start();
+    });
     slides.forEach(slide => {
       const image = slide.querySelector('img');
       if (!image) return;
