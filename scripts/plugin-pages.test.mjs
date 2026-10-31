@@ -163,6 +163,7 @@ test('market docs match the currently installable Insight and Static Check versi
   const insight = await readFile(new URL('../public/plugins/insight/index.html', import.meta.url), 'utf8');
   const insightCss = await readFile(new URL('../public/plugins/insight/styles.css', import.meta.url), 'utf8');
   const staticCheck = await readFile(new URL('../public/plugins/static-check/index.html', import.meta.url), 'utf8');
+  const staticCheckCss = await readFile(new URL('../public/plugins/static-check/styles.css', import.meta.url), 'utf8');
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   assert(insight.includes('<dt>Runtime Bundle</dt>'));
   assert(insight.includes('dsh-runtime-bundle@1.1.3'));
@@ -184,11 +185,18 @@ test('market docs match the currently installable Insight and Static Check versi
   assert(insightPageJs.includes("track.style.transform = 'none'"));
   assert(insightPageJs.includes("removeAttribute('aria-hidden')"));
   assert(insightCss.includes('.hero-carousel .carousel-track { display: block;'));
+  assert(insight.includes('data-copy="dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-insight-bundle@1.1.1"'));
+  assert(insightPageJs.includes('navigator.clipboard.writeText(button.dataset.copy)'));
+  assert(insightCss.includes('.install-command'));
   assert(insight.includes('context-insight@0.2.41'));
   assert(insight.includes('~/.dsh-insight/runtime/0.2.41/'));
   assert(insight.includes('autoInstall: true') && insight.includes('autoStart: true'));
   assert(staticCheck.includes('dsh-runtime-bundle@1.1.3'));
   assert(staticCheck.includes('dsh-static-check-bundle@1.1.2'));
+  const staticCheckPageJs = await readFile(new URL('../public/plugins/static-check/page.js', import.meta.url), 'utf8');
+  assert(staticCheck.includes('data-copy="dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-static-check-bundle@1.1.2"'));
+  assert(staticCheckPageJs.includes('navigator.clipboard.writeText(button.dataset.copy)'));
+  assert(staticCheckCss.includes('.install-command'));
   assert(staticCheck.includes('1193fa77e27ed01d657de7df1db881b61114d569'));
   assert(staticCheck.includes('2.6.0-dev.1193fa7'));
   assert(staticCheck.includes('~/.dsh-sift/runtime/2.6.0-dev.1193fa7/'));
