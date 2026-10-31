@@ -43,11 +43,47 @@
         <dl class="meta">
           <div><dt>DSH</dt><dd><code>^0.2.1-rc.2</code></dd></div>
           <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
-          <div><dt>Bundle</dt><dd><code>@fuxi-ailabs/dsh-insight-bundle@1.1.1</code></dd></div>
+          <div><dt>Insight Bundle</dt><dd><code>@fuxi-ailabs/dsh-insight-bundle@1.1.1</code></dd></div>
+          <div><dt>Runtime Bundle</dt><dd><code>@fuxi-ailabs/dsh-runtime-bundle@1.1.1</code></dd></div>
         </dl>
       </div>
-      <figure class="hero-visual" aria-label="Context-Insight Score 页面示意">
-        <img src="assets/insight-score-page.jpg" width="1280" height="800" alt="Context-Insight Score 页面，展示测试会话的总分、覆盖度和六维能力图。">
+      <figure class="hero-visual hero-carousel" data-carousel aria-label="Insight 功能截图轮播">
+        <div class="carousel-viewport">
+          <div class="carousel-track" data-carousel-track>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/insight-score-page.jpg" width="1280" height="800" alt="Context-Insight Score 页面，展示测试会话的总分、覆盖度和六维能力图。">
+              <figcaption>Context-Insight 的 <strong>Score</strong> 页面展示总分、覆盖度、否决项和六维评分。</figcaption>
+            </figure>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/insight-dsh-score.jpg" width="1280" height="800" alt="DSH 会话页中的 Insight 评分卡，显示总分、覆盖度和各维度分数。" loading="lazy">
+              <figcaption>回到 DSH 点击打分 tag，可以查看同一份评分卡摘要和维度分数。</figcaption>
+            </figure>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/insight-imported-session.jpg" width="1280" height="800" alt="Context-Insight 中已导入的 Python 测试会话总览。" loading="lazy">
+              <figcaption>会话导入后自动打开 Context-Insight，可查看轮次、工具调用、Skills 和执行概览。</figcaption>
+            </figure>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/insight-runtime-preparing.jpg" width="1280" height="800" alt="DSH 会话页显示正在准备 Insight，按钮显示启动中。" loading="lazy">
+              <figcaption>首次点击时，DSH 浮窗会显示运行时准备或 Context-Insight 启动进度。</figcaption>
+            </figure>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/insight-environment-check.jpg" width="1280" height="800" alt="Insight Bundle 环境检查页，Provider Auth、Context-Insight CLI 和服务均正常。" loading="lazy">
+              <figcaption>环境检查确认 Provider Auth、Context-Insight Runtime 和 Service 状态。</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="carousel-ui">
+          <button type="button" class="carousel-arrow" data-carousel-prev aria-label="上一张截图">‹</button>
+          <div class="carousel-dots" role="tablist" aria-label="选择截图">
+            <button type="button" class="carousel-dot is-active" data-carousel-dot="0" role="tab" aria-selected="true" aria-label="第 1 张：Score 页面"></button>
+            <button type="button" class="carousel-dot" data-carousel-dot="1" role="tab" aria-selected="false" aria-label="第 2 张：DSH 评分卡"></button>
+            <button type="button" class="carousel-dot" data-carousel-dot="2" role="tab" aria-selected="false" aria-label="第 3 张：会话总览"></button>
+            <button type="button" class="carousel-dot" data-carousel-dot="3" role="tab" aria-selected="false" aria-label="第 4 张：运行时准备"></button>
+            <button type="button" class="carousel-dot" data-carousel-dot="4" role="tab" aria-selected="false" aria-label="第 5 张：环境检查"></button>
+          </div>
+          <span class="carousel-count" aria-live="polite"><span data-carousel-current>1</span> / 5</span>
+          <button type="button" class="carousel-arrow" data-carousel-next aria-label="下一张截图">›</button>
+        </div>
       </figure>
     </header>
 

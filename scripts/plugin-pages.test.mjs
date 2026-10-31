@@ -159,8 +159,13 @@ test('market docs match the currently installable Insight and Static Check versi
   const insight = await readFile(new URL('../public/plugins/insight/index.html', import.meta.url), 'utf8');
   const staticCheck = await readFile(new URL('../public/plugins/static-check/index.html', import.meta.url), 'utf8');
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  assert(insight.includes('<dt>Runtime Bundle</dt>'));
   assert(insight.includes('dsh-runtime-bundle@1.1.1'));
   assert(insight.includes('dsh-insight-bundle@1.1.1'));
+  assert.equal((insight.match(/data-carousel-slide/g) || []).length, 5);
+  assert(insight.includes('data-carousel-next'));
+  const insightPageJs = await readFile(new URL('../public/plugins/insight/page.js', import.meta.url), 'utf8');
+  assert(insightPageJs.includes('setInterval') && insightPageJs.includes('data-carousel-dot'));
   assert(insight.includes('context-insight@0.2.41'));
   assert(insight.includes('~/.dsh-insight/runtime/0.2.41/'));
   assert(insight.includes('autoInstall: true') && insight.includes('autoStart: true'));
