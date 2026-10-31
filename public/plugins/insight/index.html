@@ -49,7 +49,7 @@
       </div>
       <figure class="hero-visual hero-carousel" data-carousel aria-label="Insight 功能截图轮播">
         <div class="carousel-viewport">
-          <div class="carousel-track" data-carousel-track>
+          <div class="carousel-track" id="insight-carousel-track" data-carousel-track>
             <figure class="carousel-slide" data-carousel-slide>
               <img src="assets/insight-dsh-score.jpg" width="1280" height="800" alt="DSH 会话页中的 Insight 评分卡，显示总分、覆盖度和各维度分数。">
               <figcaption>回到 DSH 点击打分 tag，可以查看同一份评分卡摘要和维度分数。</figcaption>
@@ -71,6 +71,9 @@
               <figcaption>环境检查确认 Provider Auth、Context-Insight Runtime 和 Service 状态。</figcaption>
             </figure>
           </div>
+        </div>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-toggle" data-carousel-toggle aria-pressed="false" aria-controls="insight-carousel-track">暂停轮播</button>
         </div>
       </figure>
     </header>

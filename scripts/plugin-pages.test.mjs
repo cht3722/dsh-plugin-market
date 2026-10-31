@@ -184,7 +184,12 @@ test('market docs match the currently installable Insight and Static Check versi
   assert(insightPageJs.includes('setInterval') && insightPageJs.includes('data-carousel-track'));
   assert(insightPageJs.includes("track.style.transform = 'none'"));
   assert(insightPageJs.includes("removeAttribute('aria-hidden')"));
+  assert(insight.includes('data-carousel-toggle'));
+  assert(insightPageJs.includes("carousel.querySelector('[data-carousel-toggle]')"));
+  assert(insightPageJs.includes("toggle.textContent = paused ? '继续轮播' : '暂停轮播'"));
+  assert(insightPageJs.includes("carousel.addEventListener('focusin', stop)"));
   assert(insightCss.includes('.hero-carousel .carousel-track { display: block;'));
+  assert(insightCss.includes('.carousel-toggle'));
   assert(insight.includes('data-copy="dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-insight-bundle@1.1.1"'));
   assert(insightPageJs.includes('navigator.clipboard.writeText(button.dataset.copy)'));
   assert(insightCss.includes('.install-command'));

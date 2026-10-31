@@ -121,9 +121,11 @@
   if (carousel) {
     const track = carousel.querySelector('[data-carousel-track]');
     const slides = [...carousel.querySelectorAll('[data-carousel-slide]')];
+    const toggle = carousel.querySelector('[data-carousel-toggle]');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let index = 0;
     let timer;
+    let paused = false;
 
     const showSlide = (next) => {
       index = (next + slides.length) % slides.length;
@@ -145,17 +147,37 @@
 
     const start = () => {
       stop();
-      if (reducedMotion.matches || document.hidden) return;
+      if (paused || reducedMotion.matches || document.hidden) return;
       timer = window.setInterval(() => showSlide(index + 1), 5200);
     };
 
+    const syncToggle = () => {
+      if (!toggle) return;
+      toggle.hidden = reducedMotion.matches;
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.textContent = paused ? '继续轮播' : '暂停轮播';
+    };
+
+    const setPaused = next => {
+      paused = next;
+      syncToggle();
+      if (paused) stop();
+      else start();
+    };
+
+    toggle?.addEventListener('click', () => setPaused(!paused));
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
+    carousel.addEventListener('focusin', stop);
+    carousel.addEventListener('focusout', event => {
+      if (!carousel.contains(event.relatedTarget)) start();
+    });
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stop();
       else start();
     });
     reducedMotion.addEventListener?.('change', () => {
+      syncToggle();
       showSlide(index);
       start();
     });
@@ -165,6 +187,7 @@
       const preload = new Image();
       preload.src = image.getAttribute('src');
     });
+    syncToggle();
     showSlide(0);
     start();
   }

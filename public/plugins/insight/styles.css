@@ -229,9 +229,14 @@ tr:last-child td { border-bottom: 0; }
 .carousel-slide img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 0; }
 .carousel-slide figcaption { position: absolute; right: 14px; bottom: 14px; left: 14px; padding: 10px 12px; border-radius: 6px; background: rgb(28 43 53 / 84%); color: #fff; font-size: .875rem; line-height: 1.65; }
 .carousel-slide figcaption strong { color: #fff; }
+.carousel-controls { display: flex; justify-content: flex-end; padding: 8px 4px 2px; }
+.carousel-toggle { min-height: 44px; padding: 7px 14px; border: 1px solid var(--line-strong); border-radius: 5px; background: var(--surface); color: var(--muted); font-size: .875rem; cursor: pointer; }
+.carousel-toggle:hover, .carousel-toggle[aria-pressed="true"] { border-color: var(--accent-line); background: var(--accent-soft); color: var(--accent); }
 @media (max-width: 620px) {
   .carousel-slide figcaption { position: static; border-radius: 0; background: var(--bg); color: var(--muted); font-size: .8125rem; }
   .carousel-slide figcaption strong { color: var(--text); }
+  .carousel-controls { justify-content: stretch; }
+  .carousel-toggle { flex: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-carousel .carousel-viewport { overflow: visible; }
