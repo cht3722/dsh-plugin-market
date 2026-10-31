@@ -122,7 +122,7 @@ test('Session Audit keeps existing evidence, video space and install contract', 
   const html = await readFile(new URL('../public/plugins/audit/index.html', import.meta.url), 'utf8');
   const css = await readFile(new URL('../public/plugins/audit/styles.css', import.meta.url), 'utf8');
   const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-audit-bundle');
-  const version = plugin.versions.at(-1).version;
+  const version = plugin.versions[0].version;
   assert(html.includes('class="market-brand"'));
   assert(html.includes('class="market-current"'));
   assert(html.includes('assets/audit-workbench.jpg'));
@@ -132,6 +132,10 @@ test('Session Audit keeps existing evidence, video space and install contract', 
   assert(html.includes('@fuxi-ailabs/dsh-runtime-bundle@1.1.3'));
   assert(html.includes(`@fuxi-ailabs/dsh-audit-bundle@${version}`));
   assert(html.includes('~/.dsh-audit/&lt;session-id&gt;/&lt;run-id&gt;/'));
+  assert(html.includes('data-copy="dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-audit-bundle@1.1.1"'));
+  assert(html.includes('id="scenarios"'));
+  assert(html.includes('适合 / SKILL 维护者'));
+  assert(plugin.versions.some(item => item.version === '1.0.1'));
   assert(html.includes('turn 引用可反向定位到 Trajectory'));
   assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css));
 });
@@ -203,6 +207,10 @@ test('Skill Eval keeps its workbench, video space and shared-runtime install con
   assert(html.includes('id="recording"'));
   assert(html.includes('操作录像待补充'));
   assert(html.includes('@fuxi-ailabs/dsh-runtime-bundle@1.1.3'));
+  assert(html.includes('data-copy="dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-eval-bundle@1.1.3"'));
+  assert(html.includes('<tr><th>Python</th><td><code>&gt;=3.10</code>，用于准备 SIFT 运行时。</td></tr>'));
+  assert(html.includes('id="scenarios"'));
+  assert(html.includes('适合 / SKILL 维护者'));
   assert(html.includes(`@fuxi-ailabs/dsh-eval-bundle@${version}`));
   assert(readme.includes('| Skill Eval · Skill 评测 | `1.1.3` |'));
   assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css));

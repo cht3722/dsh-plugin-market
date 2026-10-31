@@ -84,6 +84,15 @@
               </div>
             </section>
 
+            <section id="scenarios">
+              <h2>适用场景与对象</h2>
+              <div class="feature-grid">
+                <article><span class="feature-index">适合 / SKILL 维护者</span><h3>发布前验证行为没有回退</h3><p>为 Skill 建立题集，运行 A/B Eval 和 Trigger 测试，得到可对照的基线、Gate 结果与 HTML 报告。</p></article>
+                <article><span class="feature-index">适合 / AI 工程师与平台团队</span><h3>比较 Prompt、模型和配置变化</h3><p>固定题集与执行条件后重复评测，快速判断调整是否提升通过率，并定位具体失败题目。</p></article>
+                <article><span class="feature-index">适合 / 评审与质量团队</span><h3>形成可复查的验收依据</h3><p>用统一题集、覆盖率和 Gate 结果完成发布评审，把结论沉淀为可分享的报告。</p></article>
+              </div>
+            </section>
+
             <section id="comparison">
               <h2>使用前后效果对比</h2>
               <p>定性对比，不包含虚构测量数据。</p>
@@ -101,6 +110,7 @@
                 <tbody>
                   <tr><th>DSH</th><td><code>^0.2.1-rc.2</code>。</td></tr>
                   <tr><th>Node.js</th><td><code>&gt;=24</code>。</td></tr>
+                  <tr><th>Python</th><td><code>&gt;=3.10</code>，用于准备 SIFT 运行时。</td></tr>
                   <tr><th>SIFT</th><td>由共享 Runtime Bundle 首次加载时自动准备；也可以复用 <code>PATH</code> 中已有的 <code>sift</code>。</td></tr>
                   <tr><th>Provider</th><td>可选。生成题目、执行评测或 AI 语义评审时准备凭据。</td></tr>
                 </tbody>
@@ -116,7 +126,10 @@
               <p>在 DSH 的插件市场中添加索引，找到 <strong>Skill Eval · Skill 评测</strong> 并安装。</p>
               <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
               <p>也可以直接安装共享 Runtime Bundle 与 Eval Bundle：</p>
-              <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-eval-bundle@1.1.3</code></pre>
+              <div class="install-command" aria-label="终端安装命令">
+                <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-eval-bundle@1.1.3</code></pre>
+                <button type="button" class="copy-button" data-copy="dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-eval-bundle@1.1.3" aria-label="复制安装命令">复制 <span aria-hidden="true">⧉</span></button>
+              </div>
               <p>安装后重启 DSH。首次使用时会按需准备 SIFT 运行时。</p>
             </section>
 
@@ -196,6 +209,7 @@
         <div data-toc="overview">
           <strong>概览</strong>
           <a href="#features">功能</a>
+          <a href="#scenarios">适用场景</a>
           <a href="#workflow">评测流程</a>
           <a href="#comparison">效果对比</a>
         </div>

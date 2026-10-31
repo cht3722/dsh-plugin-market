@@ -73,6 +73,15 @@
               </div>
             </section>
 
+            <section id="scenarios">
+              <h2>适用场景与对象</h2>
+              <div class="feature-grid">
+                <article><span class="feature-index">适合 / SKILL 维护者</span><h3>核对声明与执行是否一致</h3><p>修改 Skill、Workflow 或 Agent 指令后，用真实会话执行审计，得到结构化 finding、证据和 turn 引用。</p></article>
+                <article><span class="feature-index">适合 / 任务负责人与评审者</span><h3>复盘复杂会话和子代理</h3><p>面对长链路任务时，从审计报告定位工具调用、错误重试与子代理执行，再回到对应轨迹核对原文。</p></article>
+                <article><span class="feature-index">适合 / 质量与发布团队</span><h3>沉淀可复查的审计记录</h3><p>把审计报告按 Session 归档，复用历史结果做回归和验收，避免结论只停留在临时对话里。</p></article>
+              </div>
+            </section>
+
             <section id="comparison">
               <h2>使用前后效果对比</h2>
               <p>定性对比，不包含虚构测量数据。</p>
@@ -118,7 +127,10 @@
               <p>在 DSH 的插件市场中添加索引，找到 <strong>Session Audit</strong> 并安装。</p>
               <pre><code>https://fuxi-ailabs.github.io/dsh-plugin-market/index.json</code></pre>
               <p>也可以直接安装当前版本：</p>
-              <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-audit-bundle@1.1.1</code></pre>
+              <div class="install-command" aria-label="终端安装命令">
+                <pre><code>dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-audit-bundle@1.1.1</code></pre>
+                <button type="button" class="copy-button" data-copy="dsh plugin --profile &lt;profile&gt; add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-audit-bundle@1.1.1" aria-label="复制安装命令">复制 <span aria-hidden="true">⧉</span></button>
+              </div>
               <p>安装完成后重启 DSH。首次审计时会自动准备 SIFT。</p>
             </section>
 
@@ -201,6 +213,7 @@
         <div data-toc="overview">
           <strong>概览</strong>
           <a href="#features">功能</a>
+          <a href="#scenarios">适用场景</a>
           <a href="#comparison">效果对比</a>
           <a href="#report">报告面板</a>
         </div>
