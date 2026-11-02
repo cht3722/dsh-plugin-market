@@ -33,6 +33,11 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'limits.html', 'push.html', 'runtime.html', 'security.html',
   'stats.html', 'team.html', 'tools.html', 'versions.html',
   'workflow.html',
+  'styles.css', 'page.js', 'demo-data.js', 'assets/before-memory.jpg', 'assets/after-memory.jpg',
+  'assets/crowdmemory-demo.mp4', 'assets/crowdmemory-demo-poster.jpg',
+  'assets/crowdmemory-demo-zh.vtt', 'assets/demo-evidence.json',
+  'assets/coding-memory.jpg', 'assets/coding-agent-demo.mp4',
+  'assets/coding-agent-poster.jpg', 'assets/coding-agent-zh.vtt', 'assets/coding-evidence.json',
 ])], ['plugins/workflow-rsi', new Set([
   'index.html', 'tools.html', 'errors.html', 'versions.html', 'docs.css', 'docs.js',
 ])], ['plugins/ecat', new Set([
@@ -58,7 +63,15 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'assets/skill-eval-demo.mp4', 'assets/skill-eval-demo-zh.vtt',
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
-const publicLinks = new Map([['plugins/agentlineage', new Set([
+const publicLinks = new Map([['plugins/crowdmemory', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/configuration.html',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/evaluation.html',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/tools.html',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/assets/coding-evidence.json',
+  'https://gitcode.com/third-party-library-for-harmony/CrowdMemory/pull/7',
+])], ['plugins/agentlineage', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/',
   'https://github.com/fuxi-ailabs/AgentLineage/blob/211057da3b42eabbf92a7f723ce8c3fa46ce05ef/integrations/dsh/README.md',
