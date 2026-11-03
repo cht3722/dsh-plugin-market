@@ -39,7 +39,9 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'assets/coding-memory.jpg', 'assets/coding-agent-demo.mp4',
   'assets/coding-agent-poster.jpg', 'assets/coding-agent-zh.vtt', 'assets/coding-evidence.json',
 ])], ['plugins/workflow-rsi', new Set([
-  'index.html', 'tools.html', 'errors.html', 'versions.html', 'docs.css', 'docs.js',
+  'index.html', 'styles.css', 'page.js', 'demo-data.js',
+  'guide.html', 'tools.html', 'errors.html', 'versions.html', 'docs.css', 'docs.js',
+  'assets/rsi-loop.jpg', 'assets/before-run-stop.jpg', 'assets/after-loop-pr.jpg',
 ])], ['plugins/ecat', new Set([
   'index.html', 'styles.css', 'page.js', 'demo-data.js',
   'assets/before-without-plugin.jpg', 'assets/after-with-plugin.jpg', 'assets/hero-loop.jpg',
@@ -63,7 +65,16 @@ const publicPages = new Map([['plugins/agentlineage', new Set([
   'assets/skill-eval-demo.mp4', 'assets/skill-eval-demo-zh.vtt',
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
-const publicLinks = new Map([['plugins/crowdmemory', new Set([
+const publicLinks = new Map([['plugins/workflow-rsi', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/workflow-rsi/',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/workflow-rsi/guide.html',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/workflow-rsi/tools.html',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/workflow-rsi/errors.html',
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/workflow-rsi/versions.html',
+  'https://registry.npmjs.org/@fuxi-ailabs/workflow-rsi/-/workflow-rsi-0.1.0-alpha.1.tgz',
+  'https://registry.npmjs.org/@fuxi-ailabs/workflow-rsi-dsh-console/-/workflow-rsi-dsh-console-0.1.0-alpha.1.tgz',
+])], ['plugins/crowdmemory', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/crowdmemory/configuration.html',
@@ -119,9 +130,6 @@ const publicLinks = new Map([['plugins/crowdmemory', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/guide.html',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-dt-verify',
-])], ['plugins/workflow-rsi', new Set([
-  'https://registry.npmjs.org/@fuxi-ailabs/workflow-rsi/-/workflow-rsi-0.1.0-alpha.1.tgz',
-  'https://registry.npmjs.org/@fuxi-ailabs/workflow-rsi-dsh-console/-/workflow-rsi-dsh-console-0.1.0-alpha.1.tgz',
 ])], ['templates/plugin-page', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/templates/plugin-page/',
