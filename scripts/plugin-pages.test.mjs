@@ -194,6 +194,14 @@ test('market docs match the currently installable Static Check version', async (
   assert(readme.includes('| Static Check · Skill 静态检查 | `1.1.2` |'));
 });
 
+test('market index does not restore removed source or preview metadata', () => {
+  assert.equal(catalog.metadata.labels?.preview, undefined);
+  for (const plugin of catalog.plugins) {
+    assert.equal(plugin.repository, undefined, `${plugin.name} must not restore a source entry in discovery`);
+    assert(!(plugin.metadata?.labels ?? []).includes('preview'), `${plugin.name} must not be marked as preview`);
+  }
+});
+
 test('Observe and Score are independent market pages and legacy Insight is removed', async () => {
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   const observe = await readFile(new URL('../public/plugins/observe/index.html', import.meta.url), 'utf8');
