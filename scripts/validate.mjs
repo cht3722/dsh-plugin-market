@@ -61,7 +61,7 @@ const publicPages = new Map([['plugins/skillopt', new Set(['index.html', 'styles
 ])], ['plugins/score', new Set([
   'index.html', 'styles.css', 'page.js', 'assets/icon.svg',
   'assets/score-detail.png', 'assets/score-dial-hover.png', 'assets/score-actions.png',
-  'assets/score-page.jpg', 'assets/score-environment.jpg',
+  'assets/score-page.jpg',
   'assets/score-demo.webm', 'assets/score-demo-poster.png', 'assets/score-demo-zh.vtt',
 ])], ['plugins/audit', new Set([
   'index.html', 'styles.css', 'page.js', 'assets/icon.svg', 'assets/audit-workbench.jpg', 'assets/audit-flyout.jpg',

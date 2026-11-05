@@ -245,6 +245,8 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(!observe.includes('github.com/guixu-labs/dsh-plugin'));
   assert(observeCss.includes('--accent: #0f766e'));
 
+  assert(score.includes('assets/score-page.jpg'));
+  assert(!score.includes('assets/score-environment.jpg'));
   assert(score.includes('assets/score-detail.png'));
   assert(!score.includes('assets/score-dial-hover.png'));
   assert(score.includes('assets/score-demo.webm'));
