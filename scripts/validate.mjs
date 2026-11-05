@@ -120,16 +120,13 @@ const publicLinks = new Map([['plugins/skillopt', new Set(['https://fuxi-ailabs.
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/audit/',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-audit-bundle',
-  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-runtime-bundle',
 ])], ['plugins/static-check', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-static-check-bundle',
-  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-runtime-bundle',
 ])], ['plugins/skill-eval', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/skill-eval/',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-eval-bundle',
-  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-runtime-bundle',
 ])], ['plugins/dt-verify', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/',

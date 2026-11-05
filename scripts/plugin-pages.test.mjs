@@ -140,14 +140,14 @@ test('Session Audit keeps existing evidence, silent operation video and install 
   assert(html.includes('<h2>4. 从工作台开始</h2>'));
   assert(html.indexOf('id="recording"') < html.indexOf('id="usage-steps"'));
   assert(!html.includes('录屏已移除语音'));
-  assert(html.includes('@fuxi-ailabs/dsh-runtime-bundle@1.1.3'));
+  assert(!html.includes('dsh-runtime-bundle'));
+  assert(!html.includes('Runtime Bundle'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));
-  assert(html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.indexOf('dsh plugin --profile web') < html.indexOf('https://fuxi-ailabs.github.io/dsh-plugin-market/index.json'));
   assert(html.includes(`@fuxi-ailabs/dsh-audit-bundle@${version}`));
   assert(html.includes('~/.dsh-audit/&lt;session-id&gt;/&lt;run-id&gt;/'));
-  assert(html.includes('data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-audit-bundle@1.1.1"'));
+  assert(html.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-audit-bundle@${version}"`));
   assert(html.includes('id="scenarios"'));
   assert(html.includes('适合 / SKILL 维护者'));
   assert(plugin.versions.some(item => item.version === '1.0.1'));
@@ -177,21 +177,23 @@ test('market docs match the currently installable Static Check version', async (
   const staticCheck = await readFile(new URL('../public/plugins/static-check/index.html', import.meta.url), 'utf8');
   const staticCheckCss = await readFile(new URL('../public/plugins/static-check/styles.css', import.meta.url), 'utf8');
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
-  assert(staticCheck.includes('dsh-runtime-bundle@1.1.3'));
-  assert(staticCheck.includes('dsh-static-check-bundle@1.1.2'));
-  assert(staticCheck.includes('由 Insight、Static Check、Skill Eval 与 Session Audit 共用'));
+  const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-static-check-bundle');
+  const version = plugin.versions[0].version;
+  assert(!staticCheck.includes('dsh-runtime-bundle'));
+  assert(!staticCheck.includes('Runtime Bundle'));
+  assert(staticCheck.includes(`dsh-static-check-bundle@${version}`));
+  assert(staticCheck.includes('dsh-env-health'));
   assert(staticCheck.includes('class="profile-note"'));
   assert(staticCheck.includes('class="npm-callout"'));
-  assert(staticCheck.includes('查看 Runtime Bundle npm 页面'));
   const staticCheckPageJs = await readFile(new URL('../public/plugins/static-check/page.js', import.meta.url), 'utf8');
-  assert(staticCheck.includes('data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-static-check-bundle@1.1.2"'));
+  assert(staticCheck.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-static-check-bundle@${version}"`));
   assert(staticCheckPageJs.includes('navigator.clipboard.writeText(button.dataset.copy)'));
   assert(staticCheckCss.includes('.install-command'));
   assert(staticCheck.includes('1193fa77e27ed01d657de7df1db881b61114d569'));
   assert(staticCheck.includes('2.6.0-dev.1193fa7'));
   assert(staticCheck.includes('~/.dsh-sift/runtime/2.6.0-dev.1193fa7/'));
-  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-static-check-bundle').versions[0].version, '1.1.2');
-  assert(readme.includes('| Static Check · Skill 静态检查 | `1.1.2` |'));
+  assert.equal(version, '1.2.0');
+  assert(readme.includes('| Static Check · Skill 静态检查 | `1.2.0` |'));
 });
 
 test('market index does not restore removed source or preview metadata', () => {
@@ -243,6 +245,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(observe.includes('id="comparison"'));
   assert(observe.includes('/observe'));
   assert(!observe.includes('dsh-provider-auth'));
+  assert(!observe.includes('Runtime Bundle'));
   assert(!observe.includes('autoInstall'));
   assert(!observe.includes('github.com/guixu-labs/dsh-plugin'));
   assert(observeCss.includes('--accent: #0f766e'));
@@ -275,13 +278,13 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(readme.includes('| Score · DSH 会话评分 | `1.2.0` |'));
 });
 
-test('Skill Eval keeps its workbench, silent operation video and shared-runtime install contract', async () => {
+test('Skill Eval keeps its workbench, silent operation video and self-contained install contract', async () => {
   const html = await readFile(new URL('../public/plugins/skill-eval/index.html', import.meta.url), 'utf8');
   const css = await readFile(new URL('../public/plugins/skill-eval/styles.css', import.meta.url), 'utf8');
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-eval-bundle');
   const version = plugin.versions[0].version;
-  assert.equal(version, '1.1.3');
+  assert.equal(version, '1.2.0');
   assert(html.includes('class="market-brand"'));
   assert(html.includes('class="market-current"'));
   assert(html.includes('assets/skill-eval-workbench.jpg'));
@@ -290,17 +293,17 @@ test('Skill Eval keeps its workbench, silent operation video and shared-runtime 
   assert(html.includes('assets/skill-eval-demo-zh.vtt'));
   assert(html.includes('下面视频展示 Skill 选择'));
   assert(html.includes('<video controls muted playsinline'));
-  assert(html.includes('@fuxi-ailabs/dsh-runtime-bundle@1.1.3'));
+  assert(!html.includes('dsh-runtime-bundle'));
+  assert(!html.includes('Runtime Bundle'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));
-  assert(html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.indexOf('dsh plugin --profile web') < html.indexOf('https://fuxi-ailabs.github.io/dsh-plugin-market/index.json'));
-  assert(html.includes('data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-eval-bundle@1.1.3"'));
+  assert(html.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-eval-bundle@${version}"`));
   assert(html.includes('<tr><th>Python</th><td><code>&gt;=3.10</code>，用于准备 SIFT 运行时。</td></tr>'));
   assert(html.includes('id="scenarios"'));
   assert(html.includes('适合 / SKILL 维护者'));
   assert(html.includes(`@fuxi-ailabs/dsh-eval-bundle@${version}`));
-  assert(readme.includes('| Skill Eval · Skill 评测 | `1.1.3` |'));
+  assert(readme.includes('| Skill Eval · Skill 评测 | `1.2.0` |'));
   assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css));
 });
 
