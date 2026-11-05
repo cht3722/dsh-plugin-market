@@ -200,6 +200,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   const score = await readFile(new URL('../public/plugins/score/index.html', import.meta.url), 'utf8');
   const observeCss = await readFile(new URL('../public/plugins/observe/styles.css', import.meta.url), 'utf8');
   const scoreCss = await readFile(new URL('../public/plugins/score/styles.css', import.meta.url), 'utf8');
+  const scoreCaptions = await readFile(new URL('../public/plugins/score/assets/score-demo-zh.vtt', import.meta.url), 'utf8');
 
   assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-observe-bundle').versions[0].version, '1.2.0');
   assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-score-bundle').versions[0].version, '1.2.0');
@@ -234,6 +235,8 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(score.includes('assets/score-demo-zh.vtt'));
   assert(score.includes('<video controls muted playsinline'));
   assert(!score.includes('鲸鱼'));
+  assert(!scoreCaptions.includes('鲸鱼'));
+  assert(!catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-score-bundle').description.en.toLowerCase().includes('whale'));
   assert(!score.includes('autoInstall'));
   assert(score.includes('id="comparison"'));
   assert(score.includes('示例会话为 5.7 分、覆盖 59%'));
