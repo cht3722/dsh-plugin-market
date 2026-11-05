@@ -231,6 +231,8 @@ test('Observe and Score are independent market pages and legacy Insight is remov
     assert(html.includes('dsh-insight-bundle'), `${name} FAQ must explain the legacy Insight migration`);
     assert(html.includes('以下命令在 DSH 的会话输入框中发送，不是在系统终端执行。'), `${name} must identify slash commands as DSH session input`);
     assert(html.includes('先在 DSH「插件」页移除旧包'), `${name} FAQ must include the removal prerequisite`);
+    assert(!html.includes('add @fuxi-ailabs/dsh-runtime-bundle'), `${name} must not install the legacy Runtime Bundle`);
+    assert(html.includes('remove @fuxi-ailabs/dsh-runtime-bundle'), `${name} FAQ must remove the legacy Runtime Bundle`);
     assert(html.includes('data-carousel-toggle'));
   }
 
@@ -247,7 +249,6 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(observe.includes('id="comparison"'));
   assert(observe.includes('/observe'));
   assert(!observe.includes('dsh-provider-auth'));
-  assert(!observe.includes('Runtime Bundle'));
   assert(!observe.includes('autoInstall'));
   assert(!observe.includes('github.com/guixu-labs/dsh-plugin'));
   assert(observeCss.includes('--accent: #0f766e'));
