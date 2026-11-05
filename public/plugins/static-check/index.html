@@ -143,7 +143,7 @@
 
             <section id="install">
               <h2>2. 安装 Bundle</h2>
-              <p><strong>从 1.1.x 升级：</strong>DSH 市场只会提示更新，不能直接升级已安装插件。若通过市场升级，请先在「插件」页移除旧 Bundle，或执行 <code>dsh plugin --profile web remove @fuxi-ailabs/dsh-static-check-bundle @fuxi-ailabs/dsh-runtime-bundle</code>，再从市场重新安装。直接执行下方 <code>add</code> 命令也可安装 1.2.0。</p>
+              <p><strong>从 1.1.x 升级：</strong>DSH 市场只会提示更新，不能直接升级已安装插件。无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle 和共享 Runtime Bundle：<code>dsh plugin --profile web remove @fuxi-ailabs/dsh-static-check-bundle @fuxi-ailabs/dsh-runtime-bundle</code>。随后从市场重新安装，或直接执行下方 <code>add</code> 命令安装 1.2.0。</p>
               <p>实际使用中，您只需要一键安装 Static Check Bundle：</p>
               <div class="install-command" aria-label="终端安装命令">
                 <pre><code>dsh plugin --profile web add @fuxi-ailabs/dsh-static-check-bundle@1.2.0</code></pre>

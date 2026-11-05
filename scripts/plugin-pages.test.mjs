@@ -142,7 +142,7 @@ test('Session Audit keeps existing evidence, silent operation video and install 
   assert(!html.includes('录屏已移除语音'));
   assert(!html.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
   assert(html.includes('remove @fuxi-ailabs/dsh-audit-bundle @fuxi-ailabs/dsh-runtime-bundle'));
-  assert(html.includes('直接执行下方 <code>add</code> 命令也可安装 1.2.0'));
+  assert(html.includes('无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle 和共享 Runtime Bundle'));
   assert(!html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));
@@ -183,7 +183,7 @@ test('market docs match the currently installable Static Check version', async (
   const version = plugin.versions[0].version;
   assert(!staticCheck.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
   assert(staticCheck.includes('remove @fuxi-ailabs/dsh-static-check-bundle @fuxi-ailabs/dsh-runtime-bundle'));
-  assert(staticCheck.includes('直接执行下方 <code>add</code> 命令也可安装 1.2.0'));
+  assert(staticCheck.includes('无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle 和共享 Runtime Bundle'));
   assert(!staticCheck.includes('查看 Runtime Bundle npm 页面'));
   assert(staticCheck.includes(`dsh-static-check-bundle@${version}`));
   assert(staticCheck.includes('dsh-env-health'));
@@ -300,7 +300,7 @@ test('Skill Eval keeps its workbench, silent operation video and self-contained 
   assert(html.includes('<video controls muted playsinline'));
   assert(!html.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
   assert(html.includes('remove @fuxi-ailabs/dsh-eval-bundle @fuxi-ailabs/dsh-runtime-bundle'));
-  assert(html.includes('直接执行下方 <code>add</code> 命令也可安装 1.2.0'));
+  assert(html.includes('无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle 和共享 Runtime Bundle'));
   assert(!html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));
