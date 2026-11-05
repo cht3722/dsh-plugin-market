@@ -155,9 +155,8 @@ test('Session Audit keeps existing evidence, silent operation video and install 
   assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css));
 });
 
-test('Insight and Static Check keep both banner links visible at narrow widths', async () => {
+test('Static Check keeps both banner links visible at narrow widths', async () => {
   const pages = [
-    ['insight', 'Insight'],
     ['static-check', 'Static Check'],
   ];
   for (const [slug, name] of pages) {
@@ -174,47 +173,10 @@ test('Insight and Static Check keep both banner links visible at narrow widths',
   }
 });
 
-test('market docs match the currently installable Insight and Static Check versions', async () => {
-  const insight = await readFile(new URL('../public/plugins/insight/index.html', import.meta.url), 'utf8');
-  const insightCss = await readFile(new URL('../public/plugins/insight/styles.css', import.meta.url), 'utf8');
+test('market docs match the currently installable Static Check version', async () => {
   const staticCheck = await readFile(new URL('../public/plugins/static-check/index.html', import.meta.url), 'utf8');
   const staticCheckCss = await readFile(new URL('../public/plugins/static-check/styles.css', import.meta.url), 'utf8');
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
-  assert(insight.includes('<dt>Runtime Bundle</dt>'));
-  assert(insight.includes('dsh-runtime-bundle@1.1.3'));
-  assert(insight.includes('dsh-insight-bundle@1.1.1'));
-  assert(insight.includes('DSH BUNDLE · dsh-insight-bundle · v1.1.1'));
-  assert(insight.includes('由 Insight、Static Check、Skill Eval 与 Session Audit 共用'));
-  assert(insight.includes('class="profile-note"'));
-  assert(insight.includes('class="npm-callout"'));
-  assert(insight.includes('查看 Runtime Bundle npm 页面'));
-  const installPosition = insight.indexOf('<section id="install">');
-  const requirementsPosition = insight.indexOf('<section id="requirements">');
-  assert(requirementsPosition > -1 && requirementsPosition < installPosition);
-  const quickStart = insight.slice(installPosition, insight.indexOf('<section id="first-session">'));
-  assert(quickStart.indexOf('dsh plugin --profile') < quickStart.indexOf('https://fuxi-ailabs.github.io/dsh-plugin-market/index.json'));
-  assert(insight.includes('<code>--out &lt;dir&gt;</code>'));
-  assert(insight.includes('可用逗号或空格分隔'));
-  assert(insight.includes('服务可用时仍正常导入'));
-  assert(insight.includes('~/.dsh-insight/dsh-score/&lt;sid&gt;.json'));
-  assert.equal((insight.match(/data-carousel-slide/g) || []).length, 5);
-  assert(!insight.includes('carousel-ui'));
-  const insightPageJs = await readFile(new URL('../public/plugins/insight/page.js', import.meta.url), 'utf8');
-  assert(insightPageJs.includes('setInterval') && insightPageJs.includes('data-carousel-track'));
-  assert(insightPageJs.includes("track.style.transform = 'none'"));
-  assert(insightPageJs.includes("removeAttribute('aria-hidden')"));
-  assert(insight.includes('data-carousel-toggle'));
-  assert(insightPageJs.includes("carousel.querySelector('[data-carousel-toggle]')"));
-  assert(insightPageJs.includes("toggle.textContent = paused ? '继续轮播' : '暂停轮播'"));
-  assert(insightPageJs.includes("carousel.addEventListener('focusin', stop)"));
-  assert(insightCss.includes('.hero-carousel .carousel-track { display: block;'));
-  assert(insightCss.includes('.carousel-toggle'));
-  assert(insight.includes('data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-runtime-bundle@1.1.3 @fuxi-ailabs/dsh-insight-bundle@1.1.1"'));
-  assert(insightPageJs.includes('navigator.clipboard.writeText(button.dataset.copy)'));
-  assert(insightCss.includes('.install-command'));
-  assert(insight.includes('context-insight@0.2.41'));
-  assert(insight.includes('~/.dsh-insight/runtime/0.2.41/'));
-  assert(insight.includes('autoInstall: true') && insight.includes('autoStart: true'));
   assert(staticCheck.includes('dsh-runtime-bundle@1.1.3'));
   assert(staticCheck.includes('dsh-static-check-bundle@1.1.2'));
   assert(staticCheck.includes('由 Insight、Static Check、Skill Eval 与 Session Audit 共用'));
@@ -228,10 +190,64 @@ test('market docs match the currently installable Insight and Static Check versi
   assert(staticCheck.includes('1193fa77e27ed01d657de7df1db881b61114d569'));
   assert(staticCheck.includes('2.6.0-dev.1193fa7'));
   assert(staticCheck.includes('~/.dsh-sift/runtime/2.6.0-dev.1193fa7/'));
-  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-insight-bundle').versions[0].version, '1.1.1');
   assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-static-check-bundle').versions[0].version, '1.1.2');
-  assert(readme.includes('| Insight · 会话导入与评分 | `1.1.1` |'));
   assert(readme.includes('| Static Check · Skill 静态检查 | `1.1.2` |'));
+});
+
+test('Observe and Score are independent market pages and legacy Insight is removed', async () => {
+  const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  const observe = await readFile(new URL('../public/plugins/observe/index.html', import.meta.url), 'utf8');
+  const score = await readFile(new URL('../public/plugins/score/index.html', import.meta.url), 'utf8');
+  const observeCss = await readFile(new URL('../public/plugins/observe/styles.css', import.meta.url), 'utf8');
+  const scoreCss = await readFile(new URL('../public/plugins/score/styles.css', import.meta.url), 'utf8');
+
+  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-observe-bundle').versions[0].version, '1.2.0');
+  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-score-bundle').versions[0].version, '1.2.0');
+  assert(!catalog.plugins.some(item => item.name === '@fuxi-ailabs/dsh-insight-bundle'), 'legacy Insight must be removed from the catalog');
+
+  for (const [html, name, bundle] of [[observe, 'Observe', 'dsh-observe-bundle'], [score, 'Score', 'dsh-score-bundle']]) {
+    assert(html.includes('class="market-brand"'));
+    assert(html.includes('class="market-current"'));
+    assert(html.includes(`<h1>${name}</h1>`));
+    assert(html.includes(`DSH BUNDLE · ${bundle} · v1.2.0`));
+    for (const id of ['relationship', 'features', 'scenarios', 'requirements', 'install', 'faq']) {
+      assert(html.includes(`id="${id}"`), `${name} must include #${id}`);
+    }
+    assert(html.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/${bundle}@1.2.0"`));
+    assert(html.includes('data-carousel-toggle'));
+  }
+
+  assert(observe.includes('assets/observe-session.png'));
+  assert(observe.includes('assets/observe-actions.png'));
+  assert(observe.includes('assets/observe-demo.webm'));
+  assert(observe.includes('assets/observe-demo-zh.vtt'));
+  assert(observe.includes('<video controls muted playsinline'));
+  assert(observe.includes('id="comparison"'));
+  assert(observe.includes('/observe'));
+  assert(!observe.includes('dsh-provider-auth'));
+  assert(!observe.includes('autoInstall'));
+  assert(observeCss.includes('--accent: #0f766e'));
+
+  assert(score.includes('assets/score-detail.png'));
+  assert(!score.includes('assets/score-dial-hover.png'));
+  assert(score.includes('assets/score-demo.webm'));
+  assert(score.includes('assets/score-demo-zh.vtt'));
+  assert(score.includes('<video controls muted playsinline'));
+  assert(!score.includes('鲸鱼'));
+  assert(!score.includes('autoInstall'));
+  assert(score.includes('id="comparison"'));
+  assert(score.includes('示例会话为 5.7 分、覆盖 59%'));
+  assert(score.includes('展开 D4 完成效率'));
+  assert(score.includes('是对会话打分的插件'));
+  assert(score.includes('只有用户主动使用才会请求大模型'));
+  assert(score.includes('@fuxi-ailabs/dsh-score-bundle@1.2.0'));
+  assert(score.includes('不调用大模型'));
+  assert(score.includes('/score --recalc'));
+  assert(score.includes('/score --semantic'));
+  assert(scoreCss.includes('--accent: #2563eb'));
+
+  assert(readme.includes('| Observe · DSH 会话观测 | `1.2.0` |'));
+  assert(readme.includes('| Score · DSH 会话评分 | `1.2.0` |'));
 });
 
 test('Skill Eval keeps its workbench, silent operation video and shared-runtime install contract', async () => {

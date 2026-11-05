@@ -53,10 +53,16 @@ const publicPages = new Map([['plugins/skillopt', new Set(['index.html', 'styles
   'index.html', 'styles.css', 'page.js', 'demo-data.js', 'guide.html', 'docs.css', 'docs.js',
   'assets/verify-flow.jpg', 'assets/fix-before.jpg', 'assets/fix-after.jpg',
   'assets/dsh-install-demo.mp4', 'assets/dsh-install-demo-poster.jpg', 'assets/dsh-install-demo-zh.vtt',
-])], ['plugins/insight', new Set([
+])], ['plugins/observe', new Set([
   'index.html', 'styles.css', 'page.js', 'assets/icon.svg',
-  'assets/insight-runtime-preparing.jpg', 'assets/insight-imported-session.jpg', 'assets/insight-score-page.jpg',
-  'assets/insight-dsh-score.jpg', 'assets/insight-environment-check.jpg',
+  'assets/observe-session.png', 'assets/observe-actions.png',
+  'assets/observe-environment.jpg', 'assets/observe-runtime.jpg',
+  'assets/observe-demo.webm', 'assets/observe-demo-poster.png', 'assets/observe-demo-zh.vtt',
+])], ['plugins/score', new Set([
+  'index.html', 'styles.css', 'page.js', 'assets/icon.svg',
+  'assets/score-detail.png', 'assets/score-dial-hover.png', 'assets/score-actions.png',
+  'assets/score-page.jpg', 'assets/score-environment.jpg',
+  'assets/score-demo.webm', 'assets/score-demo-poster.png', 'assets/score-demo-zh.vtt',
 ])], ['plugins/audit', new Set([
   'index.html', 'styles.css', 'page.js', 'assets/icon.svg', 'assets/audit-workbench.jpg', 'assets/audit-flyout.jpg',
   'assets/audit-demo.mp4', 'assets/audit-demo-zh.vtt',
@@ -101,11 +107,16 @@ const publicLinks = new Map([['plugins/skillopt', new Set(['https://fuxi-ailabs.
   'https://github.com/fuxi-ailabs/ECAT',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/ecat/',
-])], ['plugins/insight', new Set([
+])], ['plugins/observe', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://www.npmjs.com/package/context-insight',
-  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-insight-bundle',
-  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-runtime-bundle',
+  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-observe-bundle',
+  'https://github.com/guixu-labs/dsh-plugin',
+])], ['plugins/score', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://www.npmjs.com/package/context-insight',
+  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-score-bundle',
+  'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/audit', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/audit/',
