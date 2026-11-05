@@ -140,8 +140,9 @@ test('Session Audit keeps existing evidence, silent operation video and install 
   assert(html.includes('<h2>4. 从工作台开始</h2>'));
   assert(html.indexOf('id="recording"') < html.indexOf('id="usage-steps"'));
   assert(!html.includes('录屏已移除语音'));
-  assert(!html.includes('dsh-runtime-bundle'));
-  assert(!html.includes('Runtime Bundle'));
+  assert(!html.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
+  assert(html.includes('remove @fuxi-ailabs/dsh-runtime-bundle'));
+  assert(!html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));
   assert(html.indexOf('dsh plugin --profile web') < html.indexOf('https://fuxi-ailabs.github.io/dsh-plugin-market/index.json'));
@@ -179,8 +180,9 @@ test('market docs match the currently installable Static Check version', async (
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-static-check-bundle');
   const version = plugin.versions[0].version;
-  assert(!staticCheck.includes('dsh-runtime-bundle'));
-  assert(!staticCheck.includes('Runtime Bundle'));
+  assert(!staticCheck.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
+  assert(staticCheck.includes('remove @fuxi-ailabs/dsh-runtime-bundle'));
+  assert(!staticCheck.includes('查看 Runtime Bundle npm 页面'));
   assert(staticCheck.includes(`dsh-static-check-bundle@${version}`));
   assert(staticCheck.includes('dsh-env-health'));
   assert(staticCheck.includes('class="profile-note"'));
@@ -293,8 +295,9 @@ test('Skill Eval keeps its workbench, silent operation video and self-contained 
   assert(html.includes('assets/skill-eval-demo-zh.vtt'));
   assert(html.includes('下面视频展示 Skill 选择'));
   assert(html.includes('<video controls muted playsinline'));
-  assert(!html.includes('dsh-runtime-bundle'));
-  assert(!html.includes('Runtime Bundle'));
+  assert(!html.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
+  assert(html.includes('remove @fuxi-ailabs/dsh-runtime-bundle'));
+  assert(!html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));
   assert(html.indexOf('dsh plugin --profile web') < html.indexOf('https://fuxi-ailabs.github.io/dsh-plugin-market/index.json'));
