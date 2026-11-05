@@ -91,7 +91,7 @@
               <table class="relationship-table">
                 <thead><tr><th>组成</th><th>版本</th><th>作用</th></tr></thead>
                 <tbody>
-                  <tr><td><strong>Observe Bundle</strong><small>安装入口</small></td><td><code class="version-short">1.2.0</code></td><td>一次安装完整的观测能力，自带 env-health、Host 和 UX，不需要额外的 Runtime Bundle。</td></tr>
+                  <tr><td><strong>Observe Bundle</strong><small>安装入口</small></td><td><code class="version-short">1.2.0</code></td><td>一次安装完整的观测能力，自带 env-health、Host 和 UX。</td></tr>
                   <tr><td><strong>dsh-observe</strong><small>Host 插件</small></td><td><code class="version-short">1.2.0</code></td><td>注册 <code>/observe</code>，导出会话、调用 Insight 导入 API，并负责运行时检查与启动。</td></tr>
                   <tr><td><strong>dsh-observe-ux</strong><small>Web UX 插件</small></td><td><code class="version-short">1.2.0</code></td><td>在会话页提供“观测”入口、准备状态、错误反馈和 Context-Insight 页面跳转。</td></tr>
                   <tr><td><strong>dsh-env-health</strong><small>共享运行时</small></td><td><code class="version-short">1.2.0</code></td><td>管理 Context-Insight CLI 的探测、安装和并发安装锁；与 Score 同时安装时复用同一实例。</td></tr>
@@ -213,7 +213,7 @@
               <h2>FAQ</h2>
               <div class="faq-list">
                 <details><summary>Observe 和 Score 必须一起安装吗？<span>+</span></summary><p>不需要。两个 Bundle 完全独立；只安装 Observe 也能导入和观测会话。同时安装时共享 env-health 和 Context-Insight 服务。</p></details>
-                <details><summary>以前装过 Insight，安装前要移除旧包吗？<span>+</span></summary><p>要。Insight 已拆分为 Observe 和 Score，不再提供 <code>@fuxi-ailabs/dsh-insight-bundle</code>。如果当前 profile 还显示已安装的 Insight Bundle，请先在 DSH「插件」页移除旧包，再安装当前 Bundle，避免旧版 Insight 与当前 Bundle 同时加载。</p></details>
+                <details><summary>以前装过 Insight，安装前要移除旧包吗？<span>+</span></summary><p>要。Insight 已拆分为 Observe 和 Score，不再提供 <code>@fuxi-ailabs/dsh-insight-bundle</code>。如果当前 profile 还显示已安装的 Insight Bundle，请先在 DSH「插件」页移除旧包。若同时装有 1.1.x 的 Session Audit、Skill Eval 或 Static Check，请先一并升级到 1.2 Bundle；否则不要先删除共享 Runtime Bundle，因为这些旧插件仍依赖它。确认没有其他旧消费者后，再执行 <code>dsh plugin --profile web remove @fuxi-ailabs/dsh-runtime-bundle</code>，并安装当前 Bundle。</p></details>
                 <details><summary>为什么只看到“观测”，没有“打分”？<span>+</span></summary><p>当前 profile 只安装了 Observe Bundle。评分入口由 Score Bundle 的 dsh-score-ux 提供。</p></details>
                 <details><summary>首次点击较慢是正常的吗？<span>+</span></summary><p>首次使用需要下载 Context-Insight 运行时并启动服务，耗时取决于网络和机器；后续会复用本地运行时。</p></details>
                 <details><summary>导入失败应该先检查什么？<span>+</span></summary><p>依次检查 npm、网络、Context-Insight Runtime 和服务状态，再查看 <code>~/.dsh-insight/runtime/install.log</code> 与 <code>start.log</code>。</p></details>
