@@ -111,12 +111,10 @@ const publicLinks = new Map([['plugins/skillopt', new Set(['https://fuxi-ailabs.
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://www.npmjs.com/package/context-insight',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-observe-bundle',
-  'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/score', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://www.npmjs.com/package/context-insight',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-score-bundle',
-  'https://github.com/guixu-labs/dsh-plugin',
 ])], ['plugins/audit', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/audit/',

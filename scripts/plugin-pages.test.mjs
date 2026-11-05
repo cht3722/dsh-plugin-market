@@ -209,6 +209,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   const observeCss = await readFile(new URL('../public/plugins/observe/styles.css', import.meta.url), 'utf8');
   const scoreCss = await readFile(new URL('../public/plugins/score/styles.css', import.meta.url), 'utf8');
   const scoreCaptions = await readFile(new URL('../public/plugins/score/assets/score-demo-zh.vtt', import.meta.url), 'utf8');
+  const validator = await readFile(new URL('../scripts/validate.mjs', import.meta.url), 'utf8');
 
   assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-observe-bundle').versions[0].version, '1.2.0');
   assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-score-bundle').versions[0].version, '1.2.0');
@@ -235,6 +236,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(observe.includes('/observe'));
   assert(!observe.includes('dsh-provider-auth'));
   assert(!observe.includes('autoInstall'));
+  assert(!observe.includes('github.com/guixu-labs/dsh-plugin'));
   assert(observeCss.includes('--accent: #0f766e'));
 
   assert(score.includes('assets/score-detail.png'));
@@ -246,6 +248,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(!scoreCaptions.includes('鲸鱼'));
   assert(!catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-score-bundle').description.en.toLowerCase().includes('whale'));
   assert(!score.includes('autoInstall'));
+  assert(!score.includes('github.com/guixu-labs/dsh-plugin'));
   assert(score.includes('id="comparison"'));
   assert(score.includes('示例会话为 5.7 分、覆盖 59%'));
   assert(score.includes('展开 D4 完成效率'));
@@ -257,6 +260,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(score.includes('/score --semantic'));
   assert(scoreCss.includes('--accent: #2563eb'));
 
+  assert(!validator.includes('https://github.com/guixu-labs/dsh-plugin'));
   assert(readme.includes('| Observe · DSH 会话观测 | `1.2.0` |'));
   assert(readme.includes('| Score · DSH 会话评分 | `1.2.0` |'));
 });
