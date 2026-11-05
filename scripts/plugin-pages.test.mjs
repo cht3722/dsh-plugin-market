@@ -230,6 +230,8 @@ test('Observe and Score are independent market pages and legacy Insight is remov
     assert(html.includes('data-carousel-toggle'));
   }
 
+  assert(observe.includes('assets/observe-runtime.jpg'));
+  assert(observe.includes('当前 Observe 演示中首次点击'));
   assert(observe.includes('assets/observe-environment.jpg'));
   assert(observe.includes('旧版 Insight 环境检查界面（示意）'));
   assert(observe.includes('不包含 Provider Auth 检查'));
