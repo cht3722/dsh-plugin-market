@@ -220,6 +220,7 @@
               <h2>FAQ</h2>
               <div class="faq-list">
                 <details><summary>Score 和 Observe 必须一起安装吗？<span>+</span></summary><p>不需要。Score Bundle 自带导入和评分能力，可以在没有 Observe 的情况下单独使用；同时安装时会共享 env-health 和 Context-Insight 服务。</p></details>
+                <details><summary>以前装过 Insight，安装前要移除旧包吗？<span>+</span></summary><p>要。Insight 已拆分为 Observe 和 Score，不再提供 <code>@fuxi-ailabs/dsh-insight-bundle</code>。如果当前 profile 还显示已安装的 Insight Bundle，请先在 DSH「插件」页移除旧包，再安装当前 Bundle，避免旧版 Insight 与当前 Bundle 同时加载。</p></details>
                 <details><summary>默认评分会调用大模型吗？<span>+</span></summary><p>不会。默认读卡和重算都是确定性路径。只有主动使用语义评审或显式执行 <code>--semantic</code> 才会调用 Provider。</p></details>
                 <details><summary>为什么某些维度显示“—”？<span>+</span></summary><p>通常表示证据不足、数据未覆盖，或该维度依赖语义评审。展开维度详情可以查看具体原因。</p></details>
                 <details><summary>为什么有覆盖度不足提示？<span>+</span></summary><p>可能是子代理或最新轮次尚未导入。重新导入当前会话后，再点击重算。</p></details>

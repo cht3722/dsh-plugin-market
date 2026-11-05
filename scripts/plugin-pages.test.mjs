@@ -224,6 +224,8 @@ test('Observe and Score are independent market pages and legacy Insight is remov
       assert(html.includes(`id="${id}"`), `${name} must include #${id}`);
     }
     assert(html.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/${bundle}@1.2.0"`));
+    assert(html.includes('dsh-insight-bundle'), `${name} FAQ must explain the legacy Insight migration`);
+    assert(html.includes('先在 DSH「插件」页移除旧包'), `${name} FAQ must include the removal prerequisite`);
     assert(html.includes('data-carousel-toggle'));
   }
 
