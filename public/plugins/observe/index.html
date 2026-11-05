@@ -59,8 +59,8 @@
               <figcaption>Observe 安装后提供独立的“观测”入口；评分入口由 Score Bundle 单独提供。</figcaption>
             </figure>
             <figure class="carousel-slide" data-carousel-slide>
-              <img src="assets/observe-environment.jpg" width="1280" height="800" alt="Bundle 环境检查页显示 Context-Insight Runtime 与服务状态。">
-              <figcaption>环境检查确认 Context-Insight Runtime 和服务状态，可在这里启动或关闭服务。</figcaption>
+              <img src="assets/observe-environment.jpg" width="1280" height="800" alt="旧版 Insight 环境检查页，显示 Context-Insight Runtime、服务状态与 Provider Auth。">
+              <figcaption>旧版 Insight 环境检查界面（示意）。Observe 仅需确认 Context-Insight Runtime 和服务状态，不包含 Provider Auth 检查。</figcaption>
             </figure>
             <figure class="carousel-slide" data-carousel-slide>
               <img src="assets/observe-runtime.jpg" width="1280" height="800" alt="首次点击 Observe 时显示正在准备 Insight。">
@@ -190,6 +190,7 @@
             <section id="observe-command">
               <h2><code>/observe</code> 命令</h2>
               <p>命令与页面上的“观测”按钮等价，不经过模型，也不占用模型 token。</p>
+              <p>以下命令在 DSH 的会话输入框中发送，不是在系统终端执行。</p>
               <pre><code>/observe
 /observe &lt;sid&gt;[,&lt;sid&gt;...]
 /observe --no-subagents

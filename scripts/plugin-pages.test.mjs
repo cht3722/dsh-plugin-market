@@ -225,10 +225,14 @@ test('Observe and Score are independent market pages and legacy Insight is remov
     }
     assert(html.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/${bundle}@1.2.0"`));
     assert(html.includes('dsh-insight-bundle'), `${name} FAQ must explain the legacy Insight migration`);
+    assert(html.includes('以下命令在 DSH 的会话输入框中发送，不是在系统终端执行。'), `${name} must identify slash commands as DSH session input`);
     assert(html.includes('先在 DSH「插件」页移除旧包'), `${name} FAQ must include the removal prerequisite`);
     assert(html.includes('data-carousel-toggle'));
   }
 
+  assert(observe.includes('assets/observe-environment.jpg'));
+  assert(observe.includes('旧版 Insight 环境检查界面（示意）'));
+  assert(observe.includes('不包含 Provider Auth 检查'));
   assert(observe.includes('assets/observe-session.png'));
   assert(observe.includes('assets/observe-actions.png'));
   assert(observe.includes('assets/observe-demo.webm'));
