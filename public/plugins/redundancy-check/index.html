@@ -43,6 +43,7 @@
         <dl class="meta">
           <div><dt>DSH</dt><dd><code>^0.2.1-rc.2</code></dd></div>
           <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
+          <div><dt>Python</dt><dd><code>&gt;=3.10</code></dd></div>
           <div><dt>Bundle</dt><dd><code>dsh-redundancy-check-bundle@1.2.0</code></dd></div>
           <div><dt>输出</dt><dd><code>coverage + finding anchors</code></dd></div>
         </dl>
@@ -50,7 +51,7 @@
           <pre><code>dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0</code></pre>
           <button type="button" class="copy-button" data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0" aria-label="复制安装命令">复制 <span aria-hidden="true">⧉</span></button>
         </div>
-        <p class="profile-note">安装后重启 DSH Web。Bundle 自带 SIFT 运行环境初始化与 Provider Auth，不需要额外安装 Runtime Bundle。</p>
+        <p class="profile-note">安装后重启 DSH Web。Bundle 自带 SIFT 运行环境初始化与 Provider Auth，首次自动准备 SIFT 需要 Python &gt;=3.10；不需要额外安装 Runtime Bundle。</p>
       </div>
       <figure class="hero-visual hero-carousel" data-carousel aria-label="Redundancy Check 功能截图轮播">
         <div class="carousel-viewport">
@@ -145,8 +146,9 @@
                 <tbody>
                   <tr><th>DSH</th><td><code>^0.2.1-rc.2</code></td></tr>
                   <tr><th>Node.js</th><td><code>&gt;=24</code></td></tr>
+                  <tr><th>Python</th><td><code>&gt;=3.10</code>，用于首次自动准备 SIFT 运行时。</td></tr>
                   <tr><th>Provider Auth</th><td>Bundle 自带；审计时会使用当前 DSH Provider 配置。</td></tr>
-                  <tr><th>SIFT</th><td>Bundle 自带环境准备能力；缺少时按提示自动安装。</td></tr>
+                  <tr><th>SIFT</th><td>Bundle 自带环境准备能力；缺少且 Python 满足版本要求时按提示自动安装。</td></tr>
                 </tbody>
               </table>
             </section>
