@@ -552,6 +552,45 @@
       ]
     },
     {
+      "name": "@fuxi-ailabs/dsh-redundancy-check-bundle",
+      "title": {
+        "en": "Redundancy Check",
+        "zh": "Redundancy Check · Skill 声明覆盖"
+      },
+      "description": {
+        "en": "Audit a Skill invoked by a DSH Session, map coverage status and finding anchors back to its source lines, filter covered/uncovered/unknown declarations, and inspect transcript evidence and historical reports.",
+        "zh": "对 DSH 会话中的 Skill 执行审计，把覆盖状态与 finding 锚点反标到 Skill 原文，支持按已覆盖、未覆盖、未知筛选，并查看 transcript 证据和历史报告。"
+      },
+      "icon": "icons/redundancy-check.svg",
+      "author": "Fuxi AI Labs",
+      "homepage": "https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/redundancy-check/",
+      "metadata": {
+        "category": "verification",
+        "keywords": [
+          "Redundancy Check",
+          "Skill coverage",
+          "declaration coverage",
+          "finding anchor",
+          "SIFT",
+          "DSH",
+          "声明覆盖",
+          "Skill 审计"
+        ]
+      },
+      "versions": [
+        {
+          "version": "1.2.0",
+          "publishTimestamp": 1793955597,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": "^0.2.1-rc.2"
+          }
+        }
+      ]
+    },
+    {
       "name": "@fuxi-ailabs/dsh-skillopt",
       "title": {
         "en": "SkillOpt",

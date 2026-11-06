@@ -25,6 +25,7 @@ Fuxi 团队插件目录
 | Session Audit · 会话审计 | `1.2.0` | `^0.2.1-rc.2` |
 | Static Check · Skill 静态检查 | `1.2.0` | `^0.2.1-rc.2` |
 | Skill Eval · Skill 评测 | `1.2.0` | `^0.2.1-rc.2` |
+| Redundancy Check · Skill 声明覆盖 | `1.2.0` | `^0.2.1-rc.2` |
 | HMBot · 鸿蒙迁移 | `0.1.0` | `>=0.2.1-rc.2 <0.3.0` |
 
 AgentLineage 支持追溯文件改动来源、查询原生会话证据和打开溯源视图。参见 [插件介绍与效果对比](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/agentlineage/)。Windows x64 随插件提供完整运行环境，安装后自动启动。参见 [AgentLineage 安装与使用说明](https://github.com/fuxi-ailabs/AgentLineage/blob/dsh-agentlineage-v0.1.0-alpha.4/integrations/dsh/README.md)。
@@ -39,6 +40,8 @@ Session Audit 用 SIFT 审计真实 DSH 会话执行轨迹，在工作台和历�
 Static Check 在 DSH 工作台中检查 Skill 和 Agent 声明，组合 SIFT 的 11 项规范检查、安全扫描与可选 AI 内容评审，并在插件配置页检查 SIFT、扫描器、Provider Auth 和服务状态。参见 [Static Check 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/static-check/)。
 
 Skill Eval 在 DSH 工作台中构建 Skill 评测题集、检查覆盖率与基线，运行 Eval/Trigger 和真实任务，并生成 Gate 与 HTML 报告。参见 [Skill Eval 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/skill-eval/)。
+
+Redundancy Check 对会话中的 Skill 执行审计，把覆盖状态、finding 锚点和 transcript 证据反标到 Skill 原文，支持按已覆盖、未覆盖、未知组合筛选，并保留跨 Session 历史。参见 [Redundancy Check 文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/redundancy-check/)。
 
 鸿蒙代码验证器（harmony-verify）读取需求文档和源码，为每条需求编写 Harmony 单元测试和界面测试并在设备上执行，逐条给出结论和证据；允许修复时修改生产代码并复测。适用于按需求生成和从 Android 迁移来的鸿蒙应用，只用于鸿蒙 Stage 工程。参见 [插件介绍与效果对比](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/)，安装、使用说明与两个场景的实验数据见 [使用文档](https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/guide.html)。包发布在 npm：[@fuxi-ailabs/dsh-dt-verify](https://www.npmjs.com/package/@fuxi-ailabs/dsh-dt-verify)。0.1.0-dev.28 起，插件、委派工具和子 Agent 角色在 DSH 中显示为“鸿蒙代码验证器”，并新增计划审查角色。自定义插件市场只把可用更新显示为状态、不提供升级按钮：已装旧版本的用户在插件页移除 `@fuxi-ailabs/dsh-dt-verify` 后，从「发现」重新安装即得到 dev.39；或先退出 DSH，执行 `npx @deepseek-ai/dsh plugin --profile web add --save-exact @fuxi-ailabs/dsh-dt-verify@0.1.0-dev.39` 再启动。
 
