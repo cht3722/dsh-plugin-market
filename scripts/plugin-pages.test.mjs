@@ -261,7 +261,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(!observe.includes('dsh-provider-auth'));
   assert(!observe.includes('autoInstall'));
   assert(!observe.includes('github.com/guixu-labs/dsh-plugin'));
-  assert(observeCss.includes('--accent: #0f766e'));
+  assert(observeCss.includes('--accent: #17634d'));
 
   assert(score.includes('assets/score-page.jpg'));
   assert(!score.includes('assets/score-environment.jpg'));
@@ -284,7 +284,7 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(score.includes('不调用大模型'));
   assert(score.includes('/score --recalc'));
   assert(score.includes('/score --semantic'));
-  assert(scoreCss.includes('--accent: #2563eb'));
+  assert(scoreCss.includes('--accent: #17634d'));
 
   assert(!validator.includes('https://github.com/guixu-labs/dsh-plugin'));
   assert(readme.includes('| Observe · DSH 会话观测 | `1.2.0` |'));
@@ -331,4 +331,37 @@ test('requirements share the compact installation section and results start coll
   assert(html.indexOf('id="quickstart"') < html.indexOf('id="details"'));
   assert.equal((html.match(/class="install-command"/g) || []).length, agent.quickstart.steps.length);
   assert(html.includes('<details class="install-checks">'));
+});
+
+test('Redundancy Check publishes coverage anchors, real-run examples and self-contained install contract', async () => {
+  const html = await readFile(new URL('../public/plugins/redundancy-check/index.html', import.meta.url), 'utf8');
+  const css = await readFile(new URL('../public/plugins/redundancy-check/styles.css', import.meta.url), 'utf8');
+  const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-redundancy-check-bundle');
+  const version = plugin.versions[0].version;
+
+  assert.equal(version, '1.2.0');
+  assert(html.includes('class="market-brand"'));
+  assert(html.includes('class="market-current"'));
+  assert(html.includes('<h1>Redundancy Check</h1>'));
+  assert(html.includes('DSH BUNDLE · dsh-redundancy-check-bundle · v1.2.0'));
+  for (const id of ['relationship', 'features', 'scenarios', 'comparison', 'requirements', 'install', 'first-check', 'demo', 'workflow', 'states', 'faq']) {
+    assert(html.includes(`id="${id}"`), `Redundancy Check must include #${id}`);
+  }
+  assert(html.includes('data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0"'));
+  assert(html.includes('assets/redundancy-overview.png'));
+  assert(html.includes('assets/redundancy-annotations.png'));
+  assert(html.includes('assets/redundancy-evidence.png'));
+  assert(html.includes('assets/before-coverage.png'));
+  assert(html.includes('data-carousel-toggle'));
+  assert(html.includes('已覆盖、未覆盖、未知可以任意组合'));
+  assert(html.includes('PASS 或 FAIL 都表示该 instruction 被触发过'));
+  assert(html.includes('~/.dsh-redundancy-check/audit/'));
+  assert(html.includes('https://www.npmjs.com/package/@fuxi-ailabs/dsh-redundancy-check-bundle'));
+  assert(html.includes('本地绝对路径已隐藏'));
+  assert(!html.includes('/Users/haotianchen'));
+  assert(!html.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
+  assert(css.includes('--accent: #17634d'));
+  assert(css.includes('.state-badge.pass'));
+  assert(readme.includes('| Redundancy Check · Skill 声明覆盖 | `1.2.0` |'));
 });

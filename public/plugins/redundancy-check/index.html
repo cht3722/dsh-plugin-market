@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Redundancy Check 对 DSH 会话中的 Skill 执行审计，把覆盖状态、finding 锚点和证据标注到 Skill 原文。">
+  <meta name="color-scheme" content="light">
+  <title>Redundancy Check · Skill 声明覆盖</title>
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#relationship">跳到主要内容</a>
+  <header class="site-header">
+    <div class="market-banner">
+      <div class="wrap header-inner">
+        <nav class="market-breadcrumb" aria-label="当前位置">
+          <a class="market-brand" href="https://fuxi-ailabs.github.io/dsh-plugin-market/">Fuxi通用DSH组件市场</a>
+          <span class="market-location"><span class="market-separator" aria-hidden="true">/</span><a class="market-current" href="#top" aria-current="page">Redundancy Check</a></span>
+        </nav>
+        <nav class="section-nav" aria-label="文档导航">
+          <a href="#relationship">概览</a>
+          <a href="#requirements">快速开始</a>
+          <a href="#workflow">工作流</a>
+          <a href="#faq">FAQ</a>
+          <a class="nav-npm" href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-redundancy-check-bundle">npm ↗</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <header class="wrap hero" id="top">
+      <div class="hero-copy">
+        <div class="hero-title">
+          <img src="assets/icon.svg" alt="" width="64" height="64">
+          <div>
+            <p class="eyebrow">DSH BUNDLE · dsh-redundancy-check-bundle · v1.2.0</p>
+            <h1>Redundancy Check</h1>
+          </div>
+        </div>
+        <p class="lede"><strong>Redundancy Check</strong> 对会话中的 Skill 执行审计，把覆盖判定与 finding 锚点标注到 Skill 原文。支持按已覆盖、未覆盖、未知筛选，点击源码片段查看对应声明和证据，并可浏览历史审计记录。</p>
+        <dl class="meta">
+          <div><dt>DSH</dt><dd><code>^0.2.1-rc.2</code></dd></div>
+          <div><dt>Node.js</dt><dd><code>&gt;=24</code></dd></div>
+          <div><dt>Bundle</dt><dd><code>dsh-redundancy-check-bundle@1.2.0</code></dd></div>
+          <div><dt>输出</dt><dd><code>coverage + finding anchors</code></dd></div>
+        </dl>
+        <div class="install-command">
+          <pre><code>dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0</code></pre>
+          <button type="button" class="copy-button" data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0" aria-label="复制安装命令">复制 <span aria-hidden="true">⧉</span></button>
+        </div>
+        <p class="profile-note">安装后重启 DSH Web。Bundle 自带 SIFT 运行环境初始化与 Provider Auth，不需要额外安装 Runtime Bundle。</p>
+      </div>
+      <figure class="hero-visual hero-carousel" data-carousel aria-label="Redundancy Check 功能截图轮播">
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="redundancy-carousel-track" data-carousel-track>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/redundancy-overview.png" width="1600" height="913" alt="Redundancy Check 覆盖评分、Skill 原文状态标注和右侧 finding 证据。">
+              <figcaption>真实运行截图：覆盖率、声明状态和 finding 证据集中在一个工作台中。本地绝对路径已隐藏。</figcaption>
+            </figure>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/redundancy-annotations.png" width="1600" height="913" alt="Skill 原文按已覆盖、未覆盖和未知标注，并显示 finding 锚点。">
+              <figcaption>覆盖状态与 #finding 锚点直接落在 Skill 原文行上。</figcaption>
+            </figure>
+            <figure class="carousel-slide" data-carousel-slide>
+              <img src="assets/redundancy-evidence.png" width="1600" height="913" alt="筛选未覆盖后点击 scripts/check-update.mjs，右侧展示对应声明和判定证据。">
+              <figcaption>点击源码中的重点片段，可只看对应声明及其 transcript、verdict 和 evidence。</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-toggle" data-carousel-toggle aria-pressed="false" aria-controls="redundancy-carousel-track">暂停轮播</button>
+        </div>
+      </figure>
+    </header>
+
+    <div class="layout wrap">
+      <article class="doc">
+        <div class="tabbar" role="tablist" aria-label="Redundancy Check 文档章节">
+          <button type="button" role="tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true" data-tab="overview">概览</button>
+          <button type="button" role="tab" id="tab-quick-start" aria-controls="panel-quick-start" aria-selected="false" tabindex="-1" data-tab="quick-start">快速开始</button>
+          <button type="button" role="tab" id="tab-usage" aria-controls="panel-usage" aria-selected="false" tabindex="-1" data-tab="usage">工作流</button>
+          <button type="button" role="tab" id="tab-help" aria-controls="panel-help" aria-selected="false" tabindex="-1" data-tab="help">FAQ</button>
+        </div>
+
+        <div class="tab-panels">
+          <div class="tab-panel" id="panel-overview" role="tabpanel" aria-labelledby="tab-overview" data-panel="overview">
+            <section id="relationship">
+              <h2>主要能力</h2>
+              <table class="relationship-table">
+                <thead><tr><th>阶段</th><th>输出</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>选择 Skill</strong><small>拖入 Session 或从会话菜单打开</small></td><td>识别会话实际调用过的 Skill，不需要手工填写 Skill 路径。</td></tr>
+                  <tr><td><strong>执行审计</strong><small>由 Bundle 独立准备运行时</small></td><td>生成 audit report，并读取 <code>coverage.sections.instructions</code>、finding、verdict 和 evidence。</td></tr>
+                  <tr><td><strong>反标原文</strong><small>coverage status 与 #seq 锚点</small></td><td>把已覆盖、未覆盖、未知直接标注到源码行；同一行多条声明分别保留自己的锚点。</td></tr>
+                  <tr><td><strong>审阅证据</strong><small>筛选、点击片段、打开历史</small></td><td>右侧查看 transcript、verdict、method、evidence 与 turn_refs；历史审计跨 Session 汇总。</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="features">
+              <h2>为 Skill 审阅设计</h2>
+              <div class="feature-grid">
+                <article><span class="feature-index">01 · COVERAGE</span><h3>覆盖率优先</h3><p>总分使用 <code>covered / total</code> 口径；未覆盖和未知单独显示，不与 PASS/FAIL 混成一体。</p></article>
+                <article><span class="feature-index">02 · ANCHOR</span><h3>finding 锚点</h3><p>每个 <code>#seq</code> 都关联原始 transcript 和 evidence，点击即可回到对应声明判定。</p></article>
+                <article><span class="feature-index">03 · SOURCE</span><h3>原文内标注</h3><p>状态、锚点和重点片段落在 Skill 原文行内，不需要在长报告和源码之间反复跳转。</p></article>
+                <article><span class="feature-index">04 · FILTER</span><h3>多状态筛选</h3><p>已覆盖、未覆盖、未知可以任意组合；源码标注、重点片段和右侧证据同步变化。</p></article>
+              </div>
+            </section>
+
+            <section id="scenarios">
+              <h2>适合哪些场景</h2>
+              <ul class="scenario-list">
+                <li><strong>Skill 作者：</strong>检查哪些声明从未被实际触发，优先精简无证据的要求。</li>
+                <li><strong>Agent 评测与治理：</strong>在同一条 Skill 原文上核对覆盖状态、finding 和 transcript 证据。</li>
+                <li><strong>会话复盘：</strong>从 DSH Session 直接进入 Skill 审阅，不需要手工执行命令、查找报告和定位源码。</li>
+                <li><strong>历史追踪：</strong>按 Session 和 runId 保存审计结果，后续对比同一 Skill 的不同运行。</li>
+              </ul>
+            </section>
+
+            <section id="comparison">
+              <h2>使用前后对比</h2>
+              <div class="comparison-grid">
+                <article class="comparison-card before"><h3>直接阅读审计报告</h3><figure class="shot"><img src="assets/before-coverage.png" width="1600" height="1000" alt="原始审计报告中的声明覆盖列表，显示状态、finding 序号和判定锚点。"><figcaption>原始报告已经包含 coverage 和 finding，但需要读者在报告、Skill 原文和执行记录之间自行对应。</figcaption></figure></article>
+                <article class="comparison-card after"><h3>使用 Redundancy Check</h3><figure class="shot"><img src="assets/redundancy-annotations.png" width="1600" height="1000" alt="Skill 原文已经标注覆盖状态和 finding 锚点，右侧显示对应证据。"><figcaption>Skill 行、覆盖状态、#锚点和右侧 evidence 在同一视图中联动。</figcaption></figure></article>
+              </div>
+            </section>
+
+            <section id="boundaries">
+              <h2>判定口径</h2>
+              <ul>
+                <li><strong>已覆盖：</strong>该 instruction 在任一 transcript 中至少出现一次 PASS 或 FAIL。</li>
+                <li><strong>未覆盖：</strong>所有 transcript 均为 N/A，表示规则存在但场景从未触发。</li>
+                <li><strong>未知：</strong>N/A、UNRESOLVED、INDETERMINATE 混合，或因判据不足无法归入前两者。</li>
+              </ul>
+              <p>页面截图为 v1.2.0 真实运行界面，示例 Skill 为 <code>archify</code>；截图中已隐藏本地绝对路径，数值来自对应审计报告，不代表所有会话的固定结果。</p>
+            </section>
+          </div>
+
+          <div class="tab-panel" id="panel-quick-start" role="tabpanel" aria-labelledby="tab-quick-start" data-panel="quick-start" hidden>
+            <section id="requirements">
+              <h2>1. 准备运行环境</h2>
+              <table class="quick-facts">
+                <tbody>
+                  <tr><th>DSH</th><td><code>^0.2.1-rc.2</code></td></tr>
+                  <tr><th>Node.js</th><td><code>&gt;=24</code></td></tr>
+                  <tr><th>Provider Auth</th><td>Bundle 自带；审计时会使用当前 DSH Provider 配置。</td></tr>
+                  <tr><th>SIFT</th><td>Bundle 自带环境准备能力；缺少时按提示自动安装。</td></tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section id="install">
+              <h2>2. 安装 Redundancy Check Bundle</h2>
+              <p>实际使用中，您只需要一键安装 Redundancy Check Bundle：</p>
+              <div class="install-command"><pre><code>dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0</code></pre><button type="button" class="copy-button" data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0" aria-label="复制安装命令">复制 <span aria-hidden="true">⧉</span></button></div>
+              <div class="npm-callout"><div><strong>npm Bundle</strong><code>@fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0</code></div><a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-redundancy-check-bundle">查看 npm 页面 ↗</a></div>
+              <p class="profile-note">安装完成后重启 DSH Web。无需再安装独立 Runtime Bundle。</p>
+            </section>
+
+            <section id="first-check">
+              <h2>3. 完成第一次声明覆盖检查</h2>
+              <ol class="steps">
+                <li><span class="step-index" aria-hidden="true">1</span><div><h3>打开 Skill 审计</h3><p>从 DSH 左侧“冗余度检查”进入，或在 Session 行的“...”菜单中选择“检查 Skill 冗余度”。</p></div></li>
+                <li><span class="step-index" aria-hidden="true">2</span><div><h3>选择 Skill</h3><p>拖入会话或直接使用当前 Session，选择调用过的 Skill。插件会独立执行审计并生成报告。</p></div></li>
+                <li><span class="step-index" aria-hidden="true">3</span><div><h3>审阅覆盖标注</h3><p>使用已覆盖、未覆盖、未知筛选；点击源码中的重点片段，右侧会显示对应声明和 finding 证据。</p></div></li>
+                <li><span class="step-index" aria-hidden="true">4</span><div><h3>核对历史</h3><p>在“历史审计”中跨 Session 查找已保存的报告；打开历史记录不会重新执行审计。</p></div></li>
+              </ol>
+            </section>
+
+            <section id="demo">
+              <h2>4. 功能演示</h2>
+              <figure class="shot"><img src="assets/redundancy-evidence.png" width="1600" height="913" alt="未覆盖筛选下，scripts/check-update.mjs 被高亮，右侧显示四条 finding 的 verdict 和 evidence。"><figcaption>真实运行截图：未覆盖筛选下，点击 <code>scripts/check-update.mjs</code> 可查看 #4、#69、#137、#203 及其对应证据。</figcaption></figure>
+            </section>
+          </div>
+
+          <div class="tab-panel" id="panel-usage" role="tabpanel" aria-labelledby="tab-usage" data-panel="usage" hidden>
+            <section id="workflow">
+              <h2>审阅工作流</h2>
+              <ol class="steps">
+                <li><span class="step-index" aria-hidden="true">1</span><div><h3>先看覆盖率</h3><p>确认总体覆盖率、未覆盖和未知数量，再判断是否需要逐条核查。</p></div></li>
+                <li><span class="step-index" aria-hidden="true">2</span><div><h3>定位 Skill 行</h3><p>滚动源码时当前章节同步切换；状态和 #锚点直接显示在相关行下方。</p></div></li>
+                <li><span class="step-index" aria-hidden="true">3</span><div><h3>打开声明证据</h3><p>点击整行查看该行全部声明；点击行内代码或路径片段，只筛选相关声明。</p></div></li>
+                <li><span class="step-index" aria-hidden="true">4</span><div><h3>核对 finding</h3><p>查看右侧 transcript、verdict、method、evidence 和 turn_refs，确认覆盖状态是否与实际执行一致。</p></div></li>
+              </ol>
+            </section>
+            <section id="states">
+              <h2>状态与锚点</h2>
+              <table class="audit-table">
+                <thead><tr><th>显示</th><th>含义</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="state-badge pass">已覆盖</span></td><td>至少一条 transcript 对该 instruction 给出 PASS 或 FAIL。</td></tr>
+                  <tr><td><span class="state-badge warn">未覆盖</span></td><td>所有 transcript 都是 N/A，场景没有触发该 instruction。</td></tr>
+                  <tr><td><span class="state-badge unknown">未知</span></td><td>缺少足够判定，或 N/A、UNRESOLVED、INDETERMINATE 混合。</td></tr>
+                  <tr><td><code>#4</code></td><td>finding 序号，可关联到原始 transcript、verdict、evidence 和 turn_refs。</td></tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+
+          <div class="tab-panel" id="panel-help" role="tabpanel" aria-labelledby="tab-help" data-panel="help" hidden>
+            <section id="faq" class="faq-list">
+              <h2>FAQ</h2>
+              <details><summary>它和 Session Audit 有什么区别？<span aria-hidden="true">＋</span></summary><p>Session Audit 面向整段会话轨迹；Redundancy Check 以 Skill 声明为中心，把审计结果反标到 Skill 原文，并按已覆盖、未覆盖、未知筛选。</p></details>
+              <details><summary>它和 SIFT 原报告是什么关系？<span aria-hidden="true">＋</span></summary><p>插件独立执行审计并复用报告中的 <code>coverage.sections.instructions</code> 与 finding 锚点。它不复制报告，而是把同一份判定映射到 Skill 原文。</p></details>
+              <details><summary>没有 PASS，只有 FAIL，会显示未覆盖吗？<span aria-hidden="true">＋</span></summary><p>不会。PASS 或 FAIL 都表示该 instruction 被触发过，因此会显示“已覆盖”；没有 PASS/FAIL 且全部为 N/A 时才显示“未覆盖”。</p></details>
+              <details><summary>同一源码行出现多条声明怎么办？<span aria-hidden="true">＋</span></summary><p>同一行会分别显示每条声明的状态与锚点。点击整行查看全部 finding；点击行内重点片段则只查看相关声明。</p></details>
+              <details><summary>打开历史报告会重新调用审计吗？<span aria-hidden="true">＋</span></summary><p>不会。历史记录按 <code>sid + runId</code> 加载已有报告；只有主动开始新的检查才会重新执行审计。</p></details>
+            </section>
+            <section id="limits">
+              <h2>使用条件与限制</h2>
+              <ul>
+                <li>需要可以读取的 DSH Session，以及该 Session 实际调用过的 Skill。</li>
+                <li>覆盖率来自本次审计的 transcripts；“已覆盖”表示触发过，不等于执行正确。</li>
+                <li>本地报告保存于 <code>~/.dsh-redundancy-check/audit/</code>，历史列表跨 Session 汇总。</li>
+              </ul>
+            </section>
+            <section id="links">
+              <h2>相关链接</h2>
+              <ul class="links"><li><a href="https://www.npmjs.com/package/@fuxi-ailabs/dsh-redundancy-check-bundle">npm Bundle 与 README ↗</a></li></ul>
+            </section>
+          </div>
+        </div>
+      </article>
+
+      <aside class="toc" aria-label="页内目录">
+        <strong>本页目录</strong>
+        <div data-toc="overview"><a href="#relationship">主要能力</a><a href="#features">功能</a><a href="#scenarios">适用场景</a><a href="#comparison">前后对比</a></div>
+        <div data-toc="quick-start" hidden><a href="#requirements">运行环境</a><a href="#install">安装</a><a href="#first-check">第一次检查</a><a href="#demo">功能演示</a></div>
+        <div data-toc="usage" hidden><a href="#workflow">审阅工作流</a><a href="#states">状态与锚点</a></div>
+        <div data-toc="help" hidden><a href="#faq">FAQ</a><a href="#limits">使用限制</a><a href="#links">相关链接</a></div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="footer wrap">
+    <span>Fuxi AI Labs · Redundancy Check DSH Plugin</span>
+    <a href="https://fuxi-ailabs.github.io/dsh-plugin-market/">返回组件市场</a>
+  </footer>
+  <span id="copy-status" class="sr-only" aria-live="polite"></span>
+  <script src="page.js"></script>
+</body>
+</html>

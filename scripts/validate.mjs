@@ -77,6 +77,10 @@ const publicPages = new Map([['plugins/skillopt', new Set(['index.html', 'styles
 ])], ['plugins/skill-eval', new Set([
   'index.html', 'styles.css', 'page.js', 'assets/icon.svg', 'assets/skill-eval-workbench.jpg',
   'assets/skill-eval-demo.mp4', 'assets/skill-eval-demo-zh.vtt',
+])], ['plugins/redundancy-check', new Set([
+  'index.html', 'styles.css', 'page.js', 'assets/icon.svg',
+  'assets/redundancy-overview.png', 'assets/redundancy-annotations.png', 'assets/redundancy-evidence.png',
+  'assets/before-coverage.png',
 ])]]);
 // Exact documentation URLs are reviewed alongside each page, never inferred from its content.
 const publicLinks = new Map([['plugins/skillopt', new Set(['https://fuxi-ailabs.github.io/dsh-plugin-market/', 'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/skillopt/', "https://github.com/fuxi-ailabs/dsh-skillopt-dist/blob/7f901e565f0b34976b87fc7c85f538b441b69aaf/README.md", 'https://github.com/fuxi-ailabs/dsh-skillopt-dist'])], ['plugins/workflow-rsi', new Set([
@@ -135,6 +139,9 @@ const publicLinks = new Map([['plugins/skillopt', new Set(['https://fuxi-ailabs.
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/skill-eval/',
   'https://www.npmjs.com/package/@fuxi-ailabs/dsh-eval-bundle',
+])], ['plugins/redundancy-check', new Set([
+  'https://fuxi-ailabs.github.io/dsh-plugin-market/',
+  'https://www.npmjs.com/package/@fuxi-ailabs/dsh-redundancy-check-bundle',
 ])], ['plugins/dt-verify', new Set([
   'https://fuxi-ailabs.github.io/dsh-plugin-market/',
   'https://fuxi-ailabs.github.io/dsh-plugin-market/plugins/dt-verify/',
