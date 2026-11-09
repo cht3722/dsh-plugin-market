@@ -204,9 +204,11 @@ test('market docs match the currently installable Static Check version', async (
   assert(staticCheck.includes('从 1.0.x / 1.1.x 升级'));
   assert(staticCheck.includes('无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle'));
   assert(staticCheck.includes('若旧安装曾经使用共享 Runtime Bundle'));
-  assert(staticCheck.includes('1.0.x、1.2.0 或从未安装该 Runtime 的 profile 不需要执行'));
+  assert(staticCheck.includes('1.0.x、1.2.0、1.2.1 或从未安装该 Runtime 的 profile 不需要执行'));
   assert(!staticCheck.includes('查看 Runtime Bundle npm 页面'));
   assert(staticCheck.includes(`dsh-static-check-bundle@${version}`));
+  assert(staticCheck.includes('<tr><td><strong>Static Check Bundle</strong><small>安装入口</small></td><td><code class="version-short">1.2.2</code></td>'));
+  assert(staticCheck.includes('从 1.2.0 / 1.2.1 升级'));
   assert(staticCheck.includes('dsh-env-health'));
   assert(staticCheck.includes('class="profile-note"'));
   assert(staticCheck.includes('class="npm-callout"'));
