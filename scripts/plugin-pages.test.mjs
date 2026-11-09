@@ -160,7 +160,7 @@ test('Session Audit keeps existing evidence, silent operation video and install 
   assert(html.includes('从 1.0.x / 1.1.x 升级'));
   assert(html.includes('无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle'));
   assert(html.includes('若旧安装曾经使用共享 Runtime Bundle'));
-  assert(html.includes('1.0.x 或从未安装该 Runtime 的 profile 不需要执行'));
+  assert(html.includes('1.0.x、1.2.0 或从未安装该 Runtime 的 profile 不需要执行'));
   assert(!html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));
@@ -204,7 +204,7 @@ test('market docs match the currently installable Static Check version', async (
   assert(staticCheck.includes('从 1.0.x / 1.1.x 升级'));
   assert(staticCheck.includes('无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle'));
   assert(staticCheck.includes('若旧安装曾经使用共享 Runtime Bundle'));
-  assert(staticCheck.includes('1.0.x 或从未安装该 Runtime 的 profile 不需要执行'));
+  assert(staticCheck.includes('1.0.x、1.2.0 或从未安装该 Runtime 的 profile 不需要执行'));
   assert(!staticCheck.includes('查看 Runtime Bundle npm 页面'));
   assert(staticCheck.includes(`dsh-static-check-bundle@${version}`));
   assert(staticCheck.includes('dsh-env-health'));
@@ -217,8 +217,8 @@ test('market docs match the currently installable Static Check version', async (
   assert(staticCheck.includes('1193fa77e27ed01d657de7df1db881b61114d569'));
   assert(staticCheck.includes('2.6.0-dev.1193fa7'));
   assert(staticCheck.includes('~/.dsh-sift/runtime/2.6.0-dev.1193fa7/'));
-  assert.equal(version, '1.2.1');
-  assert(readme.includes('| Static Check · Skill 静态检查 | `1.2.1` |'));
+  assert.equal(version, '1.2.2');
+  assert(readme.includes('| Static Check · Skill 静态检查 | `1.2.2` |'));
 });
 
 test('market index does not restore removed source or preview metadata', () => {
@@ -326,7 +326,7 @@ test('Skill Eval keeps its workbench, silent operation video and self-contained 
   assert(html.includes('从 1.0.x / 1.1.x 升级'));
   assert(html.includes('无论通过市场还是下方 <code>add</code> 命令升级，都请先移除旧 Bundle'));
   assert(html.includes('若旧安装曾经使用共享 Runtime Bundle'));
-  assert(html.includes('1.0.x 或从未安装该 Runtime 的 profile 不需要执行'));
+  assert(html.includes('1.0.x、1.2.0 或从未安装该 Runtime 的 profile 不需要执行'));
   assert(!html.includes('查看 Runtime Bundle npm 页面'));
   assert(html.includes('class="profile-note"'));
   assert(html.includes('class="npm-callout"'));

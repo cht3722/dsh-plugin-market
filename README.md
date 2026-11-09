@@ -23,7 +23,7 @@ Fuxi 团队插件目录
 | Observe · DSH 会话观测 | `1.2.1` | `^0.2.1-rc.2` |
 | Score · DSH 会话评分 | `1.2.1` | `^0.2.1-rc.2` |
 | Session Audit · 会话审计 | `1.2.1` | `^0.2.1-rc.2` |
-| Static Check · Skill 静态检查 | `1.2.1` | `^0.2.1-rc.2` |
+| Static Check · Skill 静态检查 | `1.2.2` | `^0.2.1-rc.2` |
 | Skill Eval · Skill 评测 | `1.2.1` | `^0.2.1-rc.2` |
 | Redundancy Check · Skill 声明覆盖 | `1.2.1` | `^0.2.1-rc.2` |
 | HMBot · 鸿蒙迁移 | `0.1.0` | `>=0.2.1-rc.2 <0.3.0` |
