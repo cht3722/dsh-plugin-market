@@ -217,8 +217,8 @@ test('market docs match the currently installable Static Check version', async (
   assert(staticCheck.includes('1193fa77e27ed01d657de7df1db881b61114d569'));
   assert(staticCheck.includes('2.6.0-dev.1193fa7'));
   assert(staticCheck.includes('~/.dsh-sift/runtime/2.6.0-dev.1193fa7/'));
-  assert.equal(version, '1.2.0');
-  assert(readme.includes('| Static Check · Skill 静态检查 | `1.2.0` |'));
+  assert.equal(version, '1.2.1');
+  assert(readme.includes('| Static Check · Skill 静态检查 | `1.2.1` |'));
 });
 
 test('market index does not restore removed source or preview metadata', () => {
@@ -238,19 +238,19 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   const scoreCaptions = await readFile(new URL('../public/plugins/score/assets/score-demo-zh.vtt', import.meta.url), 'utf8');
   const validator = await readFile(new URL('../scripts/validate.mjs', import.meta.url), 'utf8');
 
-  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-observe-bundle').versions[0].version, '1.2.0');
-  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-score-bundle').versions[0].version, '1.2.0');
+  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-observe-bundle').versions[0].version, '1.2.1');
+  assert.equal(catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-score-bundle').versions[0].version, '1.2.1');
   assert(!catalog.plugins.some(item => item.name === '@fuxi-ailabs/dsh-insight-bundle'), 'legacy Insight must be removed from the catalog');
 
   for (const [html, name, bundle] of [[observe, 'Observe', 'dsh-observe-bundle'], [score, 'Score', 'dsh-score-bundle']]) {
     assert(html.includes('class="market-brand"'));
     assert(html.includes('class="market-current"'));
     assert(html.includes(`<h1>${name}</h1>`));
-    assert(html.includes(`DSH BUNDLE · ${bundle} · v1.2.0`));
+    assert(html.includes(`DSH BUNDLE · ${bundle} · v1.2.1`));
     for (const id of ['relationship', 'features', 'scenarios', 'requirements', 'install', 'faq']) {
       assert(html.includes(`id="${id}"`), `${name} must include #${id}`);
     }
-    assert(html.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/${bundle}@1.2.0"`));
+    assert(html.includes(`data-copy="dsh plugin --profile web add @fuxi-ailabs/${bundle}@1.2.1"`));
     assert(html.includes('dsh-insight-bundle'), `${name} FAQ must explain the legacy Insight migration`);
     assert(html.includes('以下命令在 DSH 的会话输入框中发送，不是在系统终端执行。'), `${name} must identify slash commands as DSH session input`);
     assert(html.includes('先在 DSH「插件」页移除旧包'), `${name} FAQ must include the removal prerequisite`);
@@ -295,15 +295,15 @@ test('Observe and Score are independent market pages and legacy Insight is remov
   assert(score.includes('展开 D4 完成效率'));
   assert(score.includes('是对会话打分的插件'));
   assert(score.includes('只有用户主动使用才会请求大模型'));
-  assert(score.includes('@fuxi-ailabs/dsh-score-bundle@1.2.0'));
+  assert(score.includes('@fuxi-ailabs/dsh-score-bundle@1.2.1'));
   assert(score.includes('不调用大模型'));
   assert(score.includes('/score --recalc'));
   assert(score.includes('/score --semantic'));
   assert(scoreCss.includes('--accent: #17634d'));
 
   assert(!validator.includes('https://github.com/guixu-labs/dsh-plugin'));
-  assert(readme.includes('| Observe · DSH 会话观测 | `1.2.0` |'));
-  assert(readme.includes('| Score · DSH 会话评分 | `1.2.0` |'));
+  assert(readme.includes('| Observe · DSH 会话观测 | `1.2.1` |'));
+  assert(readme.includes('| Score · DSH 会话评分 | `1.2.1` |'));
 });
 
 test('Skill Eval keeps its workbench, silent operation video and self-contained install contract', async () => {
@@ -312,7 +312,7 @@ test('Skill Eval keeps its workbench, silent operation video and self-contained 
   const readme = await readFile(new URL('../README.md', import.meta.url), 'utf8');
   const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-eval-bundle');
   const version = plugin.versions[0].version;
-  assert.equal(version, '1.2.0');
+  assert.equal(version, '1.2.1');
   assert(html.includes('class="market-brand"'));
   assert(html.includes('class="market-current"'));
   assert(html.includes('assets/skill-eval-workbench.jpg'));
@@ -336,7 +336,7 @@ test('Skill Eval keeps its workbench, silent operation video and self-contained 
   assert(html.includes('id="scenarios"'));
   assert(html.includes('适合 / SKILL 维护者'));
   assert(html.includes(`@fuxi-ailabs/dsh-eval-bundle@${version}`));
-  assert(readme.includes('| Skill Eval · Skill 评测 | `1.2.0` |'));
+  assert(readme.includes('| Skill Eval · Skill 评测 | `1.2.1` |'));
   assert(!/\.market-current[^{]*\{[^}]*display:\s*none/.test(css));
 });
 
@@ -355,15 +355,15 @@ test('Redundancy Check publishes coverage anchors, real-run examples and self-co
   const plugin = catalog.plugins.find(item => item.name === '@fuxi-ailabs/dsh-redundancy-check-bundle');
   const version = plugin.versions[0].version;
 
-  assert.equal(version, '1.2.0');
+  assert.equal(version, '1.2.1');
   assert(html.includes('class="market-brand"'));
   assert(html.includes('class="market-current"'));
   assert(html.includes('<h1>Redundancy Check</h1>'));
-  assert(html.includes('DSH BUNDLE · dsh-redundancy-check-bundle · v1.2.0'));
+  assert(html.includes('DSH BUNDLE · dsh-redundancy-check-bundle · v1.2.1'));
   for (const id of ['relationship', 'features', 'scenarios', 'comparison', 'requirements', 'install', 'first-check', 'demo', 'workflow', 'states', 'faq']) {
     assert(html.includes(`id="${id}"`), `Redundancy Check must include #${id}`);
   }
-  assert(html.includes('data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.0"'));
+  assert(html.includes('data-copy="dsh plugin --profile web add @fuxi-ailabs/dsh-redundancy-check-bundle@1.2.1"'));
   assert(html.includes('assets/redundancy-overview.png'));
   assert(html.includes('assets/redundancy-annotations.png'));
   assert(html.includes('assets/redundancy-evidence.png'));
@@ -378,5 +378,5 @@ test('Redundancy Check publishes coverage anchors, real-run examples and self-co
   assert(!html.includes('add @fuxi-ailabs/dsh-runtime-bundle'));
   assert(css.includes('--accent: #17634d'));
   assert(css.includes('.state-badge.pass'));
-  assert(readme.includes('| Redundancy Check · Skill 声明覆盖 | `1.2.0` |'));
+  assert(readme.includes('| Redundancy Check · Skill 声明覆盖 | `1.2.1` |'));
 });
